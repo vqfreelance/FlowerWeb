@@ -1,0 +1,18 @@
+paypal
+dang ky tai khoan paypal
+dang nhap vap developer.paypal.com
+vao sandbox account doi pass tk personal va business
+dang nhap vao sandbox.paypal.com 2 tk tren
+vao tk business tk nguoi ban
+website payment -> website preference -> auto return on -> nhap ten website bat ky -> payment data transfer on -> lay token
+
+ZO66490BX9n4dyzJ_NCqOH76BAseVUhuDKq9Wmv1AtYsIg7VPGfLBIXWb_i
+
+www.sandbox.paypal.com
+sb-47jrrc2472572@personal.example.com Vietqu@ng88
+sb-w4jbk2475496@business.example.com Vietqu@ng88
+
+developer.paypal.com
+travel.nothing@gmail.com	Tristan@6889
+
+url="https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-57R28545UC674825V"
