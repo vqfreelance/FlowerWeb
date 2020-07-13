@@ -1,0 +1,42 @@
+tao api controller	
+demo1: demo ra chuoi text, html, josn cua doi tuoong, truyen tham so id, cau hinh web api
+demo2: crud, application/json, create, update, delete, postman -> body -> raw -> json -> put + link + send
+json
+{
+    "Id": "1",
+    "Name": "Tristan",
+    "Price": "4.5"
+}
+
+json chuoi
+
+[
+    {
+        "id": 1,
+        "name": "Tristan",
+        "price": 4.5
+    },
+    {
+        "id": 2,
+        "name": "Druid",
+        "price": 8.5
+    },
+    {
+        "id": 3,
+        "name": "Kaka",
+        "price": 9
+    }
+]
+
+application voi moi quan he nhieu nhieu
+
+chua tim duoc lay gia tri trong moi quan he 1 nhieu 
+
+demo3: upload 1 file, nhieu file, file csv
+postman -> body -> form-data -> key file/files -> upload file
+demo4: middleware
+postman -> authorization -> auth -> user and pass
+header -> authorization -> header
+SERVER & CLIENT
+DEMO6: 
+http://localhost:57872/
