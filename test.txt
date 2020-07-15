@@ -5,3 +5,4 @@ intel new
 rtx
 
 anvu
+ádfas
