@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="signup-box">
+    <div class="col-lg-10">
+        <h3>Create a new account</h3> <br />
+        <form name="box-signup" id="signup_form" method="POST" asp-controller="account" asp-action="register">
+            <input name="return" class="return_popup_login" type="hidden" data-return="" value="">
+            <input name="action" type="hidden" value="Register">
+            <div class="form-group">
+                <label for="customer_name">Name</label>
+                <input class="form-control" type="text" id="customer_name" name="customer_name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="customer_username">Username</label>
+                <input class="form-control" type="text" id="customer_username" name="customer_username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="customer_password">Password</label>
+                <input class="form-control" type="password" id="customer_password" name="customer_password"
+                       placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="customer_password2">Re-Password</label>
+                <input class="form-control" type="password" id="customer_password2" name="customer_password2"
+                       placeholder="Re-Password">
+            </div>
+            <div class="form-group">
+                <label for="customer_phone">Phone Number</label>
+                <input class="form-control" type="text" id="customer_phone" name="customer_phone"
+                       placeholder="Phone Number">
+            </div>
+
+            <div class="form-group text-center">
+                <button class="btn btn-login" type="submit">Signup</button>
+            </div>
+            <div class="form-group text-center rgt">
+                Already have an account?
+                <a class="color-or" data-toggle="modal" data-keyboard="false" data-backdrop="static" asp-controller="account" asp-action="login">
+                    Login now
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
