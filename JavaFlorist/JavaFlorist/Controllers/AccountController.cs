@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using DemoSS18_MVC.Security;
 using JavaFlorist.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,36 +16,27 @@ namespace JavaFlorist.Controllers
         private DatabaseContext db;
         public AccountController(DatabaseContext _db) => db = _db;
 
-        [Route("")]
-        [Route("index")]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        private SecurityManager securityManager = new SecurityManager();
 
         [HttpPost]
         [Route("login")]
         public IActionResult Login(string customer_username, string customer_password)
         {
-            try
+            var countAccount = db.Account.Count(a => a.Username.Equals(customer_username) && a.Password.Equals(customer_password));
+            if (countAccount == 1)
             {
-                if (customer_username == "abc" && customer_password == "123")
-                {
-                    //HttpContext.Session.SetString("user", a.Username);
-                    return RedirectToAction("index", "home");
-                }
-                else
-                {
-                    ViewBag.error = "check your username and password again!";
-                    return RedirectToAction("index", "home");
-                }
+                var a = db.Account.SingleOrDefault(a => a.Username.Equals(customer_username));
+                securityManager.SignIn(HttpContext, a);
+                return RedirectToAction("index", "home");
             }
-            catch (Exception e)
+            else
             {
-                Debug.WriteLine(e);
-                return View("index", "home");
+                ViewBag.customer_username = customer_username;
+                ViewBag.customer_password = customer_password;
+                ViewBag.error = "check your username and password again!";
+                return View("Login");
             }
-        }
+         }
 
         [HttpGet]
         [Route("login")]
@@ -58,6 +50,26 @@ namespace JavaFlorist.Controllers
         public IActionResult Signup()
         {
             return View("Signup");
+        }
+
+        [Route("logout")]
+        public IActionResult Logout()
+        {
+            securityManager.SignOut(HttpContext);
+            return RedirectToAction("login", "account");
+        }
+
+        private Account Check(string username, string password)
+        {
+            var acc = db.Account.SingleOrDefault(a => a.Username.Equals(username));
+            if (acc != null)
+            {
+                if (BCrypt.Net.BCrypt.Verify(password, acc.Password))
+                {
+                    return acc;
+                }
+            }
+            return null;
         }
     }
 }
