@@ -3,37 +3,38 @@
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model JavaFlorist.Models.Account
 
 <div class="signup-box">
     <div class="col-lg-10">
         <h3>Create a new account</h3> <br />
-        <form name="box-signup" id="signup_form" method="POST" asp-controller="account" asp-action="register">
+        <form name="box-signup" id="signup_form" method="POST" asp-controller="account" asp-action="signup">
             <input name="return" class="return_popup_login" type="hidden" data-return="" value="">
             <input name="action" type="hidden" value="Register">
             <div class="form-group">
                 <label for="customer_name">Name</label>
-                <input class="form-control" type="text" id="customer_name" name="customer_name" placeholder="Name">
+                <input class="form-control" type="text" name="Name" placeholder="Name" >
             </div>
             <div class="form-group">
                 <label for="customer_username">Username</label>
-                <input class="form-control" type="text" id="customer_username" name="customer_username" placeholder="Username">
+                <input class="form-control" type="text" name="Username" placeholder="Username" >
             </div>
             <div class="form-group">
                 <label for="customer_password">Password</label>
-                <input class="form-control" type="password" id="customer_password" name="customer_password"
-                       placeholder="Password">
+                <input class="form-control" type="password" id="Password" name="Password" placeholder="Password" >
             </div>
             <div class="form-group">
-                <label for="customer_password2">Re-Password</label>
-                <input class="form-control" type="password" id="customer_password2" name="customer_password2"
-                       placeholder="Re-Password">
+                <label for="customer_password2">Confirm-Password</label>
+                <input class="form-control" type="password" name="Password2" placeholder="Confirm-Password">
             </div>
             <div class="form-group">
                 <label for="customer_phone">Phone Number</label>
-                <input class="form-control" type="text" id="customer_phone" name="customer_phone"
-                       placeholder="Phone Number">
+                <input class="form-control" type="text" name="Phone" placeholder="Phone Number" >
             </div>
-
+            <div class="form-group">
+                <label for="customer_phone">Email</label>
+                <input class="form-control" type="email" name="Email" placeholder="Email" >
+            </div>
             <div class="form-group text-center">
                 <button class="btn btn-login" type="submit">Signup</button>
             </div>

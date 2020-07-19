@@ -285,45 +285,51 @@ jQuery(document).ready(function () {
         ignore: null,
         ignore: 'input[type="hidden"]',
         rules: {
-            customer_name: {
+            Name: {
                 required: true
             },
-            customer_username: {
+            Username: {
                 required: true
             },
-            customer_phone: {
+            Phone: {
                 required: true,
                 number: true,
                 minlength: 10,
                 maxlength: 15
             },
-            customer_password: {
+            Password: {
                 required: true
             },
-            customer_password2: {
+            Password2: {
                 required: true,
-                equalTo: "#customer_password"
+                equalTo: "#Password"
+            },
+            Email: {
+                required: true
             }
         },
         messages: {
-            customer_name: {
+            Name: {
                 required: "Please enter your full name!"
             },
-            customer_username: {
+            Username: {
                 required: "Please enter your username!"
             },
-            customer_phone: {
+            Phone: {
                 required: "Please enter your phone number!",
                 number: "The phone number is not correct!",
                 minlength: "The phone number is not correct!",
                 maxlength: "The phone number is not correct!"
             },
-            customer_password: {
+            Password: {
                 required: "Please enter the password!"
             },
-            customer_password2: {
+            Password2: {
                 required: "Please enter the password confirmation!",
                 equalTo: "Confirm password was wrong!"
+            },
+            Email: {
+                required: "Please enter your email!"
             }
         }
     });

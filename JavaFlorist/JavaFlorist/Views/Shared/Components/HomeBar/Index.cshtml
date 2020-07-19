@@ -1,19 +1,4 @@
-﻿<div class="top-bar">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-2">
-            </div>
-            <div class="col-lg-10">
-                <ul class="top-bar-menu">
-                    <li style="position: relative;">
-                        <a asp-controller="account" asp-action="login" data-keyboard="false" data-backdrop="static"><img width="15" src="~/images/social-media.svg">Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="middle-header">
+﻿<div class="middle-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
@@ -33,11 +18,14 @@
             <div class="col-lg-6">
                 <ul class="box-group pull-right">
                     <li>
+                            <div style="padding-top:6px"><button type="button" class="btn btn-success btnlogin" onclick="location.href='@Url.Action("login", "account")'">Login</button></div>
+                    </li>
+                    <li>
                         <div class="group-item">
                             <div class="icon">
                                 <img width="30" src="~/images/phone.svg">
                             </div>
-                            <div class="item-text"><a href="callto:18001143" style="font-style: normal;"><span class="head-text">1800 1143</span></a><span class="sub-text">From 08:00 - 20:00</span></div>
+                            <div class="item-text"><a style="font-style: normal;"><span class="head-text">xxxx-xxxx</span></a><span class="sub-text">From 08:00 - 20:00</span></div>
                         </div>
                     </li>
                     <li>

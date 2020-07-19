@@ -22,15 +22,26 @@
             <div class="col-lg-6">
                 <ul class="box-group pull-right">
                     <li>
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" style="font-weight:bolder; font-size:larger;">Welcome <br /> @username.Value</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Action</a>
-                                <a href="#" class="dropdown-item">Another action</a>
-                                <a href="#" class="dropdown-item">Order History</a>
-                                <a asp-controller="account" asp-action="logout" class="dropdown-item">Logout</a>
+                        <div class="group-item">
+                            <div class="icon">
+                                <img width="30" src="~/images/account.png" style="padding:0;margin:0"/>
+                            </div>
+                            <div class="item-text" style="padding-top:6px">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @username.Value
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-controller="account" asp-action="logout">Logout</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </li>
                     <li>
                         <div class="group-item">

@@ -7,6 +7,7 @@ using JavaFlorist.Security;
 using JavaFlorist.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using JavaFlorist.Models.Repositories;
 
 namespace JavaFlorist.Controllers
 {
@@ -14,7 +15,12 @@ namespace JavaFlorist.Controllers
     public class AccountController : Controller
     {
         private DatabaseContext db;
-        public AccountController(DatabaseContext _db) => db = _db;
+        private IAccountRepository accountRepository;
+        public AccountController(DatabaseContext _db, IAccountRepository _accountRepository)
+        {
+            db = _db;
+            accountRepository = _accountRepository;
+        }
 
         private SecurityManager securityManager = new SecurityManager();
 
@@ -49,7 +55,26 @@ namespace JavaFlorist.Controllers
         [Route("signup")]
         public IActionResult Signup()
         {
-            return View("Signup");
+            var acc = new Account();
+            return View("Signup",acc);
+        }
+
+        [HttpPost]
+        [Route("signup")]
+        public async Task<IActionResult> Signup(Account acc)
+        {
+            //acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
+            acc.Role = "user";
+            try
+            {
+                await accountRepository.Create(acc);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return BadRequest();
+            }
+            return RedirectToAction("index", "home");
         }
 
         [Route("logout")]

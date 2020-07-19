@@ -310,7 +310,6 @@ C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcorea
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.RazorCoreGenerate.cache
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\ForgotPassword.cshtml.g.cs
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Login.cshtml.g.cs
-C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\RecoverPassword.cshtml.g.cs
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Register.cshtml.g.cs
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Bouquet\Index.cshtml.g.cs
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Dashboard\Index.cshtml.g.cs
@@ -345,3 +344,4 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\HomeBar\Index2.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\ChangePassword.cshtml.g.cs
+C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\ChangePassword.cshtml.g.cs
