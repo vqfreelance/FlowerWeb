@@ -98,7 +98,6 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Castle.Core.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\BCrypt.Net-Core.dll
-D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Login.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
@@ -175,7 +174,6 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csproj.CoreCompileInputs.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.MvcApplicationPartsAssemblyInfo.cache
-D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\RecoverPassword.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Register.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\ForgotPassword.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Error\Error404.cshtml.g.cs
@@ -337,3 +335,13 @@ C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcorea
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\HomeBar\Index.cshtml.g.cs
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\HomeBar\Index2.cshtml.g.cs
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Account\Index.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Account\Signup.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Bouquet\Index.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Checkout.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\HomeBar\Index.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\HomeBar\Index2.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\ChangePassword.cshtml.g.cs

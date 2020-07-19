@@ -10,7 +10,7 @@ namespace JavaFlorist.Models
             Message = new HashSet<Message>();
         }
 
-        public int OccasionId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Photo { get; set; }
         public string Description { get; set; }

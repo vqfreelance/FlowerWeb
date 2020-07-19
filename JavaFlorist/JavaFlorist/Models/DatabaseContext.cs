@@ -45,6 +45,10 @@ namespace JavaFlorist.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Photo)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Role)
                     .HasMaxLength(10)
                     .IsUnicode(false);
@@ -108,8 +112,6 @@ namespace JavaFlorist.Models
 
                 entity.ToTable("Occ_Bouquet");
 
-                entity.Property(e => e.OccBouquetId).HasColumnName("Occ_Bouquet_Id");
-
                 entity.HasOne(d => d.Bouquet)
                     .WithMany()
                     .HasForeignKey(d => d.BouquetId)
@@ -123,9 +125,6 @@ namespace JavaFlorist.Models
 
             modelBuilder.Entity<Occcasion>(entity =>
             {
-                entity.HasKey(e => e.OccasionId)
-                    .HasName("PK_Occcation");
-
                 entity.Property(e => e.Description)
                     .HasMaxLength(250)
                     .IsUnicode(false);

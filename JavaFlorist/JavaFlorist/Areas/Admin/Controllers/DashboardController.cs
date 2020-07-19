@@ -22,8 +22,15 @@ namespace JavaFlorist.Areas.Admin.Controllers
         [Route("index")]
         public IActionResult Index()
         {
-            ViewBag.countBouquets = db.Bouquet.Count();
+            ViewBag.username = TempData["Username"];
+            //ViewBag.countBouquets = db.Bouquet.Count();
             return View();
+        }
+
+        [Route("logout")]
+        public IActionResult Logout()
+        {
+            return RedirectToAction("login", "account");
         }
     }
 }

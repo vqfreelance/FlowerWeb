@@ -5,7 +5,7 @@ namespace JavaFlorist.Models
 {
     public partial class Message
     {
-        public int MessageId { get; set; }
+        public int Id { get; set; }
         public string MeContent { get; set; }
         public int? OccasionId { get; set; }
 

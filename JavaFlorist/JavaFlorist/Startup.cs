@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JavaFlorist.Models;
+using JavaFlorist.Models.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,8 @@ namespace JavaFlorist
                 options.LogoutPath = "/account/logout";
                 options.AccessDeniedPath = "/login/accessDenied";
             });
+
+            services.AddScoped<IAccountRepository, AccountRepository>();
         }
 
         

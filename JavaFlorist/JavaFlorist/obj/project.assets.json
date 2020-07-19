@@ -8515,20 +8515,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\avMacWin\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "projectUniqueName": "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
       "projectName": "JavaFlorist",
-      "projectPath": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
-      "packagesPath": "C:\\Users\\avMacWin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\obj\\",
+      "projectPath": "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\avMacWin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -8602,7 +8607,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
       }
     }
   }
