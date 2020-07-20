@@ -5,7 +5,7 @@ namespace JavaFlorist.Models
 {
     public partial class OccBouquet
     {
-        public int? OccBouquetId { get; set; }
+        public int? Id { get; set; }
         public int? OccasionId { get; set; }
         public int? BouquetId { get; set; }
 

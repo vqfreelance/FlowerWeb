@@ -1,0 +1,70 @@
+﻿@using System.Security.Claims;
+@{
+    var username = User.FindFirst(ClaimTypes.Name);
+}
+<div class="middle-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="logo"><a asp-controller="home" asp-action="index"><img width="160" src="~/images/footer-logo.png"></a></div>
+            </div>
+            <div class="col-lg-4">
+                <form action="" method="post">
+                    <div class="input-group">
+                        <input class="form-control" type="text" id="placeholder-type-writter" name="q" placeholder="Search" value="">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-search" type="submit"><img width="18" src="~/images/search.svg"></button>
+                        </div>
+                    </div>
+                    <div class="completesearch"></div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <ul class="box-group pull-right">
+                    <li>
+                        <div class="group-item">
+                            <div class="icon">
+                                <img width="30" src="~/images/account.png" style="padding:0;margin:0"/>
+                            </div>
+                            <div class="item-text" style="padding-top:6px">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @username.Value
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" asp-controller="account" asp-action="logout">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+                        <div class="group-item">
+                            <div class="icon">
+                                <img width="30" src="~/images/phone.svg">
+                            </div>
+                            <div class="item-text"><a href="callto:18001143" style="font-style: normal;"><span class="head-text">1800 1143</span></a><span class="sub-text">From 08:00 - 20:00</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="group-item cart-item">
+                            <div class="icon">
+                                <a asp-controller="cart" asp-action="index">
+                                    <img width="30" src="~/images/cart.svg">
+                                    <span id="cart-num">0</span>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

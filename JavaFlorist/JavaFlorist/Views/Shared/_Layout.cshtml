@@ -1,0 +1,157 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Dalat Hasfarm - Online Flower Shop</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+    <script src="~/js/jquery.min.js"></script>
+    <link href="~/css/app.css" rel="stylesheet">
+
+    <link href="~/css/home.css" rel="stylesheet" />
+    <link href="~/css/homereponsive.css" rel="stylesheet" />
+
+    <script>
+        var root_url = '';
+        var theme_url = '';
+    </script>
+
+</head>
+<body class="home-page show-nav-page desktop" id="Desktop">
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id=""
+         theme_color="#ff7e29"
+         logged_in_greeting="Hello, Dalat Hasfarm can support you now?"
+         logged_out_greeting="Hello, Dalat Hasfarm can support you now?">
+    </div>
+    <div class="wrapper">
+        @await Component.InvokeAsync("HomeBar")
+
+        <div class="seperate-line"></div>
+
+        <div class="container">
+            @RenderBody()
+        </div>
+
+        <div class="seperate-line" id="off_footer"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-xs-12">
+                    <div class="footer-logo">
+                        <a href="#"><img width="250" src="~/images/footer-logo.png"></a>
+                        <p>
+                            Dalat Hasfarm - Known as the professional pioneer company to initiate <br>planting flowers at Viet
+                            Nam was established in 1994. <br>In 2013 Dalat Hasfarm was voted by Flowers Tech Magazine basing in Mỹ Đình
+                            as the greatest company in Southeast Asia.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-xs-12">
+                    <div class="footer-menu">
+                        <h2>WebShop</h2>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="cam-nang/index.html">Manual</a></li>
+                            <li><a href="#">Promotion</a></li>
+                            <li><a href="info/the-thanh-vien.html">Member Card </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-xs-12">
+                    <div class="footer-menu">
+                        <h2>Infomation</h2>
+                        <ul>
+                            <li><a href="info/gioi-thieu-dalathasfarm.html">About Dalat Hasfarm</a></li>
+                            <!-- <li><a href="#">Recruitment</a></li> -->
+                            <li><a href="dalathasfarm-shop/index.html">Shop Dalat Hasfarm</a></li>
+                            <li><a href="info/chinh-sach-bao-mat.html"> Privacy Policy</a></li>
+                            <li><a href="info/huong-dan-mua-hang.html">Shopping Guidelines</a></li>
+                            <li><a href="info/dieu-khoan-su-dung.html">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-xs-12">
+                    <div class="footer-menu footer-address">
+                        <h2>Contact</h2>
+                        <ul>
+                            <li>
+                                <img width="24"
+                                     src="~/images/">
+                                <span>
+                                    Email:
+                                    webshop@dalathasfarm.com
+                                </span>
+                            </li>
+                            <li>
+                                <img width="24"
+                                     src="">
+                                <span>
+                                    Hotline:
+                                    1800 6688
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="seperate-line mr-top-30 hidden-xs"></div>
+        <div class="container hidden-xs">
+            <div class="footer-menu list-payment">
+                <h2>PAYMENT METHOD</h2>
+                <ul>
+                    <li><a href="#"><img height="45" src="~/images/payment-1.svg"></a></li>
+                    <li><a href="#"><img height="45" src="~/images/payment-2.svg"></a></li>
+                    <li><a href="#"><img height="45" src="~/images/payment-3.svg"></a></li>
+                    <li><a href="#"><img height="45" src="~/images/payment-4.svg"></a></li>
+                    <li><a href="#"><img height="45" src="~/images/payment-5.svg"></a></li>
+                    <li><a href="#"><img height="45" src="~/images/payment-6.svg"></a></li>
+                    <li><a href="#"><img height="45" src="~/images/payment-7.svg"></a></li>
+                    <li><a href="#"><img height="45" src="~/images/payment-8.svg"></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2020 Dalathasfarm. All rights reserved.</p>
+        </div>
+    </div>
+
+
+    <!--login-->
+    
+    <!--end login-->
+
+    <!--signup-->
+
+    <!--end signup-->
+
+    <div class="body-loading">
+        <img src="~/images/loading.gif" width="100" alt="">
+    </div>
+    <script type="text/javascript" src="~/js/app.bundle.js"></script>
+    <script type="text/javascript" src="~/js/masonry.pkgd.js"></script>
+    <script type="text/javascript" src="~/js/slick.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="~/js/jquery.bootstrap-touchspin.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/js/sticky-sidebar.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap-slider.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="~/js/cart.js"></script>
+    <script src="~/js/imageMapResizer.min.js"></script>
+    <script>$('map').imageMapResize();</script>
+    <script src="~/ladda/spin.min.js" type="text/javascript"></script>
+    <script src="~/ladda/ladda.min.js" type="text/javascript"></script>
+    <script src="~/js/jquery.geocomplete.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/js/custom.js"></script>
+
+</body>
+</html>
