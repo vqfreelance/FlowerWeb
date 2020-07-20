@@ -8,5 +8,10 @@ namespace JavaFlorist.Models.Repositories
 {
     public interface IAccountRepository : IGenericRepository<Account>
     {
+        //check username exist
+        public bool CheckByUsername(string username);
+        public Account GetByUsername(string username);
+        public Account GetAccById(int id);
     }
+
 }

@@ -1,8 +1,4 @@
-﻿@using System.Security.Claims;
-@{
-    var username = User.FindFirst(ClaimTypes.Name);
-}
-<div class="middle-header">
+﻿<div class="middle-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
@@ -22,26 +18,23 @@
             <div class="col-lg-6">
                 <ul class="box-group pull-right">
                     <li>
-                        <div class="group-item">
-                            <div class="icon">
-                                <img width="30" src="~/images/account.png" style="padding:0;margin:0"/>
-                            </div>
-                            <div class="item-text" style="padding-top:6px">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        @username.Value
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" asp-controller="account" asp-action="logout">Logout</a>
+                        <div class="group-item" style="padding-top:6px">
+                            <div class="dropdown">
+                                <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:50px; width:50px; border-radius:50%; overflow: hidden;">
+                                    <img src="~/images/user/@ViewBag.acc.Photo" alt="avatar image" style="height:100px;">
+                                </div>
+                                <div class="dropdown-menu">
+                                    <div class="card" style="text-align: center; margin:10px">
+                                        <img src="~/images/user/@ViewBag.acc.Photo" alt="John" style="width:50%; align-content:center">
+                                        <h3>John Doe</h3>
+                                        <h5>JohnDoe@email.com</h5>
+                                    </div>
+                                    <a class="dropdown-item" asp-controller="account" asp-action="info">Account Info</a>
+                                    <a class="dropdown-item">Order History</a>
+                                    <a class="dropdown-item" asp-controller="account" asp-action="logout">Logout</a>
                                     </div>
                                 </div>
-                            </div>
                         </div>
-
                     </li>
                     <li>
                         <div class="group-item">

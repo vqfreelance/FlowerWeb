@@ -289,7 +289,15 @@ jQuery(document).ready(function () {
                 required: true
             },
             Username: {
-                required: true
+                required: true,
+                //check username exist
+                remote: {
+                    data: {
+                        username: '#Username'
+                    },
+                    url: '/account/checkusername',
+                    type: "post"
+                }
             },
             Phone: {
                 required: true,
@@ -313,7 +321,8 @@ jQuery(document).ready(function () {
                 required: "Please enter your full name!"
             },
             Username: {
-                required: "Please enter your username!"
+                required: "Please enter your username!",
+                remote: "Username already in use!"
             },
             Phone: {
                 required: "Please enter your phone number!",

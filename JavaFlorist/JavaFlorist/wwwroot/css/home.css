@@ -48,6 +48,13 @@ label.error{
     border-bottom-right-radius: 0;
 }
 
+.group-item a {
+    font-style: normal
+}
+.group-item a:hover {
+    background-color:limegreen
+}
+
 .jquery-accordion-menu::-webkit-scrollbar {
     width: 2px;
 }

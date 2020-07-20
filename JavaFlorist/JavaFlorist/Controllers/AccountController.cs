@@ -8,6 +8,7 @@ using JavaFlorist.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using JavaFlorist.Models.Repositories;
+using System.Security.Claims;
 
 namespace JavaFlorist.Controllers
 {
@@ -75,6 +76,30 @@ namespace JavaFlorist.Controllers
                 return BadRequest();
             }
             return RedirectToAction("index", "home");
+        }
+
+        //check username exist
+        [HttpPost]
+        [Route("checkusername")]
+        public bool CheckUserName(string username)
+        {
+            if (accountRepository.CheckByUsername(username))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        [HttpGet]
+        [Route("info")]
+        public IActionResult Info()
+        {
+            var username = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            ViewBag.acc = accountRepository.GetByUsername(username.Value);
+            return View("Info");
         }
 
         [Route("logout")]
