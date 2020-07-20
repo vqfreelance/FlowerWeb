@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model JavaFlorist.Models.Account
+
+<div class="signup-box">
+    <div class="col-lg-10">
+        <h3>Change your Info</h3> <br />
+        <form name="box-signup" id="signup_form" method="post" asp-controller="account" asp-action="editaccount" asp-route-id="Id">
+            <div class="form-group">
+                <label for="customer_name">Name</label>
+                <input class="form-control" type="text" name="Name" placeholder="Name" asp-for="Name">
+            </div>
+            <div class="form-group">
+                <label for="customer_phone">Phone Number</label>
+                <input class="form-control" type="text" name="Phone" placeholder="Phone Number" asp-for="Phone">
+            </div>
+            <div class="form-group">
+                <label for="customer_phone">Email</label>
+                <input class="form-control" type="email" name="Email" placeholder="Email" asp-for="Email">
+            </div>
+            <a style="color:red">@ViewBag.error</a>
+            <div class="form-group text-center">
+                <button class="btn btn-login" type="submit">Save</button>
+            </div>
+            <input type="hidden" asp-for="Id" />
+        </form>
+    </div>
+</div>
+

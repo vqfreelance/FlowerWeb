@@ -299,6 +299,18 @@ jQuery(document).ready(function () {
                     type: "post"
                 }
             },
+            Oldpass: {
+                required: true,
+                //check user password
+                remote: {
+                    data: {
+                        id: $('#Id').val(),
+                        oldpass: '#Oldpass'
+                    },
+                    url: '/account/checkuserpass',
+                    type: "post"
+                }
+            },
             Phone: {
                 required: true,
                 number: true,
@@ -336,6 +348,11 @@ jQuery(document).ready(function () {
             Password2: {
                 required: "Please enter the password confirmation!",
                 equalTo: "Confirm password was wrong!"
+            },
+            Oldpass: {
+                required: "Please enter your old password!",
+                //check user password
+                remote: "Your old incorrect!"
             },
             Email: {
                 required: "Please enter your email!"

@@ -1,4 +1,9 @@
-﻿<div class="middle-header">
+﻿@using System.Security.Claims;
+@{
+    var username = User.FindFirst(ClaimTypes.NameIdentifier);
+}
+
+<div class="middle-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
@@ -29,11 +34,11 @@
                                         <h3>John Doe</h3>
                                         <h5>JohnDoe@email.com</h5>
                                     </div>
-                                    <a class="dropdown-item" asp-controller="account" asp-action="info">Account Info</a>
+                                    <a class="dropdown-item" asp-controller="account" asp-action="info" asp-route-username="@username.Value">Account Info</a>
                                     <a class="dropdown-item">Order History</a>
                                     <a class="dropdown-item" asp-controller="account" asp-action="logout">Logout</a>
-                                    </div>
                                 </div>
+                            </div>
                         </div>
                     </li>
                     <li>

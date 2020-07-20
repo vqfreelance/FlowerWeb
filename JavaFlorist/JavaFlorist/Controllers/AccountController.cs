@@ -72,8 +72,12 @@ namespace JavaFlorist.Controllers
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
-                return BadRequest();
+                ViewBag.name = acc.Name;
+                ViewBag.username = acc.Username;
+                ViewBag.phone = acc.Phone;
+                ViewBag.email = acc.Email;
+                ViewBag.error = "check your infomation again!";
+                return View("Signup");
             }
             return RedirectToAction("index", "home");
         }
@@ -93,13 +97,82 @@ namespace JavaFlorist.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("info")]
-        public IActionResult Info()
+        [HttpPost]
+        [Route("checkuserpass")]
+        public bool CheckUserPass(string id, string oldpass)
         {
-            var username = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-            ViewBag.acc = accountRepository.GetByUsername(username.Value);
+            var acc = accountRepository.GetAccById(int.Parse(id));
+            if (acc.Password != oldpass)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+        [HttpGet]
+        [Route("info/{username}")]
+        public IActionResult Info(string username)
+        {
+            ViewBag.acc = accountRepository.GetByUsername(username);
             return View("Info");
+        }
+
+        [HttpGet]
+        [Route("editaccount/{id}")]
+        public IActionResult EditAccout(int id)
+        {
+            var acc = accountRepository.GetAccById(id);
+            return View("Edit", acc);
+        }
+
+        [HttpPost]
+        [Route("editaccount/{id}")]
+        public async Task<IActionResult> EditAccout(int id,Account acc)
+        {
+            //acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
+            var oldInfo = accountRepository.GetAccById(id);
+            oldInfo.Name = acc.Name;
+            oldInfo.Phone = acc.Phone;
+            oldInfo.Email = acc.Email;
+            try
+            {
+                await accountRepository.Update(id,oldInfo);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("index", "home");
+        }
+
+        [HttpGet]
+        [Route("changepass/{id}")]
+        public IActionResult ChangePassword(int id)
+        {
+            var acc = accountRepository.GetAccById(id);
+            return View("ChangePass", acc);
+        }
+
+        [HttpPost]
+        [Route("changepass/{id}")]
+        public async Task<IActionResult> ChangePassword(int id, Account acc)
+        {
+            //acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
+            var oldInfo = accountRepository.GetAccById(id);
+            oldInfo.Password = acc.Password;
+            try
+            {
+                await accountRepository.Update(id, oldInfo);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("index", "home");
         }
 
         [Route("logout")]
