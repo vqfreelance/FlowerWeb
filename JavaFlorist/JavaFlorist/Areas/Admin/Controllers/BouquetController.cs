@@ -35,6 +35,15 @@ namespace JavaFlorist.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Route("searchByKeyword")]
+        public IActionResult Search(string keyword)
+        {
+            ViewBag.bouquets = bouquetRepository.Search(keyword).ToList();
+            ViewBag.keyword = keyword;
+            return View("Index");
+        }
+
+        [HttpPost]
         [Route("upload")]
         public async Task<IActionResult> Upload(IFormFile[] images)
         {
@@ -49,8 +58,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
                 {
                     var bouquet = new Bouquet();
                     string imgname = Path.GetFileNameWithoutExtension(i.FileName);
-                    string imgext = Path.GetExtension(i.FileName);
-
+                   
                     Debug.WriteLine("File Name: " + i.FileName);
                     Debug.WriteLine("File Size (byte): " + i.Length);
                     Debug.WriteLine("File SizeType: " + i.ContentType);
