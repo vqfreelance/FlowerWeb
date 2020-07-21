@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Info";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model JavaFlorist.Models.Account
+
+<div class="signup-box">
+    <div class="col-sm-10">
+        <h3>Account Info</h3> <br />
+            <div class="form-group">
+                <div class="center-cropped"style="background-image: url('/images/user/@ViewBag.acc.Photo'); 
+                     width: 100%;  height: 450px;  background-position: center top;  background-repeat: no-repeat;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="customer_name">Name</label>
+                <a class="form-control" name="Name">@ViewBag.acc.Name</a>
+            </div>
+            <div class="form-group">
+                <label for="customer_username">Username</label>
+                <a class="form-control" name="Username">@ViewBag.acc.Username</a>
+            </div>
+            <div class="form-group">
+                <label for="customer_phone">Phone Number</label>
+                <a class="form-control" name="Phone">@ViewBag.acc.Phone</a>
+            </div>
+            <div class="form-group">
+                <label for="customer_phone">Email</label>
+                <a class="form-control" name="Email">@ViewBag.acc.Email</a>
+            </div>
+    </div>
+</div>
+
+

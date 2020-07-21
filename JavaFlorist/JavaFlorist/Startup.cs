@@ -36,6 +36,7 @@ namespace JavaFlorist
             });
 
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IBouquetRepository, BouquetRepository>();
         }
 
         
