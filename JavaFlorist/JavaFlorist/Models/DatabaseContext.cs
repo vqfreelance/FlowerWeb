@@ -24,7 +24,8 @@ namespace JavaFlorist.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
 
-        
+      
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
@@ -108,17 +109,15 @@ namespace JavaFlorist.Models
 
             modelBuilder.Entity<OccBouquet>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Occ_Bouquet");
 
                 entity.HasOne(d => d.Bouquet)
-                    .WithMany()
+                    .WithMany(p => p.OccBouquet)
                     .HasForeignKey(d => d.BouquetId)
                     .HasConstraintName("FK_Occ_Bouquet_Bouquet");
 
                 entity.HasOne(d => d.Occasion)
-                    .WithMany()
+                    .WithMany(p => p.OccBouquet)
                     .HasForeignKey(d => d.OccasionId)
                     .HasConstraintName("FK_Occ_Bouquet_Occcasion");
             });

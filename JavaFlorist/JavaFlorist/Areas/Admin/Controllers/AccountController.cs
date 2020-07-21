@@ -88,7 +88,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest();
+                throw e;
             }
             Debug.WriteLine("Account Info");
             Debug.WriteLine("Username: " + account.Username);
