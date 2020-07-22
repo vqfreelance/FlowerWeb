@@ -11,6 +11,7 @@ namespace JavaFlorist.Models.Repositories
         public BouquetRepository(DatabaseContext dbContext) : base(dbContext)
         {
         }
+
        
     }
 }

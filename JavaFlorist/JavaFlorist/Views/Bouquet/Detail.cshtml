@@ -6,44 +6,37 @@
 
 <div class="top-detail-product">
     <div class="row">
-        <div class="col-lg-5">
-            <div>
-                <figure>
-                    <img src="~/images/bouquet/ChaCon_DadSon.jpg" />
-                </figure>
-            </div>
+        <div class="col-lg-5 text-center">
+            <img src="~/images/bouquets/@ViewBag.bouquet.Photo" style=" max-height: 450px" />
         </div>
         <div class="col-lg-7">
-            <h1 class="title" itemprop="name">Dad & Son</h1>
+            <h1 class="title" itemprop="name">@ViewBag.bouquet.Name</h1>
             <div class="product-feture">
-
-                It is so fortunate and happy that my adult life is always under
-                Dad's shadow. In Dad 's eyes, i am a small child forever, always in need of protection. I love you, daddy !
-            </div>
-            <hr>
-            <div class="product-info sku">
-                <p>SKU</p>
-                <p itemprop="sku">WFAD062005</p>
+                @ViewBag.bouquet.Description
             </div>
             <div class="product-info quantity">
                 <p>Quantity</p>
-                <p><input id="quantity" type="text" value="1" name="quantity"></p>
+                <p><input id="quantity" type="text" name="quantity"></p>
             </div>
             <hr>
             <p>Price at shop</p>
-            <div class="price">520.000đ / Bó</div>
+            <div class="price">$@ViewBag.bouquet.Price</div>
 
             <div class="btn-box">
-                <button class="hidden toggle-popupCart" type="button" data-toggle="modal" data-keyboard="false"
-                        data-target="#popupCart"></button>
-                <button class="btn btn-buy" type="button" data-id="580" data-price="520000" data-unit="" data-quantity=""
-                        onclick="return add_cart(this, 2)">
-                    Buy Now
-                </button>
-                <button type="button" data-id="580" data-price="520000" data-unit="" data-quantity=""
-                        onclick="return add_cart(this, 1)" class="btn btn-add-to-cart" href="#">
-                    Add to Cart
-                </button>
+                <input hidden value="@ViewBag.bouquet.Id" id="bouquetid" />
+                @*<button class="hidden toggle-popupCart" type="button" data-toggle="modal" data-keyboard="false"
+                data-target="#popupCart"></button>
+        <button class="btn btn-buy" type="button" data-id="580" data-price="520000" data-unit="" data-quantity=""
+                onclick="return add_cart(this, 2)">
+            Buy Now
+        </button>*@
+                @*<a class="btn btn-buy" asp-controller="cart" asp-action="buy" asp-route-id="@ViewBag.bouquet.Id">Buy Now</a>*@
+                <input type="button" value="Buy Now" id="buynow" />
+                @*<button type="button" data-id="580" data-price="520000" data-unit="" data-quantity=""
+                onclick="return add_cart(this, 1)" class="btn btn-add-to-cart" href="#">
+            Add to Cart
+        </button>*@
+                <input type="button" value="Add Cart" id="addcart" />
             </div>
             <p>
                 <small>Actual product images may differ from its illustration (bloom, accessories, etc)</small>
@@ -76,10 +69,9 @@
     </div>
 </div>
 <div class="content-detail-product">
-    <h1 class="title">Dad & Son</h1>
+    <h1 class="title">@ViewBag.bouquet.Name</h1>
     <p>
-        It is so fortunate and happy that my adult life is always under
-        Dad's shadow. In Dad 's eyes, i am a small child forever, always in need of protection. I love you, daddy !
+        @ViewBag.bouquet.Description
     </p>
 </div>
 <div class="related-products group-product-wrapp">

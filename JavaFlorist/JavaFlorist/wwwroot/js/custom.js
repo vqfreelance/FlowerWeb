@@ -137,8 +137,10 @@ jQuery(document).ready(function () {
     }
     // End product detail slider
     $(".product-info input[name='quantity']").TouchSpin({
-        initval: 40
+        min: 1,
+        initval: 1
     });
+
     if ($('.selectpicker').length) {
         $('.selectpicker').selectpicker();
     }
@@ -678,7 +680,7 @@ function setUpToolTipHelpers() {
     });
 }
 $(document).ready(function () {
-    get_total_num_cart();
+    //get_total_num_cart();
 });
 
 function validate_member_form() {
@@ -1360,6 +1362,62 @@ function clearAllFilter() {
             $('html, body').animate({
                 scrollTop: $("div.group-product-wrapp").offset().top - 130
             }, 1000)
+        }
+    });
+}
+
+//anhvu .js--------------------
+$(document).ready(function () {
+    $('#buynow').click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/cart/buynow',
+            data: {
+                bouquetid: $('#bouquetid').val(),
+                quantity: $('#quantity').val()
+            },
+            success: function (data) {
+                window.location.href = data;
+                count_item()
+            }
+        });
+    });
+
+    $('#addcart').click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/cart/addcart',
+            data: {
+                bouquetid: $('#bouquetid').val(),
+                quantity: $('#quantity').val()
+            },
+            success: function (data) {
+                count_item()
+            }
+        });
+    });
+})
+
+function count_item() {
+    $.ajax({
+        url: '/cart/countcart',
+        success: function (data) {
+            //alert(data);
+            $('#cart-num').html(data)
+        }
+    })
+}
+
+function quickaddcart(id) {
+    $.ajax({
+        type: "POST",
+        url: '/cart/addcart',
+        data: {
+            bouquetid: id,
+            quantity: 1
+        },
+        success: function (data) {
+            count_item()
         }
     });
 }

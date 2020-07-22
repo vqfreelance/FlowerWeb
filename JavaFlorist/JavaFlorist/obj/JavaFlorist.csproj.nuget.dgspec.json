@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {}
+    "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {}
   },
   "projects": {
-    "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {
+    "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+        "projectUniqueName": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
         "projectName": "JavaFlorist",
-        "projectPath": "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Aptech ADSE\\eProject - S3\\Source Tree\\JavaFlorist\\JavaFlorist\\obj\\",
+        "projectPath": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+        "packagesPath": "C:\\Users\\anhvu\\.nuget\\packages\\",
+        "outputPath": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\anhvu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -93,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

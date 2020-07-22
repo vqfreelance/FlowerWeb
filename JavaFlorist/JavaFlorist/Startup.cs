@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace JavaFlorist
 {
@@ -27,6 +29,7 @@ namespace JavaFlorist
             string connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
             services.AddControllersWithViews();
+            services.AddSession();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
@@ -37,6 +40,7 @@ namespace JavaFlorist
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IBouquetRepository, BouquetRepository>();
+
         }
 
         
@@ -46,6 +50,7 @@ namespace JavaFlorist
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSession();
 
             app.UseStaticFiles();
 
@@ -63,5 +68,7 @@ namespace JavaFlorist
                 );
             });
         }
+
+
     }
 }
