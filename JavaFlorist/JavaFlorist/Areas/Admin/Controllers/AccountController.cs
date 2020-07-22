@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using JavaFlorist.Models;
 using JavaFlorist.Models.Repositories;
 using JavaFlorist.Security;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JavaFlorist.Areas.Admin.Controllers
@@ -38,11 +39,11 @@ namespace JavaFlorist.Areas.Admin.Controllers
         [Route("login")]
         public IActionResult Login(string admin_username, string admin_password)
         {
-            var countAccount = db.Account.Count(a => a.Username.Equals(admin_username) && a.Password.Equals(admin_password));
-            if (countAccount == 1)
+            if (Check(admin_username, admin_password) != null)
             {
                 var a = db.Account.SingleOrDefault(a => a.Username.Equals(admin_username));
                 securityManager.SignIn(HttpContext, a);
+                HttpContext.Session.SetString("username", admin_username);
                 TempData["Username"] = admin_username;
                 return RedirectToAction("index", "dashboard");
             }
@@ -66,14 +67,19 @@ namespace JavaFlorist.Areas.Admin.Controllers
             return null;
         }
 
+        //logout
+        [Route("logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("username");
+            return RedirectToAction("login", "account");
+        }
+
         //Register
         [Route("register")]
         public IActionResult Register()
         {
-            var account = new Account()
-            { 
-                Role = "admin"
-            };
+            var account = new Account();
             return View("Register", account);
         }
 
@@ -82,6 +88,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
         public async Task<IActionResult> Register(Account account)
         {
             account.Role = "admin";
+            account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
             try
             {
                 await accountRepository.Create(account);
@@ -93,8 +100,6 @@ namespace JavaFlorist.Areas.Admin.Controllers
             Debug.WriteLine("Account Info");
             Debug.WriteLine("Username: " + account.Username);
             Debug.WriteLine("Password: " + account.Password);
-            string hash = BCrypt.Net.BCrypt.HashPassword(account.Password);
-            Debug.WriteLine("Hash: " + hash);
             Debug.WriteLine("Email: " + account.Email);
             Debug.WriteLine("Phone: " + account.Phone);
             Debug.WriteLine("Role: " + account.Role);

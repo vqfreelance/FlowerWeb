@@ -27,10 +27,6 @@ namespace JavaFlorist.Areas.Admin.Controllers
             return View();
         }
 
-        [Route("logout")]
-        public IActionResult Logout()
-        {
-            return RedirectToAction("login", "account");
-        }
+        
     }
 }

@@ -118,7 +118,6 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfoInputs.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfo.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csproj.CoreCompileInputs.cache
@@ -160,3 +159,4 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.pdb
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.genruntimeconfig.cache
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Bouquet\Edit.cshtml.g.cs

@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <form method="post" asp-area="admin" asp-controller="bouquet" asp-action="searchByKeyword">                               
+                            <form method="get" asp-area="admin" asp-controller="bouquet" asp-action="searchByKeyword" >                               
                                 <input type="search" class="form-control form-control-sm" placeholder="Enter letter(s).." value="@ViewBag.keyword" name="keyword"> 
                                 <input type="submit" value="Search" />
                             </form>
@@ -101,13 +101,18 @@
                                             <td>@bouquet.Id</td>
                                             <td>@bouquet.Name</td>
                                             <td>
-                                                <img src="~/images/bouquets/@bouquet.Photo" width="60" height="60" />
+                                                <img src="~/images/bouquets/@bouquet.Photo" width="100" height="100" />
                                             </td>
                                             <td>@bouquet.Description</td>
                                             <td>$@bouquet.Price</td>
-                                            <td>X</td>
+                                            <td>x</td>
                                             <td>@bouquet.Status</td>
-                                            <td>X</td>
+                                            <td>
+                                                <a asp-area="admin" asp-controller="bouquet" asp-action="edit" asp-route-id="@bouquet.Id">Edit</a>
+                                                @*<a asp-area="admin" asp-controller="bouquet" asp-action="delete" asp-route-id="@bouquet.Id"></a>*@
+                                                @Html.ActionLink("Delete", "delete", "bouquet", new { area="admin",id = bouquet.Id },
+                                                new { onclick = "return confirm('Are you sure you wish to delete this order?');" })                     
+                                            </td>
                                         </tr>
                                     }
 
