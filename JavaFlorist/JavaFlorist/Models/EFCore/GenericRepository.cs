@@ -17,10 +17,21 @@ namespace JavaFlorist.Models.EFCore
 
         public IQueryable<TEntity> GetAll()
         {
+            return _dbContext.Set<TEntity>();
+        }
+
+        public IQueryable<TEntity> GetAllAsNoTracking()
+        {
             return _dbContext.Set<TEntity>().AsNoTracking();
         }
 
         public async Task<TEntity> GetById(int id)
+        {
+            return await _dbContext.Set<TEntity>()              
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<TEntity> GetByIdAsNoTracking(int id)
         {
             return await _dbContext.Set<TEntity>()
                 .AsNoTracking()

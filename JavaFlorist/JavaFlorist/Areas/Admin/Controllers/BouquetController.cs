@@ -38,26 +38,25 @@ namespace JavaFlorist.Areas.Admin.Controllers
                 ViewBag.bouquets = bouquetRepository.GetAll().ToList();
             }
             catch (Exception)
-            {
-                // Ask============================
-                return RedirectToAction("Error500", "error500");
+            {                
+                return RedirectToAction("error500", "error", new { area = "admin"});
                 
             }
             
             ViewBag.noimageerror = TempData["NoImage"];
             ViewBag.uploaded = TempData["Uploaded"];
-            return RedirectToAction("Error500", "error500");
-            //return View();
+   
+            return View();
         }
 
-        //Search bouquest by keyword =>>> Ask =============================
+        //Search bouquest by keyword
         [HttpPost]
         [Route("searchByKeyword")]
         public IActionResult Search(string keyword)
         {
             ViewBag.bouquets = bouquetRepository.Search(keyword).ToList();
             ViewBag.keyword = keyword;           
-            return RedirectToAction("Index");
+            return View("Index");
         }
 
         //Upload bouquets
