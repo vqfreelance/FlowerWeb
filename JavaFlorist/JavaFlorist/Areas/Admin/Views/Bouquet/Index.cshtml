@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-6">
-                            <form method="get" asp-area="admin" asp-controller="bouquet" asp-action="searchByKeyword" >                               
+                            <form method="post" asp-area="admin" asp-controller="bouquet" asp-action="searchbykeyword" >                               
                                 <input type="search" class="form-control form-control-sm" placeholder="Enter letter(s).." value="@ViewBag.keyword" name="keyword"> 
                                 <input type="submit" value="Search" />
                             </form>

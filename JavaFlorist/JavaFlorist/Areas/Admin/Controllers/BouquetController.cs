@@ -46,18 +46,19 @@ namespace JavaFlorist.Areas.Admin.Controllers
             
             ViewBag.noimageerror = TempData["NoImage"];
             ViewBag.uploaded = TempData["Uploaded"];
-            return RedirectToAction("Error500", "error500");
-            //return View();
+            //return RedirectToAction("Error500", "error500");
+            return View();
         }
 
         //Search bouquest by keyword =>>> Ask =============================
         [HttpPost]
-        [Route("searchByKeyword")]
+        [Route("searchbykeyword")]
         public IActionResult Search(string keyword)
         {
             ViewBag.bouquets = bouquetRepository.Search(keyword).ToList();
-            ViewBag.keyword = keyword;           
-            return RedirectToAction("Index");
+            ViewBag.keyword = keyword;
+            //return RedirectToAction("Index");
+            return View("Index");
         }
 
         //Upload bouquets

@@ -27,6 +27,12 @@ namespace JavaFlorist.Models.EFCore
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
+        public async Task<TEntity> GetByIdNoTracking(int id)
+        {
+            return await _dbContext.Set<TEntity>()
+                .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
         public async Task Create(TEntity entity)
         {
             await _dbContext.Set<TEntity>().AddAsync(entity);

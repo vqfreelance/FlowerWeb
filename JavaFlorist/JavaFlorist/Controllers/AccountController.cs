@@ -226,16 +226,22 @@ namespace JavaFlorist.Controllers
             {
                 receiver = await customerRepository.GetById(order.ReceiverId);
             }
+            var a =  await orderRepository.GetByIdNoTracking(id);
             var cart = new List<Item>();
-            foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
+            //foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
+            if (a != null)
             {
-                var item = new Item
+                foreach (var b in a.OrderDetail.ToList())
                 {
-                    Bouquet = await bouquetRepository.GetById(b.BouquetId),
-                    Quantity = b.Quantity
-                };
-                cart.Add(item);
+                    var item = new Item
+                    {
+                        Bouquet = await bouquetRepository.GetById(b.BouquetId),
+                        Quantity = b.Quantity
+                    };
+                    cart.Add(item);
+                }
             }
+
 
             ViewBag.acc = acc;
             ViewBag.sender = sender;

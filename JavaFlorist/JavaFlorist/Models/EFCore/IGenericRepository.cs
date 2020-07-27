@@ -10,6 +10,8 @@ namespace JavaFlorist.Models.EFCore
 
         Task<TEntity> GetById(int id);
 
+        Task<TEntity> GetByIdNoTracking(int id);
+
         Task Create(TEntity entity);
 
         Task Update(int id, TEntity entity);
