@@ -22,8 +22,14 @@ namespace JavaFlorist.Areas.Admin.Controllers
         [Route("index")]
         public IActionResult Index()
         {
-            ViewBag.username = TempData["Username"];
-            //ViewBag.countBouquets = db.Bouquet.Count();
+            try
+            {
+                ViewBag.countBouquets = db.Bouquet.Count();
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
             return View();
         }
 

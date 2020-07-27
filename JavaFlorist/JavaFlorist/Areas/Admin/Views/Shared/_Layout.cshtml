@@ -171,7 +171,7 @@
                         <img src="~/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a asp-area="admin" asp-controller="account" asp-action="logout" class="d-block">@ViewBag.username</a>
+                        <a asp-area="admin" asp-controller="account" asp-action="logout" class="d-block">@Context.Session.GetString("username")</a>
                     </div>
                 </div>
 

@@ -33,13 +33,24 @@ namespace JavaFlorist.Areas.Admin.Controllers
         [Route("index")]
         public IActionResult Index()
         {
-            ViewBag.bouquets = bouquetRepository.GetAll().ToList();
+            try
+            {
+                ViewBag.bouquets = bouquetRepository.GetAll().ToList();
+            }
+            catch (Exception)
+            {
+                // Ask============================
+                return RedirectToAction("Error500", "error500");
+                
+            }
+            
             ViewBag.noimageerror = TempData["NoImage"];
             ViewBag.uploaded = TempData["Uploaded"];
-            return View();
+            return RedirectToAction("Error500", "error500");
+            //return View();
         }
 
-        //Search bouquest by keyword
+        //Search bouquest by keyword =>>> Ask =============================
         [HttpPost]
         [Route("searchByKeyword")]
         public IActionResult Search(string keyword)
@@ -107,7 +118,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
             return RedirectToAction("index", "bouquet");
         }
 
-        //Delete Bouquet
+        //Delete Bouquet => Ask =======================
         [Route("delete/{id}")]
         public IActionResult Delete(int id)
         {

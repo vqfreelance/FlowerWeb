@@ -43,8 +43,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
             {
                 var a = db.Account.SingleOrDefault(a => a.Username.Equals(admin_username));
                 securityManager.SignIn(HttpContext, a);
-                HttpContext.Session.SetString("username", admin_username);
-                TempData["Username"] = admin_username;
+                HttpContext.Session.SetString("username", admin_username);               
                 return RedirectToAction("index", "dashboard");
             }
             else
@@ -76,6 +75,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
         }
 
         //Register
+        [HttpGet]
         [Route("register")]
         public IActionResult Register()
         {
@@ -108,8 +108,25 @@ namespace JavaFlorist.Areas.Admin.Controllers
         }
 
         // Forgot Password
+        [HttpGet]
         [Route("forgotpassword")]
         public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Route("forgotpassword")]
+        public IActionResult ForgotPassword(string email)
+        {
+            var user = db.Account.SingleOrDefault(a => a.Email.Equals(email));           
+            return View();
+        }
+
+        // Recovery Password
+        [HttpGet]
+        [Route("recoverypassword")]
+        public IActionResult RecoveryPassword()
         {
             return View();
         }

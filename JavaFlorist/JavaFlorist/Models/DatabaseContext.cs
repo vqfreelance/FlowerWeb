@@ -20,16 +20,20 @@ namespace JavaFlorist.Models
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<OccBouquet> OccBouquet { get; set; }
-        public virtual DbSet<Occcasion> Occcasion { get; set; }
+        public virtual DbSet<Occasion> Occasion { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
 
-      
+ 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
             {
+                entity.Property(e => e.Address)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(250)
                     .IsUnicode(false);
@@ -122,7 +126,7 @@ namespace JavaFlorist.Models
                     .HasConstraintName("FK_Occ_Bouquet_Occcasion");
             });
 
-            modelBuilder.Entity<Occcasion>(entity =>
+            modelBuilder.Entity<Occasion>(entity =>
             {
                 entity.Property(e => e.Description)
                     .HasMaxLength(250)

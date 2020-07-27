@@ -10,6 +10,6 @@ namespace JavaFlorist.Models
         public int? BouquetId { get; set; }
 
         public virtual Bouquet Bouquet { get; set; }
-        public virtual Occcasion Occasion { get; set; }
+        public virtual Occasion Occasion { get; set; }
     }
 }
