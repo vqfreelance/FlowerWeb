@@ -1,9 +1,10 @@
-﻿using System;
+﻿using JavaFlorist.Models.EFCore;
+using System;
 using System.Collections.Generic;
 
 namespace JavaFlorist.Models
 {
-    public partial class Order
+    public partial class Order:IEntity
     {
         public Order()
         {
@@ -11,12 +12,12 @@ namespace JavaFlorist.Models
         }
 
         public int Id { get; set; }
-        public int? AccountId { get; set; }
-        public int? SenderId { get; set; }
-        public int? ReceiverId { get; set; }
+        public int AccountId { get; set; }
+        public int SenderId { get; set; }
+        public int ReceiverId { get; set; }
         public string Status { get; set; }
         public string Message { get; set; }
-        public DateTime? ReceivingTime { get; set; }
+        public string ReceivingTime { get; set; }
 
         public virtual Account Account { get; set; }
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }

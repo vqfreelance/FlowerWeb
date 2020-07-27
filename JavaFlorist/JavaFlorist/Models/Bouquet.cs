@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace JavaFlorist.Models
 {
-    public partial class Bouquet : IEntity
+    public partial class Bouquet:IEntity
     {
         public Bouquet()
         {

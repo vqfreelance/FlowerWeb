@@ -190,8 +190,19 @@
                                     <a href="" class="title-products"
                                        title="@b.Name"><span itemprop="name">@b.Name</span></a>
                                 </div>
-                                <div class="product-price"><b>$@b.Price</b></div>
-                                <img class="btn" src="~/images/cart.svg" height="45" href="#" onClick="quickaddcart(@b.Id);"/>
+                                <div class="product-price">
+                                    <b>$@b.Price</b>
+                                </div>
+                                <div class="product-cart">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-left">
+                                            <img class="btn" src="~/images/shopping-cart.png" href="#" onClick="quickbuyout(@b.Id)" />
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <img class="btn" src="~/images/plus.png" href="#" onClick="quickaddcart(@b.Id)" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     }

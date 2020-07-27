@@ -28,7 +28,7 @@ namespace JavaFlorist
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
             services.AddSession();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
@@ -40,6 +40,16 @@ namespace JavaFlorist
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IBouquetRepository, BouquetRepository>();
+            services.AddScoped<IOccasionRepository, OccasionRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IOccBouquetRepository, OccBouquetRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
         }
 

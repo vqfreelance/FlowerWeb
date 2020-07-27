@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using JavaFlorist.Models;
 using JavaFlorist.Models.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,10 +18,32 @@ namespace JavaFlorist.Controllers
     {
         private DatabaseContext db;
         private IBouquetRepository bouquetRepository;
-        public CartController(DatabaseContext _db, IBouquetRepository _bouquetRepository)
+        private IAccountRepository accountRepository;
+        private IOccasionRepository occasionRepository;
+        private IMessageRepository messageRepository;
+        private IOrderRepository orderRepository;
+        private IOrderDetailRepository orderdetailRepository;
+        private ICustomerRepository customerRepository;
+
+        public CartController(DatabaseContext _db, 
+            IBouquetRepository _bouquetRepository, 
+            IAccountRepository _accountRepository, 
+            IOccasionRepository _occasionRepository, 
+            IMessageRepository _messageRepository,
+            IOrderRepository _orderRepository,
+            IOrderDetailRepository _orderdetailRepository,
+            ICustomerRepository _customerRepository
+            )
         {
             db = _db;
             bouquetRepository = _bouquetRepository;
+            accountRepository = _accountRepository;
+            occasionRepository = _occasionRepository;
+            messageRepository = _messageRepository;
+            orderRepository = _orderRepository;
+            orderdetailRepository = _orderdetailRepository;
+            customerRepository = _customerRepository;
+
         }
 
         [Route("index")]
@@ -29,7 +53,7 @@ namespace JavaFlorist.Controllers
             {
                 //Debug.WriteLine("Cart: " + HttpContext.Session.GetString("cart"));
                 List<Item> cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
-                if(cart.Count >0)
+                if (cart.Count > 0)
                 {
                     ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
                     ViewBag.cart = cart;
@@ -90,7 +114,7 @@ namespace JavaFlorist.Controllers
                 }
                 else
                 {
-                    cart[index].Quantity = cart[index].Quantity+quantity;
+                    cart[index].Quantity = cart[index].Quantity + quantity;
                 }
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cart, new JsonSerializerSettings()
                 {
@@ -169,10 +193,81 @@ namespace JavaFlorist.Controllers
             return RedirectToAction("index", "cart");
         }
 
+        [Authorize(Roles = "user")]
+        [HttpGet]
         [Route("checkout")]
         public IActionResult Checkout()
         {
+            List<Item> cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
+            var username = User.FindFirst(ClaimTypes.NameIdentifier);
+            ViewBag.acc = accountRepository.GetByUsername(username.Value);
+            ViewBag.occ = occasionRepository.GetAll().ToList();
+            ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
+            ViewBag.cart = cart;
+
             return View("Checkout");
+        }
+
+        [Authorize(Roles = "user")]
+        [Route("pay")]
+        public async Task<IActionResult> Pay(
+            string sender_name,
+            string sender_email,
+            string sender_phone,
+            string sender_address,
+            string receiver_name,
+            string receiver_email,
+            string receiver_phone,
+            string receiver_address,
+            string message, 
+            string receivingtime)
+        {
+            var sender = new Customer { Name = sender_name, Phone = sender_phone, Email = sender_email, Address = sender_address };
+            var receiver = new Customer { Name = receiver_name, Phone = receiver_phone, Email = receiver_email, Address = receiver_address };
+            List<Item> cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
+            var username = User.FindFirst(ClaimTypes.NameIdentifier);
+            var acc = accountRepository.GetByUsername(username.Value);
+            var order = new Order();
+            try
+            {
+                if(sender.Name!=null) { await customerRepository.Create(sender); };
+                if(receiver.Name!=null) { await customerRepository.Create(receiver); };
+                order = new Order
+                {
+                    AccountId = acc.Id,
+                    SenderId = sender != null ? sender.Id : 0,
+                    ReceiverId = receiver != null ? receiver.Id : 0,
+                    Status = "pending",
+                    Message = message,
+                    ReceivingTime = receivingtime
+                };
+                await orderRepository.Create(order);
+                foreach (var c in cart)
+                {
+                    var od = new OrderDetail
+                    {
+                        OrderId = order.Id,
+                        BouquetId = c.Bouquet.Id,
+                        Quantity = c.Quantity
+                    };
+                await orderdetailRepository.Create(od);
+                };
+                
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+
+            return Json(Url.Action("vieworderdetail", "account",new {id =  order.Id}));
+        }
+
+        [Route("getallmess")]
+        public IActionResult GetAllMess(int id)
+        {
+            //Occasion occ = await occasionRepository.GetById(id);
+            //var mess = db.Message.Where(m => m.OccasionId == id).ToList();
+            return new JsonResult(db.Message.Where(m=>m.OccasionId==id).ToList());
         }
 
         private int exists(int id, List<Item> cart)
@@ -190,8 +285,7 @@ namespace JavaFlorist.Controllers
         [Route("countcart")]
         public IActionResult countCart()
         {
-            var i = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart")).Sum(i => i.Quantity);
-            return new JsonResult(i.ToString());
+            return new JsonResult(JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart")).Sum(i => i.Quantity));
         }
     }
 }

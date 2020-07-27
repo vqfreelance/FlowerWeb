@@ -1,4 +1,16 @@
-button, button:focus{
+/*anhvu css-----------------------*/
+.product-cart img {
+    padding: 0;
+    height: 35px;
+    width: 35px;
+}
+.product-cart {
+    padding: 0;
+    margin:0;
+    height:35px;
+}
+/*-------------------------------*/
+button, button:focus {
     outline: none !important;
 }
 label.error{
@@ -167,9 +179,11 @@ label.error{
     color: #333;
 }
 .products .product-item .product-title {
-    height: 53px;
+    /*height: 53px;*/
     overflow: hidden;
 }
+
+
 .products .product-item .product-img {
     height: 235px;
 }
@@ -936,7 +950,6 @@ END SEARCH HEADER
 	    position: relative;
 	    top: -1px;
 	}
-}
 /* ============== END PHONE RING */
 #back-top:hover {
     background-color: #f58831;

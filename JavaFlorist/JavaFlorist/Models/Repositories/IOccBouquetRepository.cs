@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace JavaFlorist.Models.Repositories
 {
-    public interface IBouquetItemRepository : IGenericRepository<BouquetItem>
-    {      
+    public interface IOccBouquetRepository : IGenericRepository<OccBouquet>
+    {
+        public Task<OccBouquet> GetById(int id);
     }
+
+
 }

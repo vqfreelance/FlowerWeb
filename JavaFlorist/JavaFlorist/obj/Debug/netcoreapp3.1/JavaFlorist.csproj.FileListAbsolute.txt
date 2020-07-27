@@ -11,6 +11,8 @@ C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\JavaFlorist.Views.pdb
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\BCrypt.Net-Core.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Razor.Language.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
@@ -47,6 +49,7 @@ C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\NuGet.Frameworks.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\System.Composition.AttributedModel.dll
@@ -118,7 +121,6 @@ C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfoInputs.cache
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfo.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csproj.CoreCompileInputs.cache
@@ -147,8 +149,10 @@ C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Checkout.cshtml.g.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Index.cshtml.g.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\BouquetList\Index.cshtml.g.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\HomeBar\Index.cshtml.g.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\HomeBar\Index2.cshtml.g.cs
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Components\Sender\Index.cshtml.g.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\_ViewImports.cshtml.g.cs
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.RazorTargetAssemblyInfo.cache
@@ -160,3 +164,5 @@ C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.dll
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.pdb
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.genruntimeconfig.cache
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Account\OrderHistory.cshtml.g.cs

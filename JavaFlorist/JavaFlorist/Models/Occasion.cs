@@ -1,11 +1,12 @@
-﻿using System;
+﻿using JavaFlorist.Models.EFCore;
+using System;
 using System.Collections.Generic;
 
 namespace JavaFlorist.Models
 {
-    public partial class Occcasion
+    public partial class Occasion:IEntity
     {
-        public Occcasion()
+        public Occasion()
         {
             Message = new HashSet<Message>();
             OccBouquet = new HashSet<OccBouquet>();
