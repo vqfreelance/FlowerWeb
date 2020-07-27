@@ -5,9 +5,9 @@
                 <div class="logo"><a asp-controller="home" asp-action="index"><img width="160" src="~/images/footer-logo.png"></a></div>
             </div>
             <div class="col-lg-4">
-                <form action="" method="post">
+                <form  asp-controller="bouquet" asp-action="search">
                     <div class="input-group">
-                        <input class="form-control" type="text" id="placeholder-type-writter" name="q" placeholder="Search" value="">
+                        <input class="form-control" type="text" id="placeholder-type-writter" name="keyword" placeholder="Search" value="">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary btn-search" type="submit"><img width="18" src="~/images/search.svg"></button>
                         </div>

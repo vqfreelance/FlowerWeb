@@ -226,7 +226,7 @@ namespace JavaFlorist.Controllers
             {
                 receiver = await customerRepository.GetById(order.ReceiverId);
             }
-            var a =  await orderRepository.GetByIdNoTracking(id);
+            var a =  await orderRepository.GetByIdIncludeRelationship(id);
             var cart = new List<Item>();
             //foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
             if (a != null)
@@ -241,7 +241,6 @@ namespace JavaFlorist.Controllers
                     cart.Add(item);
                 }
             }
-
 
             ViewBag.acc = acc;
             ViewBag.sender = sender;

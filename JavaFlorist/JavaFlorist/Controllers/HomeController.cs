@@ -14,21 +14,34 @@ namespace JavaFlorist.Controllers
     {
         private DatabaseContext db;
         private IBouquetRepository bouquetRepository;
-        public HomeController(DatabaseContext _db, IBouquetRepository _bouquetRepository)
+        private IOccasionRepository occasionRepository;
+        public HomeController(DatabaseContext _db, IBouquetRepository _bouquetRepository, IOccasionRepository _occasionRepository)
         {
             db = _db;
             bouquetRepository = _bouquetRepository;
+            occasionRepository = _occasionRepository;
         }
 
         [AllowAnonymous]
         [Route("index")]
         [Route("")]
         [Route("~/")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var bouquets = bouquetRepository.GetAll().ToList();
-            ViewBag.bouquets = bouquets;
+            ViewBag.bouquets = bouquetRepository.GetBouquetByStatus();
+            ViewBag.numberOccasions = occasionRepository.GetNumberOcc(5);
+            ViewBag.occasions = occasionRepository.GetAll().ToList();
             return View();
+        }
+
+        [Route("occbouquet/{id}")]
+        public IActionResult OccBouquet(int id)
+        {
+
+            ViewBag.bouquets = occasionRepository.GetBouquetsByOcc(id);
+            ViewBag.numberOccasions = occasionRepository.GetNumberOcc(5);
+            ViewBag.occasions = occasionRepository.GetAll().ToList();
+            return View("Index2");
         }
     }
 }

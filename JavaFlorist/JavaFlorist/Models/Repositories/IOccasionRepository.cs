@@ -8,7 +8,8 @@ namespace JavaFlorist.Models.Repositories
 {
     public interface IOccasionRepository : IGenericRepository<Occasion>
     {
-        public Task<Occasion> GetById(int id);
+        List<Occasion> GetNumberOcc(int number);
+        List<Bouquet> GetBouquetsByOcc(int id);
     }
 
 

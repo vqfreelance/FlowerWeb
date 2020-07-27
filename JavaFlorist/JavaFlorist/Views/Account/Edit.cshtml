@@ -7,6 +7,10 @@
 
 <div class="signup-box">
     <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+            <li class="breadcrumb-item active">EditAccount</li>
+        </ol>
         <h3>Change your Info</h3> <br />
         <form name="box-signup" id="signup_form" method="post" asp-controller="account" asp-action="editaccount" asp-route-id="Id">
             <div class="form-group">

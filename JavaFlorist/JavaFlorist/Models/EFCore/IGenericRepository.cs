@@ -10,7 +10,9 @@ namespace JavaFlorist.Models.EFCore
 
         Task<TEntity> GetById(int id);
 
-        Task<TEntity> GetByIdNoTracking(int id);
+        IQueryable<TEntity> GetAllIncludeRelationship();
+
+        Task<TEntity> GetByIdIncludeRelationship(int id);
 
         Task Create(TEntity entity);
 

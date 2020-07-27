@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+    <div class="container">
+        <div class="row top-content-wrapp">
+            <div class="col-lg-2 col-xs-12">
+                <div class="dropdown cate-main hidden-xs">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        <img class="sep2" src="~/images/signs.svg"> OCCASIONS
+                    </button>
+                </div>
+                <nav class="jquery-accordion-menu hidden-xs" id="jquery-accordion-menu">
+                    <ul>
+                        @foreach (var occasion in ViewBag.Occasions)
+                        {
+                            <li class="">
+                                <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                                    <img width="20" src="~/images/occasions/@occasion.Photo">
+                                    <span>@occasion.Name</span>
+                                </a>
+                                <div class="sub-menu">
+                                    <ul>
+                                        <li class=" ">
+                                            <a href="">* Phong Lan </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+            @*<div class="col-lg-9 custom-col-lg-9 col-xs-12">
+                <nav class="nav-extend">
+                    
+                </nav>
+                <div class="banner">
+                    <div>
+                        <a href="" target="_blank">
+                            <img src="~/assets/2020/2020-06/a41f059deb0a800af8491b1d234f5f71.jpg">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="" target="_blank">
+                            <img src="~/assets/2020/2020-06/b496ebd7b74cbf7ba1d2f0d0ea4a660e.jpg">
+                        </a>
+                    </div>
+                </div>
+            </div>*@
+            
+            <div class="col-lg-9 custom-col-lg-9 col-xs-12" id="cate-content">
+                <div class="products-type category-product-event" style="margin-top: 1px;">
+                    <div class="banner-decor">
+                        <img src="~/images/Lan_Ho_Diep_Dalat_Hasfarm.png">
+                    </div>
+                </div>
+                </div>
+
+                @*<div class="col-lg-2 col-lg-custom-2 col-xs-12 hidden-xs">
+                <ul class="services-box">
+                    <li>
+                        <div class="box-item">
+                            <img src="~/images/commit.png">
+                            <h4>Commitment</h4>
+                            <p>Fair Price</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="box-item">
+                            <img src="~/images/shipping.png">
+                            <h4>Express Delivery</h4>
+                            <p>2 hours within 5 km</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="box-item">
+                            <img src="~/images/guarantee.png">
+                            <h4>Guarantee</h4>
+                            <p>Fresh flowers in 3 days</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="box-item">
+                            <img src="~/images/sustainability.png">
+                            <h4>Friendly</h4>
+                            <p>Environment</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>*@
+        </div>
+    </div>

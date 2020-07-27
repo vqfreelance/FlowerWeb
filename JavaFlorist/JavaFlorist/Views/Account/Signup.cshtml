@@ -7,6 +7,10 @@
 
 <div class="signup-box">
     <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+            <li class="breadcrumb-item active">Signup</li>
+        </ol>
         <h3>Create a new account</h3> <br />
         <form name="box-signup" id="signup_form" method="POST" asp-controller="account" asp-action="signup">
             <input name="return" class="return_popup_login" type="hidden" data-return="" value="">

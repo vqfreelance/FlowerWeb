@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Occasion\" />
     <Folder Include="Middlewares\" />
     <Folder Include="wwwroot\images\bouquets\" />
   </ItemGroup>

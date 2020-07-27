@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Globalization
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -15,94 +15,27 @@
             </div>
             <nav class="jquery-accordion-menu hidden-xs" id="jquery-accordion-menu">
                 <ul>
-                    <li class="">
-                        <a href="c/hoa-cat-canh/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-2.png">
-                            <span>Cut Flowers</span>
-                        </a>
-                        <div class="sub-menu">
-                            <ul>
-                                <li class=" "><a href="">* Green Wicky</a></li>
-                                <li class=" "><a href="">* Cúc Đơn</a></li>
-                                <li class=" "><a href="">* Cúc Nhánh</a></li>
-                                <li class=" "><a href="">* Sống Đời</a></li>
-                                <li class=" "><a href="">* Cẩm Chướng Đơn</a></li>
-                                <li class=" "><a href="">* Lily</a></li>
-                                <li class=" "><a href="">* Cẩm Chướng Nhánh</a></li>
-                                <li class=" "><a href="">* Calimero</a></li>
-                                <li class=" "><a href="">* Rossi</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="">
-                        <a href="c/hoa-chau/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-3.png">
-                            <span>Flower Pots</span>
-                        </a>
-                        <div class="sub-menu">
-                            <ul>
-                                <li class=" "><a href="">* Bâng Khuâng</a></li>
-                                <li class=" "><a href="">* Hồng Môn</a></li>
-                                <li class=" "><a href="">* Thu Hải Đường</a></li>
-                                <li class=" "><a href="">* Calimero</a></li>
-                                <li class=" "><a href="">* Cẩm Chướng</a></li>
-                                <li class=" "><a href="">* Hoa Cúc</a></li>
-                                <li class=" "><a href="">* Anh Thảo</a></li>
-                                <li class=" "><a href="">* Dương Xỉ Nhỏ</a></li>
-                                <li class=" "><a href="">* Đồng Tiền</a></li>
-                                <li class=" "><a href="">* Cây Xanh</a></li>
-                            </ul><ul>
-                                <li class=" "><a href="">* Râm Bụt</a></li>
-                                <li class=" "><a href="">* Cẩm Tú Cầu</a></li>
-                                <li class=" "><a href="">* Sống Đời</a></li>
-                                <li class=" "><a href="">* Calla Lily</a></li>
-                                <li class=" "><a href="">* Lily</a></li>
-                                <li class=" "><a href="">* Cúc Họa Mi</a></li>
-                                <li class=" "><a href="">* Cúc Pico</a></li>
-                                <li class=" "><a href="">* Lan Ý</a></li>
-                                <li class=" "><a href="">* Hoa Hồng</a></li>
-                                <li class=" "><a href="">* Violet Châu Phi</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="">
-                        <a href="c/la-trang-tri/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-5.png">
-                            <span>Decorative Leaves</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="c/lan-ho-diep/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-4.png">
-                            <span>Orchid</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="c/phu-lieu-hoa/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-6.png">
-                            <span>Accessories</span>
-                        </a>
-                        <div class="sub-menu">
-                            <ul>
-                                <li class=" "><a href="">* Đất hữu cơ Potting Soil</a></li>
-                                <li class=" "><a href="">* Accessories khác</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    @foreach (var occasion in ViewBag.Occasions)
+                    {
+                        <li class="">
+                            <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                                <img width="20" src="~/images/occasions/@occasion.Photo">
+                                <span>@occasion.Name</span>
+                            </a>
+                            @*<div class="sub-menu">
+                        <ul>
+                            <li class=" ">
+                                    <a href="">* Phong Lan </a>
+                                </li>
+                        </ul>
+                    </div>*@
+                        </li>
+                    }
                 </ul>
             </nav>
         </div>
         <div class="col-lg-8 col-lg-custom-8 col-xs-12">
-            <nav class="nav-extend">
-                <ul>
-                    <li><a href=""><img src="~/assets/_file/2020/2020-06/present-box-3.png"><span>Award Flowers</span></a></li>
-                    <li><a href=""><img src="~/assets/_file/2020/2020-06/Pot-design.png"><span>Design Flower Pots</span></a></li>
-                    <li><a href=""><img src="~/assets/_file/2020/2020-06/pray-day-2.png"><span>Workship day Flowers</span></a></li>
-                    <li class="hidden-xs"><a href=""><img src="~/images/office-2.svg"><span>Decorate</span></a></li>
-                    <li style="display:none"><a href=""><img src="~/images/promotion.svg"><span>Promotion</span></a></li>
-                    <li><a href=""><img src="~/images/bundle-2.svg"><span>Buy a lot</span></a></li>
-                </ul>
-            </nav>
+
             <div class="banner">
                 <div><a href="" target="_blank"><img src="~/assets/2020/2020-06/a41f059deb0a800af8491b1d234f5f71.jpg"></a></div>
                 <div><a href="" target="_blank"><img src="~/assets/2020/2020-06/b496ebd7b74cbf7ba1d2f0d0ea4a660e.jpg"></a></div>
@@ -147,31 +80,14 @@
         <h2><a href="">Award Flowers & Service Flowers </a></h2>
         <div class="products-type hidden-xs" style="margin: 10px 0 40px;">
             <ul class="type-list">
-                <li>
-                    <a href="">
-                        <img src="~/images/type-1.png"><span>Love</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="~/images/type-2.png"><span>Birthday</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="~/images/type-3.png"><span>Thanks</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="~/images/type-4.png"><span>Condolatory</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="~/images/type-5.png"><span>Congratulation</span>
-                    </a>
-                </li>
+                @foreach (var occasion in ViewBag.NumberOccasions)
+                {
+                    <li>
+                        <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                            <img src="~/images/occasions/@occasion.Photo"><span>@occasion.Name</span>
+                        </a>
+                    </li>
+                }
             </ul>
         </div>
         <div class="row products service-product">
@@ -191,7 +107,7 @@
                                        title="@b.Name"><span itemprop="name">@b.Name</span></a>
                                 </div>
                                 <div class="product-price">
-                                    <b>$@b.Price</b>
+                                    <b>@(((decimal)b.Price).ToString("C", CultureInfo.CurrentCulture))</b>
                                 </div>
                                 <div class="product-cart">
                                     <div class="row">
@@ -208,7 +124,9 @@
                     }
                     <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
                         <a class="btn-readmore"
-                           href="">View All</a>
+                           asp-controller="Bouquet" asp-action="Index">
+                            View All
+                        </a>
                     </div>
                 </div>
             </div>
