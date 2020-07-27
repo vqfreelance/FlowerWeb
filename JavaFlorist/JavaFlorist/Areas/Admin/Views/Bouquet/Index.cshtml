@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Bouquets List</h1>
+                <h1>Bouquets Management</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -24,75 +24,151 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-12">         
+        <div class="col-12">
             <div class="card">
-
+                <div class="card-header">
+                    <h3 class="card-title">Upload Bouquet Photo</h3>
+                </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <div class="form-group">
-                        <label for="exampleInputFile">Upload Bouquet Photo</label>
-                        <form class="input-group" method="post" asp-area="admin" asp-controller="bouquet" asp-action="upload" enctype="multipart/form-data">
-                            <div class="custom-file">
-                                <input name="images" type="file" multiple="multiple" class="custom-file-input" id="exampleInputFile">
-                                <label class="custom-file-label" for="exampleInputFile" align="left">Choose file</label>
+                    <div class="row">
+                        <div class="col-sm-7 col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputFile">Please choose image(s)...</label>
+                                <form class="input-group" method="post" asp-area="admin" asp-controller="bouquet" asp-action="upload" enctype="multipart/form-data">
+                                    <div class="custom-file">
+                                        <input name="images" type="file" multiple="multiple" class="custom-file-input" id="exampleInputFile">
+                                        <label class="custom-file-label" for="exampleInputFile" align="left">Choose file</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <input type="submit" class="input-group-text" value="Upload">
+                                    </div>
+                                </form>
+                                <span style="color:red">@ViewBag.noimageerror</span>
+                                <span style="color:red">@ViewBag.uploaded</span>
                             </div>
-                            <div class="input-group-append">
-                                <input type="submit" class="input-group-text" value="Upload">
-                            </div>
-                        </form>
-                        @ViewBag.noimageerror
-                        @ViewBag.uploaded
+                        </div>
                     </div>
                 </div>
-                <!-- /.upload bouquet photo -->
+            </div>
+            <!-- /.upload bouquet photo -->
+
+            <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Bouquets List</h3>
                 </div>
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Photo</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Occasion</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var bouquet in ViewBag.bouquets)
-                            {
-                                <tr>
-                                    <td>@bouquet.Id</td>
-                                    <td>@bouquet.Name</td>
-                                    <td>
-                                        <img src="~/images/bouquets/@bouquet.Photo" width="60" height="60" />
-                                    </td>
-                                    <td>@bouquet.Description</td>
-                                    <td>$@bouquet.Price</td>
-                                    <td>X</td>
-                                    <td>@bouquet.Status</td>
-                                    <td>X</td>
-                                </tr>
-                            }
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="">
+                                Show 
+                                <select name="bouquet_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                </select>
+                                 entries
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <form method="get" asp-area="admin" asp-controller="bouquet" asp-action="searchByKeyword" >                               
+                                <input type="search" class="form-control form-control-sm" placeholder="Enter letter(s).." value="@ViewBag.keyword" name="keyword"> 
+                                <input type="submit" value="Search" />
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.search photo -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Photo</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Occasion</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var bouquet in ViewBag.bouquets)
+                                    {
+                                        <tr>
+                                            <td>@bouquet.Id</td>
+                                            <td>@bouquet.Name</td>
+                                            <td>
+                                                <img src="~/images/bouquets/@bouquet.Photo" width="100" height="100" />
+                                            </td>
+                                            <td>@bouquet.Description</td>
+                                            <td>$@bouquet.Price</td>
+                                            <td>x</td>
+                                            <td>@bouquet.Status</td>
+                                            <td>
+                                                <a asp-area="admin" asp-controller="bouquet" asp-action="edit" asp-route-id="@bouquet.Id">Edit</a>
+                                                @*<a asp-area="admin" asp-controller="bouquet" asp-action="delete" asp-route-id="@bouquet.Id"></a>*@
+                                                @Html.ActionLink("Delete", "delete", "bouquet", new { area="admin",id = bouquet.Id },
+                                                new { onclick = "return confirm('Are you sure you wish to delete this order?');" })                     
+                                            </td>
+                                        </tr>
+                                    }
 
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Photo</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Occasion</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Photo</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th>Occasion</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- /.details of photo -->
+                    <div class="row">
+                        <div class="col-sm-12 col-md-5">
+                            <div class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                        </div>
+                        <div class="col-sm-12 col-md-7">
+                            <div class="" id="">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous disabled" id="example2_previous">
+                                        <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                    </li>
+                                    <li class="paginate_button page-item active">
+                                        <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
+                                    </li>
+                                    <li class="paginate_button page-item ">
+                                        <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
+                                    </li>
+                                    <li class="paginate_button page-item next" id="example2_next">
+                                        <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pages -->
                 </div>
                 <!-- /.card-body -->
             </div>

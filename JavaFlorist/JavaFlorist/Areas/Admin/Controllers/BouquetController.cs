@@ -16,11 +16,14 @@ namespace JavaFlorist.Areas.Admin.Controllers
     [Route("admin/bouquet")]
     public class BouquetController : Controller
     {
+        private DatabaseContext db;
         private readonly IWebHostEnvironment iwebHostEnvironment;
         private IBouquetRepository bouquetRepository;
 
-        public BouquetController(IWebHostEnvironment _iwebHostEnvironment, IBouquetRepository _bouquetRepository)
-        {          
+        public BouquetController(DatabaseContext _db, 
+            IWebHostEnvironment _iwebHostEnvironment, IBouquetRepository _bouquetRepository)
+        {
+            db = _db;
             iwebHostEnvironment = _iwebHostEnvironment;
             bouquetRepository = _bouquetRepository;
         }
@@ -30,18 +33,42 @@ namespace JavaFlorist.Areas.Admin.Controllers
         [Route("index")]
         public IActionResult Index()
         {
-            ViewBag.bouquets = bouquetRepository.GetAll().ToList();
-            return View();
+            try
+            {
+                ViewBag.bouquets = bouquetRepository.GetAll().ToList();
+            }
+            catch (Exception)
+            {
+                // Ask============================
+                return RedirectToAction("Error500", "error500");
+                
+            }
+            
+            ViewBag.noimageerror = TempData["NoImage"];
+            ViewBag.uploaded = TempData["Uploaded"];
+            return RedirectToAction("Error500", "error500");
+            //return View();
         }
 
+        //Search bouquest by keyword =>>> Ask =============================
+        [HttpPost]
+        [Route("searchByKeyword")]
+        public IActionResult Search(string keyword)
+        {
+            ViewBag.bouquets = bouquetRepository.Search(keyword).ToList();
+            ViewBag.keyword = keyword;           
+            return RedirectToAction("Index");
+        }
+
+        //Upload bouquets
         [HttpPost]
         [Route("upload")]
         public async Task<IActionResult> Upload(IFormFile[] images)
         {
            
-            if (images == null || images.Length==0)
+            if (images.Count() == 0 || images.Length==0)
             {
-                ViewBag.noimageerror = "Please select at least 1 image";
+                TempData["NoImage"] = "Please select at least 1 image";
             }
             else
             {
@@ -49,8 +76,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
                 {
                     var bouquet = new Bouquet();
                     string imgname = Path.GetFileNameWithoutExtension(i.FileName);
-                    string imgext = Path.GetExtension(i.FileName);
-
+                   
                     Debug.WriteLine("File Name: " + i.FileName);
                     Debug.WriteLine("File Size (byte): " + i.Length);
                     Debug.WriteLine("File SizeType: " + i.ContentType);
@@ -69,9 +95,36 @@ namespace JavaFlorist.Areas.Admin.Controllers
                         throw e;
                     }
                 }
-                ViewBag.uploaded = "Upload images successfully!";                
+                TempData["Uploaded"] = "Upload images successfully!";                
             }
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+
+        //Edit Bouquets
+        [HttpGet]
+        [Route("edit/{id}")]
+        public IActionResult Edit(int id)
+        {
+            var bouquet = db.Bouquet.Find(id);
+            return View("Edit", bouquet);
+        }
+
+        [HttpPost]
+        [Route("edit/{id}")]
+        public IActionResult Edit(Bouquet bouquet)
+        {           
+            db.Entry(bouquet).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("index", "bouquet");
+        }
+
+        //Delete Bouquet => Ask =======================
+        [Route("delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            db.Bouquet.Remove(db.Bouquet.Find(id));
+            db.SaveChanges();
+            return RedirectToAction("index", "bouquet");
         }
     }
 }

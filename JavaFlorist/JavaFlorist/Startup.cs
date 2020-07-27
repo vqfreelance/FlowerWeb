@@ -37,6 +37,7 @@ namespace JavaFlorist
                 options.LogoutPath = "/account/logout";
                 options.AccessDeniedPath = "/login/accessDenied";
             });
+            services.AddSession();
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IBouquetRepository, BouquetRepository>();

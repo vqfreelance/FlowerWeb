@@ -23,7 +23,7 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="~/admin/index2.html"><b>Admin</b>LTE</a>
+            <a asp-area="admin" asp-controller="account" asp-action="register"><b>Admin</b>LTE</a>
         </div>
 
         <div class="card">
@@ -98,7 +98,7 @@
                     </div>
                 </form>
                 <br />
-                <p style="color:red">@ViewBag.registererror</p>
+                
 
                 <a asp-area="admin" asp-controller="account" asp-action="login" class="text-center">I already have a membership</a>
             </div>

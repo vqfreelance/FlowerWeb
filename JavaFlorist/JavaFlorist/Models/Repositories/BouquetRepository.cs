@@ -11,7 +11,15 @@ namespace JavaFlorist.Models.Repositories
         public BouquetRepository(DatabaseContext dbContext) : base(dbContext)
         {
         }
+        public List<Bouquet> Search(string keyword)
+        {
+            return GetAll().Where(b => b.Name.Contains(keyword)).ToList();
+        }
 
-       
+        public List<Bouquet> Search(decimal min, decimal max)
+        {
+            return GetAll().Where(b => b.Price >= min && b.Price <= max).ToList();
+        }
+
     }
 }
