@@ -216,39 +216,47 @@ namespace JavaFlorist.Controllers
             var username = User.FindFirst(ClaimTypes.NameIdentifier);
             var acc = accountRepository.GetByUsername(username.Value);
             var order = await orderRepository.GetById(id);
-            var sender = new Customer();
-            if (order !=null && order.SenderId > 0)
+            if(acc.Id == order.AccountId)
             {
-                sender = await customerRepository.GetById(order.SenderId);
-            }
-            var receiver = new Customer();
-            if (order != null && order.ReceiverId > 0)
-            {
-                receiver = await customerRepository.GetById(order.ReceiverId);
-            }
-            var a =  await orderRepository.GetByIdIncludeRelationship(id);
-            var cart = new List<Item>();
-            //foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
-            if (a != null)
-            {
-                foreach (var b in a.OrderDetail.ToList())
+                var sender = new Customer();
+                if (order !=null && order.SenderId > 0)
                 {
-                    var item = new Item
-                    {
-                        Bouquet = await bouquetRepository.GetById(b.BouquetId),
-                        Quantity = b.Quantity
-                    };
-                    cart.Add(item);
+                    sender = await customerRepository.GetById(order.SenderId);
                 }
+                var receiver = new Customer();
+                if (order != null && order.ReceiverId > 0)
+                {
+                    receiver = await customerRepository.GetById(order.ReceiverId);
+                }
+                var a =  await orderRepository.GetByIdIncludeRelationship(id);
+                var cart = new List<Item>();
+                //foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
+                if (a != null)
+                {
+                    foreach (var b in a.OrderDetail.ToList())
+                    {
+                        var item = new Item
+                        {
+                            Bouquet = await bouquetRepository.GetById(b.BouquetId),
+                            Quantity = b.Quantity
+                        };
+                        cart.Add(item);
+                    }
+                }
+
+                ViewBag.acc = acc;
+                ViewBag.sender = sender;
+                ViewBag.receiver = receiver;
+                ViewBag.cart = cart;
+                ViewBag.order = order;
+                ViewBag.total = receiver.Name == null ? (cart.Sum(i => i.Quantity * i.Bouquet.Price)) : (cart.Sum(i => i.Quantity * i.Bouquet.Price))+ 5;
+
+                return View("OrderHistory");
+            } else
+            {
+                return RedirectToAction("carterror", "cart");
             }
-
-            ViewBag.acc = acc;
-            ViewBag.sender = sender;
-            ViewBag.receiver = receiver;
-            ViewBag.cart = cart;
-            ViewBag.order = order;
-
-            return View("OrderHistory");
+            
         }
 
         [Authorize(Roles = "user")]

@@ -26,10 +26,10 @@ namespace JavaFlorist.Controllers
         private IOrderDetailRepository orderdetailRepository;
         private ICustomerRepository customerRepository;
 
-        public CartController(DatabaseContext _db, 
-            IBouquetRepository _bouquetRepository, 
-            IAccountRepository _accountRepository, 
-            IOccasionRepository _occasionRepository, 
+        public CartController(DatabaseContext _db,
+            IBouquetRepository _bouquetRepository,
+            IAccountRepository _accountRepository,
+            IOccasionRepository _occasionRepository,
             IMessageRepository _messageRepository,
             IOrderRepository _orderRepository,
             IOrderDetailRepository _orderdetailRepository,
@@ -143,7 +143,7 @@ namespace JavaFlorist.Controllers
                 }));
             }
             else
-            {   
+            {
                 cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
                 int index = exists(bouquet.Id, cart);
                 if (index == -1)
@@ -177,10 +177,11 @@ namespace JavaFlorist.Controllers
 
                 var cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
                 int index = exists(bouquet.Id, cart);
-                if(cart[index].Quantity+quantity < 1)
+                if (cart[index].Quantity + quantity < 1)
                 {
                     cart[index].Quantity = 1;
-                } else
+                }
+                else
                 {
                     cart[index].Quantity = cart[index].Quantity + quantity;
                 }
@@ -194,12 +195,13 @@ namespace JavaFlorist.Controllers
                 var result = new
                 {
                     cart_num = cart.Sum(i => i.Quantity),
-                    cart_total = cart.Sum(i=>i.Quantity * i.Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture),
+                    cart_total = cart.Sum(i => i.Quantity * i.Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture),
                     bouquet_total = (cart[index].Quantity * cart[index].Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture)
 
                 };
                 return new JsonResult(result);
-            } else
+            }
+            else
             {
                 return null;
             }
@@ -249,10 +251,12 @@ namespace JavaFlorist.Controllers
             if (time.AddHours(5) < startday)
             {
                 time = time.Date + new TimeSpan(14, 00, 00);
-            } else if(time.AddHours(5) > endday)
+            }
+            else if (time.AddHours(5) > endday)
             {
                 time = time.AddDays(1).Date + new TimeSpan(14, 00, 00);
-            } else
+            }
+            else
             {
                 time = time.AddHours(5);
             }
@@ -292,8 +296,8 @@ namespace JavaFlorist.Controllers
             var order = new Order();
             try
             {
-                if(sender.Name!=null) { await customerRepository.Create(sender); };
-                if(receiver.Name!=null) { await customerRepository.Create(receiver); };
+                if (sender.Name != null) { await customerRepository.Create(sender); };
+                if (receiver.Name != null) { await customerRepository.Create(receiver); };
                 order = new Order
                 {
                     AccountId = acc.Id,
@@ -312,16 +316,17 @@ namespace JavaFlorist.Controllers
                         BouquetId = c.Bouquet.Id,
                         Quantity = c.Quantity
                     };
-                await orderdetailRepository.Create(od);
+                    await orderdetailRepository.Create(od);
                 };
-                
+
+                HttpContext.Session.Remove("cart");
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e);
             }
 
-            return Json(Url.Action("vieworderdetail", "account",new {id =  order.Id}));
+            return Json(Url.Action("vieworderdetail", "account", new { id = order.Id }));
         }
 
         [Route("getallmess")]
@@ -329,7 +334,7 @@ namespace JavaFlorist.Controllers
         {
             //Occasion occ = await occasionRepository.GetById(id);
             //var mess = db.Message.Where(m => m.OccasionId == id).ToList();
-            return new JsonResult(db.Message.Where(m=>m.OccasionId==id).ToList());
+            return new JsonResult(db.Message.Where(m => m.OccasionId == id).ToList());
         }
 
         private int exists(int id, List<Item> cart)
@@ -348,14 +353,22 @@ namespace JavaFlorist.Controllers
         public IActionResult countCart()
         {
             var cart = HttpContext.Session.GetString("cart");
-            if (cart != null) {
+            if (cart != null)
+            {
 
                 return new JsonResult(JsonConvert.DeserializeObject<List<Item>>(cart).Sum(i => i.Quantity));
 
-            } else
+            }
+            else
             {
                 return null;
             }
+        }
+
+        [Route("carterror")]
+        public IActionResult CartError()
+        {
+            return View("OrderError");
         }
     }
 }
