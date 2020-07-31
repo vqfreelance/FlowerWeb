@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $(".cart-list input[name='quantity']").TouchSpin({
-        initval: 40,
+        min: 1,
+        initval: 1
     });
     // update_current_addres_shipping();
     validate_ship();
@@ -130,7 +131,8 @@ function get_cart_page() {
         success: function (result) {
             $('#cart-page').html(result);
             $(".cart-list input[name='quantity']").TouchSpin({
-                initval: 40,
+                min: 1,
+                initval: 1
             });
             $('.selectpicker').selectpicker();
             //get new data for delivery-box

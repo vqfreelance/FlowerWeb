@@ -13,11 +13,12 @@
         </ol>
         <h3>Account Info</h3> <br />
         <form method="get" asp-controller="account" asp-action="info" asp-route-id="@ViewBag.acc.Id">
-            <div class="form-group">
+            @*<div class="form-group">
                 <div class="center-cropped" style="background-image: url('/images/user/@ViewBag.acc.Photo');
                      width: 100%;  height: 450px;  background-position: center top;  background-repeat: no-repeat;">
                 </div>
-            </div>
+            </div>*@
+            <img src="~/images/user/@ViewBag.acc.Photo" height=150 />
             <div class="form-group">
                 <label for="customer_name">Name</label>
                 <a class="form-control" name="Name">@ViewBag.acc.Name</a>

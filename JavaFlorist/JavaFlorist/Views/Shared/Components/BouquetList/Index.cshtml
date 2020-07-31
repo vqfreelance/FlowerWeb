@@ -1,5 +1,6 @@
-﻿@model JavaFlorist.Models.Item
-<div class="col-lg-3 col-xs-12" >
+﻿@using System.Globalization
+@model JavaFlorist.Models.Item
+<div class="col-lg-3 col-xs-12">
     <div class="sidebar__inner" id="cart-summary">
         <div class="border-wrapp padding-0">
             <div class="order-cart-header hover-cursor" onClick="if($(this).find('.fa').hasClass('fa-angle-down')){$(this).find('.fa').removeClass('fa-angle-down').addClass('fa-angle-up');}else{$(this).find('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');};$(this).next().toggle('fast');">
@@ -17,7 +18,7 @@
                             <a class="p-name" style="color: #333" href="" title="@i.Bouquet.Name">@i.Bouquet.Name</a><br>
                             <span>x @i.Quantity</span>
                         </p>
-                        <p>@(@i.Quantity* @i.Bouquet.Price)</p>
+                        <p>@((@i.Quantity* @i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture))</p>
                     </div>
                 }
 
@@ -30,18 +31,18 @@
             <div class="order-cart-content">
                 <div class="order-cart-content-item">
                     <p>Provisonal Sum</p>
-                    <p>@ViewBag.total</p>
+                    <p>@ViewBag.total.ToString("C", CultureInfo.CurrentCulture)</p>
                 </div>
-                <div class="order-cart-content-item shipping_price">
+                <div class="order-cart-content-item shipping_price" style="display:none">
                     <p>Ship</p>
-                    <p>20.000</p>
+                    <p>$5.00</p>
                 </div>
                 <hr>
                 <div class="order-cart-content-item cart-all-total">
                     <p>Total</p>
                     <p>
-                        <span class="have_ship">@(ViewBag.total+20)</span>
-                        <span class="hidden no_ship">@ViewBag.total</span>
+                        <span class="hidden have_ship">@((ViewBag.total+5).ToString("C", CultureInfo.CurrentCulture))</span>
+                        <span class="no_ship">@ViewBag.total.ToString("C", CultureInfo.CurrentCulture)</span>
                     </p>
                 </div>
             </div>

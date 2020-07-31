@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -55,6 +56,7 @@ namespace JavaFlorist.Controllers
                 List<Item> cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
                 if (cart.Count > 0)
                 {
+                    ViewBag.totalqty = cart.Sum(i => i.Quantity);
                     ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
                     ViewBag.cart = cart;
                 }
@@ -130,9 +132,9 @@ namespace JavaFlorist.Controllers
         public IActionResult AddCart(int bouquetid, int quantity)
         {
             var bouquet = db.Bouquet.Find(bouquetid);
+            List<Item> cart = new List<Item>();
             if (HttpContext.Session.GetString("cart") == null)
             {
-                List<Item> cart = new List<Item>();
                 cart.Add(new Item { Bouquet = bouquet, Quantity = quantity });
                 HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cart, new JsonSerializerSettings()
                 {
@@ -141,8 +143,8 @@ namespace JavaFlorist.Controllers
                 }));
             }
             else
-            {
-                List<Item> cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
+            {   
+                cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
                 int index = exists(bouquet.Id, cart);
                 if (index == -1)
                 {
@@ -157,9 +159,51 @@ namespace JavaFlorist.Controllers
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                     Formatting = Formatting.Indented
                 }));
-
             }
-            return null;
+
+            var result = new
+            {
+                cart_num = cart.Sum(i => i.Quantity),
+            };
+            return new JsonResult(result);
+        }
+
+        [Route("touchspincart")]
+        public IActionResult TouchSpinCart(int bouquetid, int quantity)
+        {
+            if (bouquetid > 0)
+            {
+                var bouquet = db.Bouquet.Find(bouquetid);
+
+                var cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
+                int index = exists(bouquet.Id, cart);
+                if(cart[index].Quantity+quantity < 1)
+                {
+                    cart[index].Quantity = 1;
+                } else
+                {
+                    cart[index].Quantity = cart[index].Quantity + quantity;
+                }
+
+                HttpContext.Session.SetString("cart", JsonConvert.SerializeObject(cart, new JsonSerializerSettings()
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    Formatting = Formatting.Indented
+                }));
+
+                var result = new
+                {
+                    cart_num = cart.Sum(i => i.Quantity),
+                    cart_total = cart.Sum(i=>i.Quantity * i.Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture),
+                    bouquet_total = (cart[index].Quantity * cart[index].Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture)
+
+                };
+                return new JsonResult(result);
+            } else
+            {
+                return null;
+            }
+
         }
 
         [Route("remove/{id}")]
@@ -198,12 +242,28 @@ namespace JavaFlorist.Controllers
         [Route("checkout")]
         public IActionResult Checkout()
         {
+            var time = DateTime.Now;
+            var startday = time.Date + new TimeSpan(09, 00, 00);
+            var endday = time.Date + new TimeSpan(21, 00, 00);
+
+            if (time.AddHours(5) < startday)
+            {
+                time = time.Date + new TimeSpan(14, 00, 00);
+            } else if(time.AddHours(5) > endday)
+            {
+                time = time.AddDays(1).Date + new TimeSpan(14, 00, 00);
+            } else
+            {
+                time = time.AddHours(5);
+            }
+
             List<Item> cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
             var username = User.FindFirst(ClaimTypes.NameIdentifier);
             ViewBag.acc = accountRepository.GetByUsername(username.Value);
             ViewBag.occ = occasionRepository.GetAll().ToList();
             ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
             ViewBag.cart = cart;
+            ViewBag.time = time.ToString("MM/dd/yyyy, HH:mm");
 
             return View("Checkout");
         }
@@ -219,8 +279,10 @@ namespace JavaFlorist.Controllers
             string receiver_email,
             string receiver_phone,
             string receiver_address,
-            string message, 
-            string receivingtime)
+            string message,
+            string time_type,
+            string receivingtime,
+            string receiving5hours)
         {
             var sender = new Customer { Name = sender_name, Phone = sender_phone, Email = sender_email, Address = sender_address };
             var receiver = new Customer { Name = receiver_name, Phone = receiver_phone, Email = receiver_email, Address = receiver_address };
@@ -239,7 +301,7 @@ namespace JavaFlorist.Controllers
                     ReceiverId = receiver != null ? receiver.Id : 0,
                     Status = "pending",
                     Message = message,
-                    ReceivingTime = receivingtime
+                    ReceivingTime = time_type == "ctime" ? receivingtime : receiving5hours
                 };
                 await orderRepository.Create(order);
                 foreach (var c in cart)
@@ -285,7 +347,15 @@ namespace JavaFlorist.Controllers
         [Route("countcart")]
         public IActionResult countCart()
         {
-            return new JsonResult(JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart")).Sum(i => i.Quantity));
+            var cart = HttpContext.Session.GetString("cart");
+            if (cart != null) {
+
+                return new JsonResult(JsonConvert.DeserializeObject<List<Item>>(cart).Sum(i => i.Quantity));
+
+            } else
+            {
+                return null;
+            }
         }
     }
 }

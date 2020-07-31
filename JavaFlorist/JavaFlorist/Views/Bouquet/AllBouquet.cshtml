@@ -33,9 +33,9 @@
                                 </a>
                             </div>
                             <div class="product-price">
-                                <b>@(((decimal)b.Price).ToString("C", CultureInfo.CurrentCulture))</b>
+                                <b>@(b.Price.ToString("C", CultureInfo.CurrentCulture))</b>
                             </div>
-                            <div class="product-cart">
+                            @*<div class="product-cart">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
                                         <img class="btn" src="~/images/shopping-cart.png" href="#" onClick="quickbuyout(@b.Id)" />
@@ -44,17 +44,11 @@
                                         <img class="btn" src="~/images/plus.png" href="#" onClick="quickaddcart(@b.Id)" />
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </div>
                 }
-
-
                 <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
-                    @*<a class="btn-readmore"
-                   href="">
-                    View All
-                </a>*@
                 </div>
             </div>
         </div>

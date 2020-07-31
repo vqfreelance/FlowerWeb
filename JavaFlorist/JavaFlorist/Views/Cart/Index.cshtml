@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Globalization
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -43,11 +43,11 @@
                                                             <span>$@i.Bouquet.Price</span>
                                                         </div>
                                                         <div class="body-item quantity">
-                                                            <input data-id="14" onChange="update_qty_product(this)" data-unit="packing_item" type="text" value="@i.Quantity" name="quantity" class="quantity-input">
-                                                            <input name="item_qty_current" value="1" type="hidden">
+                                                            <input data-unit="packing_item" type="text" value="@i.Quantity" name="quantity" class="quantity-input">
+                                                            <input class="bouquetid" value="@i.Bouquet.Id" type="hidden">
                                                         </div>
                                                         <div class="body-item total">
-                                                            <span>@(i.Quantity*i.Bouquet.Price)</span>
+                                                            <span class="bouquet-total">@((i.Quantity * i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture))</span>
                                                             <a class="btn" asp-controller="cart" asp-action="remove" asp-route-id="@i.Bouquet.Id" style="float:right"><img width="20" src="~/images/close.png"></a>
                                                         </div>
                                                     </div>
@@ -59,12 +59,12 @@
                                             <div class="border-wrapp padding-0">
                                                 <div class="order-cart-header">
                                                     <p>My Cart</p>
-                                                    <p class="total-item">1 Product</p>
+                                                    <p class="total-item">@ViewBag.totalqty Product</p>
                                                 </div>
                                                 <div class="order-cart-content">
                                                     <div class="order-cart-content-item">
                                                         <p>Provisional Sum</p>
-                                                        <p name="provisionalsum">@ViewBag.total</p>
+                                                        <p class="cart_total">@ViewBag.total.ToString("C", CultureInfo.CurrentCulture)</p>
                                                     </div>
                                                     <div class="order-cart-content-item">
                                                     </div>

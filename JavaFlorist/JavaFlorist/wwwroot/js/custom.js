@@ -1400,7 +1400,7 @@ $(document).ready(function () {
                 quantity: $('#quantity').val()
             },
             success: function (data) {
-                count_item()
+                $('#cart-num').html(data.cart_num);
             }
         });
     });
@@ -1427,15 +1427,28 @@ $(document).ready(function () {
         $("#blk-" + $(this).val()).show('slow');
 
         if ($(this).val() == 'receiver') {
-            //$('p .have_ship').addClass('hidden');
-            //$('p .no_ship').removeClass('hidden');
+            $('.shipping_price').show('slow');
+            $('p .have_ship').removeClass('hidden');
+            $('p .no_ship').addClass('hidden');
             //$('#get-sender-info').validator.reset();
             validate_receiver();
         } else {
-            //$('p .have_ship').removeClass('hidden');
-            //$('p .no_ship').addClass('hidden');
+            $('.shipping_price').hide('slow');
+            $('p .have_ship').addClass('hidden');
+            $('p .no_ship').removeClass('hidden');
             $('#get-receiver-info').validate().resetForm();
             //validate_sender();
+        }
+    });
+
+    $("[name=time_type]").click(function () {
+        $('.time-delivery').hide('slow');
+        $("#blk-" + $(this).val()).show('slow');
+
+        if ($(this).val() == '5hours') {
+
+        } else {
+
         }
     });
 
@@ -1459,6 +1472,47 @@ $(document).ready(function () {
     //    });
     //});
 
+    $('[class*="bootstrap-touchspin-"]').click(function (event) {
+        var $this = $(this);
+        var a = $(this).find('input[name="quantity"]').val();
+        var $bouquettotal = $this.parent().parent().parent().next('div');
+        //alert(a);
+
+        if ($this.hasClass('bootstrap-touchspin-down')) {
+
+                $.ajax({
+                    type: "POST",
+                    url: '/cart/touchspincart',
+                    data: {
+                        bouquetid: $this.parent().parent().siblings('.bouquetid').val(),
+                        quantity: -1
+                    },
+                    success: function (data) {
+                        $bouquettotal.find('.bouquet-total').html(data.bouquet_total);
+                        $('#cart-num').html(data.cart_num);
+                        $('.total-item').html(data.cart_num+' Product');
+                        $('.cart_total').html(data.cart_total);
+                    }
+                });
+
+        } else if ($this.hasClass('bootstrap-touchspin-up')) {
+            $.ajax({
+                type: "POST",
+                url: '/cart/touchspincart',
+                data: {
+                    bouquetid: $this.parent().parent().siblings('.bouquetid').val(),
+                    quantity: 1
+                },
+                success: function (data) {
+                    $bouquettotal.find('.bouquet-total').html(data.bouquet_total);
+                    $('#cart-num').html(data.cart_num);
+                    $('.total-item').html(data.cart_num + ' Product');
+                    $('.cart_total').html(data.cart_total);
+                }
+            });
+        }
+    });
+
     $('[name=occasion]').on('change', function () {
         var id = $(this).find(':selected')[0].id;
         //alert(id); 
@@ -1474,6 +1528,7 @@ $(document).ready(function () {
                 $("select[name='message']").html('');
                 //$mess.empty();
                 //console.log(data);
+                $("select[name='message']").append('<option value="" selected>Message</option>');
                 for (var i = 0; i < data.length; i++) {
                     $("select[name='message']").append('<option id=' + data[i].id + 'value=' + data[i].meContent + '>' + data[i].meContent + '</option>');
                 }
@@ -1482,27 +1537,52 @@ $(document).ready(function () {
         });
     });
 
+    $('[name=message]').on('change', function () {
+
+        $('[name=messagetype]').html('Dear ' + $("select[name='object']").children("option:selected").text() +', '
+            + $("select[name='message']").children("option:selected").text() +' Sincerely');
+    });
+
     $('#pay').click(function () {
-        $.ajax({
-            type: 'POST',
-            url: '/cart/pay',
-            data: {
-                sender_name: $("[name='sender_name']").val(),
-                sender_email: $("[name='sender_email']").val(),
-                sender_phone: $("[name='sender_phone']").val(),
-                sender_address: $("[name='sender_address']").val(),
-                receiver_name: $("[name='receiver_name']").val(),
-                receiver_email: $("[name='receiver_email']").val(),
-                receiver_phone: $("[name='receiver_phone']").val(),
-                receiver_address: $("[name='receiver_address']").val(),
-                message: $("select[name='message']").children("option:selected").text() + '\n' + $("[name='messagetype']").text(),
-                receivingtime: $("input[name='order_delivery_date']").val() + ' at ' + $("select[name='order_delivery_time']").children("option:selected").text(),
-            },
-            success: function (data) {  
-                window.location.href = data;
-            }
-        });
+        var $sender = $('input[name="send_type"]:checked').val();
+        var $receiver = $('input[name="receiver_type"]:checked').val();
+        if ($sender != 'sender'){
+            $("[name='sender_name']").val('');
+            $("[name='sender_email']").val('');
+            $("[name='sender_phone']").val('');
+            $("[name='sender_address']").val('');
+        };
+        if ($receiver != 'receiver'){
+            $("[name='receiver_name']").val('');
+            $("[name='receiver_email']").val('');
+            $("[name='receiver_phone']").val('');
+            $("[name='receiver_address']").val('');
+        };
+        if ($("#get-sender-info").valid() && $("#get-receiver-info").valid()) {
+            $.ajax({
+                type: 'POST',
+                url: '/cart/pay',
+                data: {
+                    sender_name: $("[name='sender_name']").val(),
+                    sender_email: $("[name='sender_email']").val(),
+                    sender_phone: $("[name='sender_phone']").val(),
+                    sender_address: $("[name='sender_address']").val(),
+                    receiver_name: $("[name='receiver_name']").val(),
+                    receiver_email: $("[name='receiver_email']").val(),
+                    receiver_phone: $("[name='receiver_phone']").val(),
+                    receiver_address: $("[name='receiver_address']").val(),
+                    message: $("[name='messagetype']").text(),
+                    time_type: $('input[name="time_type"]:checked').val(),
+                    receivingtime: $("input[name='order_delivery_date']").val() + ' at ' + $("select[name='order_delivery_time']").children("option:selected").text(),
+                    receiving5hours: $("span[name='order_delivery_5hours']").text(),
+                },
+                success: function (data) {  
+                    window.location.href = data;
+                }
+            });
+        };
     })
+    count_item();
 })
 
 //count all quantity products in cart
@@ -1560,7 +1640,7 @@ function showlistbouquet() {
 //validate sender in checkout
 function validate_sender() {
     $("#get-sender-info").validate({
-        ignore: null,
+        //ignore: null,
         rules: {
             sender_name: {
                 required: true
@@ -1597,7 +1677,7 @@ function validate_sender() {
 //validate receiver in checkout
 function validate_receiver() {
     $("#get-receiver-info").validate({
-        ignore: null,
+        //ignore: null,
         rules: {
             receiver_name: {
                 required: true
@@ -1629,6 +1709,12 @@ function validate_receiver() {
             }
         }
     });
+}
+
+//auto height with content
+function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = (25 + element.scrollHeight) + "px";
 }
 
 
