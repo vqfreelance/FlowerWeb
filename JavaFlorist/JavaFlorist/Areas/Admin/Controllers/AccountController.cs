@@ -95,7 +95,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
             }
             catch (Exception e)
             {
-                throw e;
+                return RedirectToAction("error500", "error", new { area = "admin" });
             }
             Debug.WriteLine("Account Info");
             Debug.WriteLine("Username: " + account.Username);

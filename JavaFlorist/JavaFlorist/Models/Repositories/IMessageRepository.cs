@@ -9,6 +9,8 @@ namespace JavaFlorist.Models.Repositories
     public interface IMessageRepository : IGenericRepository<Message>
     {
         public List<Message> GetAllMessbyOccId(int id);
+
+        public List<Message> Search(string keyword);
     }
 
 

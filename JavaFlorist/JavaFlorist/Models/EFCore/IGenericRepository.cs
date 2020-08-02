@@ -8,7 +8,11 @@ namespace JavaFlorist.Models.EFCore
     {
         IQueryable<TEntity> GetAll();
 
+        IQueryable<TEntity> GetAllIncludeRelationship();
+
         Task<TEntity> GetById(int id);
+
+        Task<TEntity> GetByIdIncludeRelationship(int id);
 
         Task Create(TEntity entity);
 

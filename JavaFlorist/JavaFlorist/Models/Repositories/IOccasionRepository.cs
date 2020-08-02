@@ -9,6 +9,8 @@ namespace JavaFlorist.Models.Repositories
     public interface IOccasionRepository : IGenericRepository<Occasion>
     {
         public Task<Occasion> GetById(int id);
+
+        public List<Occasion> Search(string keyword);
     }
 
 

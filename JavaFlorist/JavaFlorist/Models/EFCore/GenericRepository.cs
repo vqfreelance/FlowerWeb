@@ -17,24 +17,24 @@ namespace JavaFlorist.Models.EFCore
 
         public IQueryable<TEntity> GetAll()
         {
-            return _dbContext.Set<TEntity>();
+            return _dbContext.Set<TEntity>().AsNoTracking();
         }
 
-        public IQueryable<TEntity> GetAllAsNoTracking()
+        public IQueryable<TEntity> GetAllIncludeRelationship()
         {
-            return _dbContext.Set<TEntity>().AsNoTracking();
+            return _dbContext.Set<TEntity>();
         }
 
         public async Task<TEntity> GetById(int id)
         {
-            return await _dbContext.Set<TEntity>()              
+            return await _dbContext.Set<TEntity>()
+                .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
-        public async Task<TEntity> GetByIdAsNoTracking(int id)
+        public async Task<TEntity> GetByIdIncludeRelationship(int id)
         {
             return await _dbContext.Set<TEntity>()
-                .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
@@ -56,5 +56,6 @@ namespace JavaFlorist.Models.EFCore
             _dbContext.Set<TEntity>().Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
+
     }
 }

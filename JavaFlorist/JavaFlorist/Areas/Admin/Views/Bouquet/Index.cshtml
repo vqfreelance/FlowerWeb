@@ -1,4 +1,5 @@
-﻿
+﻿@model JavaFlorist.Models.OccBouquet
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -9,12 +10,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Bouquets Management</h1>
+                <h1>Bouquet Management</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a asp-area="admin" asp-controller="dashboard" asp-action="index">Home</a></li>
-                    <li class="breadcrumb-item active">DataTables</li>
+                    <li class="breadcrumb-item active">Bouquet Management</li>
                 </ol>
             </div>
         </div>
@@ -28,6 +29,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Upload Bouquet Photo</h3>
+                    
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -56,25 +58,39 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Bouquets List</h3>
+                    <div class="card-tools">
+                        <form method="post" asp-area="admin" asp-controller="bouquet" asp-action="searchByKeyword">
+                            <div class="input-group input-group-sm" style="width: 200px;">
+                                <input type="search" class="form-control float-right" placeholder="Enter letter(s).." value="@ViewBag.keyword" name="keyword">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="">
-                                Show 
-                                <select name="bouquet_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                </select>
-                                 entries
-                            </div>
+                        <div class="col-sm-6 col-md-3">
+                            <select name="bouquet_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm">
+                                <option value="10">10 entries</option>
+                                <option value="25">25 entries</option>
+                                <option value="50">50 entries</option>
+                                <option value="100">100 entries</option>
+                            </select>
                         </div>
-                        <div class="col-sm-12 col-md-6">
-                            <form method="post" asp-area="admin" asp-controller="bouquet" asp-action="searchByKeyword" >                               
-                                <input type="text" class="form-control form-control-sm" placeholder="Enter letter(s).." value="@ViewBag.keyword" name="keyword"> 
-                                <input type="submit" value="Search" />
+                       
+                        <div class="col-sm-6 col-md-9">
+                            <form class="float-right" method="post" asp-area="admin" asp-controller="bouquet" asp-action="searchByPrice">
+                                <div class="input-group input-group-sm">
+                                    <input type="search" class="form-control float-right" placeholder="Min Price" value="@ViewBag.min" name="min">
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <input type="search" class="form-control float-right" placeholder="Max Price" value="@ViewBag.max" name="max">
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default float-right" ><i class="fas fa-search"></i></button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -84,7 +100,7 @@
                             <table id="" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Photo</th>
                                         <th>Description</th>
@@ -105,21 +121,24 @@
                                             </td>
                                             <td>@bouquet.Description</td>
                                             <td>$@bouquet.Price</td>
-                                            <td>x</td>
+                                            <td>
+                                                @foreach (var occasions in bouquet.OccBouquet)
+                                                {
+                                                    <div>@occasions.Occasion.Name</div>
+                                                }
+                                            </td>
                                             <td>@bouquet.Status</td>
                                             <td>
-                                                <a asp-area="admin" asp-controller="bouquet" asp-action="edit" asp-route-id="@bouquet.Id">Edit</a>
-                                                @*<a asp-area="admin" asp-controller="bouquet" asp-action="delete" asp-route-id="@bouquet.Id"></a>*@
-                                                @Html.ActionLink("Delete", "delete", "bouquet", new { area="admin",id = bouquet.Id },
-                                                new { onclick = "return confirm('Are you sure you wish to delete this order?');" })                     
+                                                <a class="btn btn-primary" asp-area="admin" asp-controller="bouquet" asp-action="edit" asp-route-id="@bouquet.Id">
+                                                <span class="btn-label"><i class="fa fa-edit"></i></span>
+                                                Edit</a>                                              
                                             </td>
                                         </tr>
                                     }
-
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Photo</th>
                                         <th>Description</th>
@@ -137,7 +156,7 @@
                         <div class="col-sm-12 col-md-5">
                             <div class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
                         </div>
-                        <div class="col-sm-12 col-md-7">
+                        <div class="col-sm-12 col-md-7" align="right">
                             <div class="" id="">
                                 <ul class="pagination">
                                     <li class="paginate_button page-item previous disabled" id="example2_previous">

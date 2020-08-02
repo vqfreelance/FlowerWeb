@@ -15,15 +15,5 @@ namespace JavaFlorist.Models.Repositories
         {
             _dbContext = dbContext;
         }
-
-        public async Task<OccBouquet> GetById(int id)
-        {
-            return await _dbContext.OccBouquet
-                .Include(a=>a.Occasion)
-                .Include(a=>a.Bouquet)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(e => e.Id == id);
-        }
-
     }
 }

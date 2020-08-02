@@ -25,5 +25,10 @@ namespace JavaFlorist.Models.Repositories
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
+        public List<Occasion> Search(string keyword)
+        {
+            return GetAllIncludeRelationship().Where(b => b.Name.Contains(keyword)).ToList();
+        }
+
     }
 }
