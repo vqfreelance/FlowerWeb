@@ -5,36 +5,28 @@
 }
 @model JavaFlorist.Models.Bouquet
 
-<div class="container">
-    <div class="row top-content-wrapp">
-        <div class="col-lg-2 col-xs-12">
-            <div class="dropdown cate-main hidden-xs">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                    <img class="sep2" src="~/images/signs.svg"> Category
-                </button>
-            </div>
-            <nav class="jquery-accordion-menu hidden-xs" id="jquery-accordion-menu">
-                <ul>
-                    @foreach (var occasion in ViewBag.Occasions)
-                    {
-                        <li class="">
-                            <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
-                                <img width="20" src="~/images/occasions/@occasion.Photo">
-                                <span>@occasion.Name</span>
-                            </a>
-                        </li>
-                    }
-                </ul>
-            </nav>
-        </div>
-        <div class="col-lg-8 col-lg-custom-8 col-xs-12">
+@*<div class="container">*@
 
-            <div class="banner">
-                <div><a href="" target="_blank"><img src="~/assets/2020/2020-06/a41f059deb0a800af8491b1d234f5f71.jpg"></a></div>
-                <div><a href="" target="_blank"><img src="~/assets/2020/2020-06/b496ebd7b74cbf7ba1d2f0d0ea4a660e.jpg"></a></div>
+    <div class="row top-content-wrapp">
+
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/images/banner/banner1.jpg">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/images/banner/banner2.jpg">
+                </div>
             </div>
         </div>
-        <div class="col-lg-2 col-lg-custom-2 col-xs-12 hidden-xs">
+
+        <div class="col-lg-8">
+            <div class="banner">
+                <div><a href="" target="_blank"><img src="~/images/banner/banner1.jpg"></a></div>
+                <div><a href="" target="_blank"><img src="~/images/banner/banner2.jpg"></a></div>
+            </div>
+        </div>
+        <div class="col-lg-2">
             <ul class="services-box">
                 <li>
                     <div class="box-item">
@@ -67,42 +59,42 @@
             </ul>
         </div>
     </div>
-</div>
-<div class="container">
-    <div class="group-product-wrapp" style="margin-top:40px">
-        <h2><a href="">Award Flowers & Service Flowers </a></h2>
-        <div class="products-type hidden-xs" style="margin: 10px 0 40px;">
-            <ul class="type-list">
-                @foreach (var occasion in ViewBag.NumberOccasions)
+@*</div>*@
+@*<div class="container">*@
+<div class="group-product-wrapp" style="margin-top:40px">
+    <h2><a href="">Award Flowers & Service Flowers </a></h2>
+    <div class="products-type hidden-xs" style="margin: 10px 0 40px;">
+        <ul class="type-list">
+            @foreach (var occasion in ViewBag.NumberOccasions)
+            {
+                <li>
+                    <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                        <img src="~/images/occasions/@occasion.Photo"><span>@occasion.Name</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="row products service-product">
+        <div class="col-lg-12 col-lg-custom-12">
+            <div class="row">
+                @foreach (var b in ViewBag.bouquets)
                 {
-                    <li>
-                        <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
-                            <img src="~/images/occasions/@occasion.Photo"><span>@occasion.Name</span>
-                        </a>
-                    </li>
-                }
-            </ul>
-        </div>
-        <div class="row products service-product">
-            <div class="col-lg-12 col-lg-custom-12">
-                <div class="row">
-                    @foreach (var b in ViewBag.bouquets)
-                    {
-                        <div class="col-lg-3 col-xs-6 blur-box item-580">
-                            <div class="product-item">
-                                <div class="product-img">
-                                    <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
-                                        <img itemprop="image" src="~/images/bouquets/@b.Photo" alt="@b.Name" />
-                                    </a>
-                                </div>
-                                <div class="product-title">
-                                    <a href="" class="title-products"
-                                       title="@b.Name"><span itemprop="name">@b.Name</span></a>
-                                </div>
-                                <div class="product-price">
-                                    <b>@(((decimal)b.Price).ToString("C", CultureInfo.CurrentCulture))</b>
-                                </div>
-                                @*<div class="product-cart">
+                    <div class="col-lg-3 col-xs-6 blur-box item-580">
+                        <div class="product-item">
+                            <div class="product-img">
+                                <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                                    <img itemprop="image" src="~/images/bouquets/@b.Photo" alt="@b.Name" />
+                                </a>
+                            </div>
+                            <div class="product-title">
+                                <a href="" class="title-products"
+                                   title="@b.Name"><span itemprop="name">@b.Name</span></a>
+                            </div>
+                            <div class="product-price">
+                                <b>@(((decimal)b.Price).ToString("C", CultureInfo.CurrentCulture))</b>
+                            </div>
+                            @*<div class="product-cart">
                                     <div class="row">
                                         <div class="col-sm-6 text-left">
                                             <img class="btn" src="~/images/shopping-cart.png" href="#" onClick="quickbuyout(@b.Id)" />
@@ -112,17 +104,17 @@
                                         </div>
                                     </div>
                                 </div>*@
-                            </div>
                         </div>
-                    }
-                    <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
-                        <a class="btn-readmore"
-                           asp-controller="Bouquet" asp-action="Index">
-                            View All
-                        </a>
                     </div>
+                }
+                <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
+                    <a class="btn-readmore"
+                       asp-controller="Bouquet" asp-action="Index">
+                        View All
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@*</div>*@

@@ -1,0 +1,113 @@
+body {
+    padding-top: 55px
+}
+
+.navbar-custom {
+    margin-bottom: 10px;
+    background: #FF95A1;
+    font-weight: 400;
+}
+    /* change the brand and text color */
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-text {
+        color: white;
+    }
+    /* change the link color */
+    .navbar-custom .navbar-nav .nav-link {
+        color: white;
+    }
+    /* change the color of active or hovered links */
+    .navbar-custom .nav-item.active .nav-link,
+    .navbar-custom .nav-item:hover .nav-link {
+        color: #FF4C60;
+    }
+
+    .navbar-custom .dropdown-menu a:hover {
+        background: #FF95A1;
+    }
+
+
+#back-top {
+    bottom: 115px;
+    display: none;
+    height: 55px;
+    position: fixed;
+    right: 12px;
+    width: 55px;
+    border: 3px solid #00833d;
+    z-index: 9999;
+    border-radius: 30px;
+    cursor: pointer;
+    background: #00833d;
+    line-height: 55px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+    #back-top:hover {
+        background-color: #f58831;
+        border: 3px solid #f58831;
+    }
+
+.banner {
+    margin-top: 20px;
+    max-height: 326px;
+    overflow: hidden;
+    border-radius: 15px
+}
+
+    .banner img {
+        width: 100%
+    }
+
+#cart-num {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    background: #f58831;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 25px;
+    border-radius: 50%;
+    font-style: normal;
+}
+
+.carousel {
+    margin: auto;
+    width: 80%;
+}
+
+    .carousel .carousel-inner {
+        border-radius: 15px;
+    }
+
+    .carousel img {
+        width: 100%
+    }
+
+.middle-header {
+    padding: 10px;
+}
+
+    .middle-header form {
+        justify-content: center;
+    }
+
+        .middle-header form input {
+            border: 2px solid #FF95A1;
+            border-radius: 5px;
+            height: 45px;
+        }
+
+    .middle-header button {
+        color: #FF95A1;
+        border: 2px solid #FF95A1;
+        border-radius: 5px;
+        height: 45px;
+    }
+    .middle-header button:hover {
+        color: white;
+        background: #FF95A1;
+    }

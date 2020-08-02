@@ -216,47 +216,80 @@ namespace JavaFlorist.Controllers
             var username = User.FindFirst(ClaimTypes.NameIdentifier);
             var acc = accountRepository.GetByUsername(username.Value);
             var order = await orderRepository.GetById(id);
-            if(acc.Id == order.AccountId)
-            {
-                var sender = new Customer();
-                if (order !=null && order.SenderId > 0)
+            if(order != null) {
+                if(acc.Id == order.AccountId)
                 {
-                    sender = await customerRepository.GetById(order.SenderId);
-                }
-                var receiver = new Customer();
-                if (order != null && order.ReceiverId > 0)
-                {
-                    receiver = await customerRepository.GetById(order.ReceiverId);
-                }
-                var a =  await orderRepository.GetByIdIncludeRelationship(id);
-                var cart = new List<Item>();
-                //foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
-                if (a != null)
-                {
-                    foreach (var b in a.OrderDetail.ToList())
+                    var sender = new Customer();
+                    if (order !=null && order.SenderId > 0)
                     {
-                        var item = new Item
-                        {
-                            Bouquet = await bouquetRepository.GetById(b.BouquetId),
-                            Quantity = b.Quantity
-                        };
-                        cart.Add(item);
+                        sender = await customerRepository.GetById(order.SenderId);
                     }
+                    var receiver = new Customer();
+                    if (order != null && order.ReceiverId > 0)
+                    {
+                        receiver = await customerRepository.GetById(order.ReceiverId);
+                    }
+                    var a =  await orderRepository.GetByIdIncludeRelationship(id);
+                    var cart = new List<Item>();
+                    //foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
+                    if (a != null)
+                    {
+                        foreach (var b in a.OrderDetail.ToList())
+                        {
+                            var item = new Item
+                            {
+                                Bouquet = await bouquetRepository.GetById(b.BouquetId),
+                                Quantity = b.Quantity
+                            };
+                            cart.Add(item);
+                        }
+                    }
+
+                    ViewBag.acc = acc;
+                    ViewBag.sender = sender;
+                    ViewBag.receiver = receiver;
+                    ViewBag.cart = cart;
+                    ViewBag.order = order;
+                    ViewBag.total = receiver.Name == null ? (cart.Sum(i => i.Quantity * i.Bouquet.Price)) : (cart.Sum(i => i.Quantity * i.Bouquet.Price))+ 5;
+
+                    return View("OrderHistory");
                 }
-
-                ViewBag.acc = acc;
-                ViewBag.sender = sender;
-                ViewBag.receiver = receiver;
-                ViewBag.cart = cart;
-                ViewBag.order = order;
-                ViewBag.total = receiver.Name == null ? (cart.Sum(i => i.Quantity * i.Bouquet.Price)) : (cart.Sum(i => i.Quantity * i.Bouquet.Price))+ 5;
-
-                return View("OrderHistory");
-            } else
+                else
+                {
+                    return RedirectToAction("carterror", "cart");
+                }
+            }
+             else
             {
                 return RedirectToAction("carterror", "cart");
             }
-            
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpGet]
+        [Route("vieworderlist")]
+        public async Task<IActionResult> ViewOrderList()
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            var acc = accountRepository.GetByUsername(username.Value);
+
+            var a = await accountRepository.GetById2(acc.Id);
+
+            var list = a.Order.ToList();
+            var listorder = new List<ListOrder>();
+            foreach (var o in list)
+            {
+                var aa = new ListOrder
+                {
+                    Order = o,
+                    Total = o.SenderId == 0? o.OrderDetail.Sum(i=>i.Quantity * i.Bouquet.Price) : o.OrderDetail.Sum(i => i.Quantity * i.Bouquet.Price)+5
+                };
+                listorder.Add(aa);
+            }
+
+            ViewBag.listorder = listorder;
+            return View("OrderList");
         }
 
         [Authorize(Roles = "user")]

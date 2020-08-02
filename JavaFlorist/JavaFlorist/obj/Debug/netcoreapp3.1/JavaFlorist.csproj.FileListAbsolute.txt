@@ -172,3 +172,4 @@ C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.genruntimeconfig.cache
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
 C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Cart\OrderError.cshtml.g.cs
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Account\OrderList.cshtml.g.cs

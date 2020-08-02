@@ -195,8 +195,8 @@ namespace JavaFlorist.Controllers
                 var result = new
                 {
                     cart_num = cart.Sum(i => i.Quantity),
-                    cart_total = cart.Sum(i => i.Quantity * i.Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture),
-                    bouquet_total = (cart[index].Quantity * cart[index].Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture)
+                    cart_total = cart.Sum(i => i.Quantity * i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture),
+                    bouquet_total = (cart[index].Quantity * cart[index].Bouquet.Price).ToString("C", CultureInfo.CurrentCulture)
 
                 };
                 return new JsonResult(result);
@@ -355,9 +355,7 @@ namespace JavaFlorist.Controllers
             var cart = HttpContext.Session.GetString("cart");
             if (cart != null)
             {
-
                 return new JsonResult(JsonConvert.DeserializeObject<List<Item>>(cart).Sum(i => i.Quantity));
-
             }
             else
             {

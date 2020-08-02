@@ -13,10 +13,12 @@ namespace JavaFlorist.Controllers
     {
         private DatabaseContext db;
         private IBouquetRepository bouquetRepository;
+
         public BouquetController(DatabaseContext _db, IBouquetRepository _bouquetRepository)
         {
             db = _db;
             bouquetRepository = _bouquetRepository;
+
         }
 
         [HttpGet]
@@ -46,6 +48,7 @@ namespace JavaFlorist.Controllers
         [Route("search")]
         public IActionResult Search(string keyword)
         {
+
             ViewBag.bouquets = bouquetRepository.SearchByKeyword(keyword);
             return View("AllBouquet");
         }

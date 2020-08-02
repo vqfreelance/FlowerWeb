@@ -1,9 +1,10 @@
-﻿using System;
+﻿using JavaFlorist.Models.EFCore;
+using System;
 using System.Collections.Generic;
 
 namespace JavaFlorist.Models
 {
-    public partial class Occcasion
+    public partial class Occcasion:IEntity
     {
         public Occcasion()
         {

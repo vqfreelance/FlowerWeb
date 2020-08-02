@@ -141,6 +141,8 @@ namespace JavaFlorist.Models
 
             modelBuilder.Entity<Order>(entity =>
             {
+                entity.Property(e => e.CreateDate).HasColumnType("date");
+
                 entity.Property(e => e.Message)
                     .HasMaxLength(250)
                     .IsUnicode(false);

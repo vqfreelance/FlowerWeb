@@ -3,8 +3,8 @@
     var username = User.FindFirst(ClaimTypes.NameIdentifier);
 }
 
-<div class="middle-header">
-    <div class="container">
+@*<div class="middle-header">
+    <div class="container">*@
         <div class="row">
             <div class="col-lg-2">
                 <div class="logo"><a asp-controller="home" asp-action="index"><img width="160" src="~/images/footer-logo.png"></a></div>
@@ -25,17 +25,17 @@
                     <li>
                         <div class="group-item" style="padding-top:6px">
                             <div class="dropdown">
-                                <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:50px; width:50px; border-radius:50%; overflow: hidden;">
-                                    <img src="~/images/user/@ViewBag.acc.Photo" alt="avatar image" style="height:100px;">
+                                <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="height:50px; width:50px; border-radius:50%; overflow: hidden; border: outset">
+                                    <img src="~/images/user/@ViewBag.acc.Photo" alt="avatar image" style="height:50px;">
                                 </div>
                                 <div class="dropdown-menu">
                                     <div class="card" style="text-align: center; margin:10px">
                                         <img src="~/images/user/@ViewBag.acc.Photo" alt="John" style="width:50%; align-content:center">
-                                        <h3>John Doe</h3>
-                                        <h5>JohnDoe@email.com</h5>
+                                        <h3>@ViewBag.acc.Name</h3>
+                                        <h5>@ViewBag.acc.Email</h5>
                                     </div>
                                     <a class="dropdown-item" asp-controller="account" asp-action="info" asp-route-username="@username.Value">Account Info</a>
-                                    <a class="dropdown-item">Order History</a>
+                                    <a class="dropdown-item" asp-controller="account" asp-action="vieworderlist">Order History</a>
                                     <a class="dropdown-item" asp-controller="account" asp-action="logout">Logout</a>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                 </ul>
             </div>
         </div>
-    </div>
-</div>
+    @*</div>
+</div>*@
 
 
