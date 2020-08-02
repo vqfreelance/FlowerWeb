@@ -28,17 +28,18 @@
                 <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item">
-                <a asp-controller="account" asp-action="login" class="nav-item nav-link"><i class="fa fa-cloud"></i> Login</a>
+                <a asp-controller="account" asp-action="login" class="nav-item nav-link"><i class="fa fa-user" aria-hidden="true"></i> Login</a>
             </li>
             <li class="nav-item">
-                    <a asp-controller="cart" asp-action="index">
-                        <img width="30" src="~/images/cart.svg">
-                        <span id="cart-num">0</span>
-                    </a>
+                <a asp-controller="cart" asp-action="index" class="nav-link">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <span id="cart-num">0</span>
+                </a>
             </li>
         </ul>
     </div>
 </nav>
+
 
 
 

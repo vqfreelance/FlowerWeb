@@ -2,6 +2,18 @@ body {
     padding-top: 55px
 }
 
+.services-guarante {
+    text-align: center;
+    width: 100%;
+}
+
+    .services-guarante li {
+        font-size: larger;
+        margin-right: 25px;
+        list-style-type: none;
+        display: inline;
+    }
+
 .navbar-custom {
     margin-bottom: 10px;
     background: #FF95A1;
@@ -60,7 +72,7 @@ body {
         width: 100%
     }
 
-#cart-num {
+/*#cart-num {
     position: absolute;
     right: 0;
     top: 0;
@@ -72,14 +84,16 @@ body {
     line-height: 25px;
     border-radius: 50%;
     font-style: normal;
-}
+}*/
 
 .carousel {
     margin: auto;
     width: 80%;
+    overflow: hidden;
 }
 
     .carousel .carousel-inner {
+        height: 320px;
         border-radius: 15px;
     }
 
@@ -107,7 +121,36 @@ body {
         border-radius: 5px;
         height: 45px;
     }
-    .middle-header button:hover {
-        color: white;
-        background: #FF95A1;
+
+        .middle-header button:hover {
+            color: white;
+            background: #FF95A1;
+        }
+
+    .occasion-group div {
+        margin: auto;
+        justify-content: center;
     }
+
+    .occasion-group button {
+        color: white;
+        margin-right: 15px;
+        background: #FF95A1;
+        border-radius: 5px;
+        width: 85px;
+    }
+
+        .occasion-group button:hover {
+            color: white;
+            background: #FF4C60;
+        }
+
+@media only screen and (max-width: 767px) {
+    .services-guarante {
+        text-align: left;
+    }
+
+        .services-guarante li {
+            display: block;
+        }
+}
