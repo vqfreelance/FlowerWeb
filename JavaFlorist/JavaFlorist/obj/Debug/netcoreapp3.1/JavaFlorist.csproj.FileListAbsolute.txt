@@ -300,7 +300,6 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.RazorCoreGenerate.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\ForgotPassword.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Login.cshtml.g.cs
-D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\RecoveryPassword.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Register.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Bouquet\Edit.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Bouquet\Index.cshtml.g.cs
@@ -342,3 +341,4 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Message\Create.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Dashboard\User.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Profile.cshtml.g.cs

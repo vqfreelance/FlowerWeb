@@ -32,7 +32,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
         public IActionResult Login()
         {
             var account = new Account();
-            return View("Login", account);
+            return View("login", account);
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
             else
             {
                 ViewBag.loginerror = "Invalid! Username or Password is incorrect!";
-                return View("Login");
+                return View("login");
             }
         }
 
@@ -64,6 +64,49 @@ namespace JavaFlorist.Areas.Admin.Controllers
                 }
             }
             return null;
+        }
+        // Edit profile
+        [HttpGet]
+        [Route("profile")]
+        public IActionResult EditProfile()
+        {
+            var username = HttpContext.Session.GetString("username");
+            var account = accountRepository.GetByUsername(username);
+            ViewBag.account = account;
+            return View("profile", account);
+        }
+
+        [HttpPost]
+        [Route("profile")]
+        public async Task<IActionResult> EditProfile(string newname, 
+            string newemail, string newphone, string newaddress)
+        {
+            var username = HttpContext.Session.GetString("username");
+            var account = accountRepository.GetByUsername(username);
+            account.Name = newname;
+            account.Email = newemail;
+            account.Phone = newphone;
+            account.Address = newaddress;
+            await accountRepository.Update(account.Id, account);
+            return RedirectToAction("profile", "account");
+        }
+
+        // Change Password
+        [HttpPost]
+        [Route("changepassword")]
+        public async Task<IActionResult> ChangePassword(string oldpassword, 
+            string newpassword, string retypepassword)
+        {
+            var username = HttpContext.Session.GetString("username");
+            var account = accountRepository.GetByUsername(username); 
+
+            if (newpassword == oldpassword && 
+                BCrypt.Net.BCrypt.Verify(oldpassword, account.Password))
+            {
+                account.Password = BCrypt.Net.BCrypt.HashPassword(newpassword);
+                await accountRepository.Update(account.Id, account);
+            }
+            return RedirectToAction("profile", "account");
         }
 
         //logout
@@ -80,7 +123,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
         public IActionResult Register()
         {
             var account = new Account();
-            return View("Register", account);
+            return View("register", account);
         }
 
         [HttpPost]
@@ -104,7 +147,7 @@ namespace JavaFlorist.Areas.Admin.Controllers
             Debug.WriteLine("Phone: " + account.Phone);
             Debug.WriteLine("Role: " + account.Role);
 
-            return RedirectToAction("Login");
+            return RedirectToAction("login");
         }
 
         // Forgot Password
@@ -131,11 +174,6 @@ namespace JavaFlorist.Areas.Admin.Controllers
             return View();
         }
 
-        // Change Password
-        [Route("changepassword")]
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
+        
     }
 }
