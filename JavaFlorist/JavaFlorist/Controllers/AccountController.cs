@@ -8,6 +8,9 @@ using JavaFlorist.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using JavaFlorist.Models.Repositories;
+using System.Security.Claims;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JavaFlorist.Controllers
 {
@@ -16,10 +19,24 @@ namespace JavaFlorist.Controllers
     {
         private DatabaseContext db;
         private IAccountRepository accountRepository;
-        public AccountController(DatabaseContext _db, IAccountRepository _accountRepository)
+        private IOrderRepository orderRepository;
+        private IOrderDetailRepository orderdetailRepository;
+        private ICustomerRepository customerRepository;
+        private IBouquetRepository bouquetRepository;
+
+        public AccountController(DatabaseContext _db, 
+            IAccountRepository _accountRepository,
+            IOrderRepository _orderRepository,
+            IOrderDetailRepository _orderdetailRepository,
+            ICustomerRepository _customerRepository,
+            IBouquetRepository _bouquetRepository )
         {
             db = _db;
             accountRepository = _accountRepository;
+            orderRepository = _orderRepository;
+            orderdetailRepository = _orderdetailRepository;
+            customerRepository = _customerRepository;
+            bouquetRepository = _bouquetRepository;
         }
 
         private SecurityManager securityManager = new SecurityManager();
@@ -33,6 +50,16 @@ namespace JavaFlorist.Controllers
             {
                 var a = db.Account.SingleOrDefault(a => a.Username.Equals(customer_username));
                 securityManager.SignIn(HttpContext, a);
+                if (HttpContext.Session.GetString("cart") != null)
+                {
+                    List<Item> cart = JsonConvert.DeserializeObject<List<Item>>(HttpContext.Session.GetString("cart"));
+                    if (cart.Count > 0)
+                    {
+                        ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
+                        ViewBag.cart = cart;
+                        return RedirectToAction("index", "cart");
+                    }
+                }
                 return RedirectToAction("index", "home");
             }
             else
@@ -71,12 +98,168 @@ namespace JavaFlorist.Controllers
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
-                return BadRequest();
+                ViewBag.name = acc.Name;
+                ViewBag.username = acc.Username;
+                ViewBag.phone = acc.Phone;
+                ViewBag.email = acc.Email;
+                ViewBag.address = acc.Address;
+                ViewBag.error = "check your infomation again!";
+                return View("Signup");
             }
             return RedirectToAction("index", "home");
         }
 
+        //check username exist
+        [HttpPost]
+        [Route("checkusername")]
+        public bool CheckUserName(string username)
+        {
+            if (accountRepository.CheckByUsername(username))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpPost]
+        [Route("checkuserpass")]
+        public bool CheckUserPass(string id, string oldpass)
+        {
+            var acc = accountRepository.GetAccById(int.Parse(id));
+            if (acc.Password != oldpass)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpGet]
+        [Route("info/{username}")]
+        public IActionResult Info(string username)
+        {
+            ViewBag.acc = accountRepository.GetByUsername(username);
+            return View("Info");
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpGet]
+        [Route("editaccount/{id}")]
+        public IActionResult EditAccout(int id)
+        {
+            var acc = accountRepository.GetAccById(id);
+            return View("Edit", acc);
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpPost]
+        [Route("editaccount/{id}")]
+        public async Task<IActionResult> EditAccout(int id,Account acc)
+        {
+            //acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
+            var oldInfo = accountRepository.GetAccById(id);
+            oldInfo.Name = acc.Name;
+            oldInfo.Phone = acc.Phone;
+            oldInfo.Email = acc.Email;
+            oldInfo.Address = acc.Address;
+            try
+            {
+                await accountRepository.Update(id,oldInfo);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("index", "home");
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpGet]
+        [Route("changepass/{id}")]
+        public IActionResult ChangePassword(int id)
+        {
+            var acc = accountRepository.GetAccById(id);
+            return View("ChangePass", acc);
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpPost]
+        [Route("changepass/{id}")]
+        public async Task<IActionResult> ChangePassword(int id, Account acc)
+        {
+            //acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
+            var oldInfo = accountRepository.GetAccById(id);
+            oldInfo.Password = acc.Password;
+            try
+            {
+                await accountRepository.Update(id, oldInfo);
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("index", "home");
+        }
+
+        [Authorize(Roles = "user")]
+        [HttpGet]
+        [Route("vieworderdetail/{id}")]
+        public async Task<IActionResult> ViewOrderDetail(int id)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier);
+            var acc = accountRepository.GetByUsername(username.Value);
+            var order = await orderRepository.GetById(id);
+            if(acc.Id == order.AccountId)
+            {
+                var sender = new Customer();
+                if (order !=null && order.SenderId > 0)
+                {
+                    sender = await customerRepository.GetById(order.SenderId);
+                }
+                var receiver = new Customer();
+                if (order != null && order.ReceiverId > 0)
+                {
+                    receiver = await customerRepository.GetById(order.ReceiverId);
+                }
+                var a =  await orderRepository.GetByIdIncludeRelationship(id);
+                var cart = new List<Item>();
+                //foreach (var b in db.OrderDetail.Where(a=>a.OrderId==id).ToList())
+                if (a != null)
+                {
+                    foreach (var b in a.OrderDetail.ToList())
+                    {
+                        var item = new Item
+                        {
+                            Bouquet = await bouquetRepository.GetById(b.BouquetId),
+                            Quantity = b.Quantity
+                        };
+                        cart.Add(item);
+                    }
+                }
+
+                ViewBag.acc = acc;
+                ViewBag.sender = sender;
+                ViewBag.receiver = receiver;
+                ViewBag.cart = cart;
+                ViewBag.order = order;
+                ViewBag.total = receiver.Name == null ? (cart.Sum(i => i.Quantity * i.Bouquet.Price)) : (cart.Sum(i => i.Quantity * i.Bouquet.Price))+ 5;
+
+                return View("OrderHistory");
+            } else
+            {
+                return RedirectToAction("carterror", "cart");
+            }
+            
+        }
+
+        [Authorize(Roles = "user")]
         [Route("logout")]
         public IActionResult Logout()
         {

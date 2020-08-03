@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "ChangePass";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model JavaFlorist.Models.Account
+
+<div class="signup-box">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+            <li class="breadcrumb-item active">ChangePassword</li>
+        </ol>
+        <h3>Change Password</h3> <br />
+        <form name="box-signup" id="signup_form" method="post" asp-controller="account" asp-action="changepass" asp-route-id="Id">
+            <div class="form-group">
+                <label for="customer_phone">Old Password</label>
+                <input class="form-control" type="password" name="Oldpass" placeholder="Your old password">
+            </div>
+            <div class="form-group">
+                <label for="customer_password">Password</label>
+                <input class="form-control" type="password" id="Password" name="Password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="customer_password2">Confirm-Password</label>
+                <input class="form-control" type="password" name="Password2" placeholder="Confirm-Password">
+            </div>
+            <a style="color:red">@ViewBag.error</a>
+            <div class="form-group text-center">
+                <button class="btn btn-login" type="submit">Save</button>
+            </div>
+            <input type="hidden" asp-for="Id" name="Id" />
+        </form>
+    </div>
+</div>
+

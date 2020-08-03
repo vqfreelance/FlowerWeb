@@ -15,7 +15,8 @@ namespace JavaFlorist.Security
         private IEnumerable<Claim> GetClaimsOfAccount(Account account)
         {
             List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, account.Username)); //lay username
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, account.Username));
+            claims.Add(new Claim(ClaimTypes.Name, account.Name)); //lay username
             claims.Add(new Claim(ClaimTypes.Role, account.Role)); //lay roles cua username
             return claims;
         }

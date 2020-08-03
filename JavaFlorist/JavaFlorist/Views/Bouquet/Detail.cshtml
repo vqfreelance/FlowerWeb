@@ -1,0 +1,109 @@
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="content">
+        <div class="content-box">
+            <div class="container">
+                <div class="top-detail-product">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="breadcrumb-item active">Bouquet</li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-lg-5 text-center">
+                            <img src="~/images/bouquets/@ViewBag.bouquet.Photo" style=" max-height: 450px" />
+                        </div>
+                        <div class="col-lg-7">
+                            <h1 class="title" itemprop="name">@ViewBag.bouquet.Name</h1>
+                            <div class="product-feture">
+                                @ViewBag.bouquet.Description
+                            </div>
+                            <div class="product-info quantity">
+                                <p>Quantity</p>
+                                <p><input id="quantity" type="text" name="quantity"></p>
+                            </div>
+                            <hr>
+                            <p>Price at shop</p>
+                            <div class="price">@ViewBag.bouquet.Price.ToString("C", CultureInfo.CurrentCulture)</div>
+
+                            <div class="btn-box">
+                                <input hidden value="@ViewBag.bouquet.Id" id="bouquetid" />
+                                @*<button class="hidden toggle-popupCart" type="button" data-toggle="modal" data-keyboard="false"
+                                            data-target="#popupCart"></button>
+                                    <button class="btn btn-buy" type="button" data-id="580" data-price="520000" data-unit="" data-quantity=""
+                                            onclick="return add_cart(this, 2)">
+                                        Buy Now
+                                    </button>*@
+                                @*<a class="btn btn-buy" asp-controller="cart" asp-action="buy" asp-route-id="@ViewBag.bouquet.Id">Buy Now</a>*@
+                                <input class="btn btn-success" type="button" value="Buy Now" id="buynow" />
+                                @*<button type="button" data-id="580" data-price="520000" data-unit="" data-quantity=""
+                                            onclick="return add_cart(this, 1)" class="btn btn-add-to-cart" href="#">
+                                        Add to Cart
+                                    </button>*@
+                                <input class="btn btn-info" type="button" value="Add Cart" id="addcart" />
+                            </div>
+                            <p>
+                                <small>Actual product images may differ from its illustration (bloom, accessories, etc)</small>
+                            </p>
+                            <hr>
+                            <div class="option-box">
+                                <ul>
+                                    <li>
+                                        <img width="40" src="~/images/delivery.png">
+                                        <span>
+
+                                            2-hour express delivery within 5km
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <img width="40" src="~/images/present-box.png">
+                                        <span>
+                                            Free greeting card
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <img width="40" src="~/images/eco-nature.png">
+                                        <span>
+                                            Guarantee fresh flowers in 3 days
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-detail-product">
+                    <h1 class="title">@ViewBag.bouquet.Name</h1>
+                    <p>
+                        @ViewBag.bouquet.Description
+                    </p>
+                </div>
+                <div class="related-products group-product-wrapp">
+                    <h4 style="align-content: center">RELATED FLOWERS @*"<strong>Father 's Day</strong>"*@</h4>
+                    <div class="row products">
+                        @foreach (var b in ViewBag.randombouquets)
+                        {
+                            <div class="col-lg-2 col-xs-6">
+                                <div class="product-item">
+                                    <div class="product-img">
+                                        <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                                            <img src="~/images/bouquets/@b.Photo" />
+                                        </a>
+                                    </div>
+                                    <div class="product-title">
+                                        <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                                            @b.Name
+                                        </a>
+                                    </div>
+                                    <div class="product-price">@(b.Price.ToString("C", CultureInfo.CurrentCulture))</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

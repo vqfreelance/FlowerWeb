@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Order History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="content">
+        <div class="content-box">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                            <li class="breadcrumb-item">
+                                <a href="shop.dalathasfarm.com/shopcart/gio-hang.html">Cart</a>
+                            </li>
+                            <li class="breadcrumb-item active">Order</li>
+                        </ol>
+                        <div class="document-box">
+                            <div class="row" id="main-content">
+                                <div class="customer-address col-lg-6">
+                                    <p class="title">Order Info</p>
+                                    <table>
+                                        <tr>
+                                            <td width=100px height=30px>Oderer: </td>
+                                            <td><b>@ViewBag.acc.Name</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td width=100px height=30px></td>
+                                        </tr>
+                                        @if (ViewBag.sender.Name != null)
+                                        {
+                                            <tr>
+                                                <td width=100px height=30px>Sender: </td>
+                                                <td><b>@ViewBag.sender.Name</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px>Sender Address: </td>
+                                                <td><b>@ViewBag.sender.Address</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px>Phone: </td>
+                                                <td><b>@ViewBag.sender.Phone</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px>Email: </td>
+                                                <td><b>@ViewBag.sender.Email</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px></td>
+                                            </tr>
+                                        }
+
+                                        @if (ViewBag.sender.Name != null)
+                                        {
+                                            <tr>
+                                                <td width=100px height=30px>Receiver: </td>
+                                                <td><b>@ViewBag.receiver.Name</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px>Sender Address: </td>
+                                                <td><b>@ViewBag.receiver.Address</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px>Phone: </td>
+                                                <td><b>@ViewBag.receiver.Phone</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px>Email: </td>
+                                                <td><b>@ViewBag.receiver.Email</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px></td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td width=100px height=30px>Receive: </td>
+                                                <td><b>Receive goods at the store</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width=100px height=30px></td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td width=100px height=30px>Time Delivery: </td>
+                                            <td><b>@ViewBag.order.ReceivingTime</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td width=100px height=30px>Message: </td>
+                                            <td><b>@ViewBag.order.Message</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td width=100px height=30px>Status: </td>
+                                            <td><b>@ViewBag.order.Status</b></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                @await Component.InvokeAsync("BouquetList")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

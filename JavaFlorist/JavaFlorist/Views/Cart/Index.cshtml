@@ -1,24 +1,26 @@
-﻿
+﻿@using System.Globalization
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model JavaFlorist.Models.Item
 
-    <div class="content">
-        <div class="content-box">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                            <li class="breadcrumb-item active">Cart</li>
-                        </ol>
+<div class="content">
+    <div class="content-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="breadcrumb-item active">Cart</li>
+                    </ol>
+                    @if (@ViewBag.cart != null)
+                    {
                         <div class="document-box">
                             <div class="no-gutters checkout-box">
                                 <div class="cart-box" id="cart-page">
                                     <div class="row">
                                         <div class="col-lg-9">
-
                                             <div class="cart-list">
                                                 <div class="header-list">
                                                     <div class="header-item">Product</div>
@@ -27,86 +29,42 @@
                                                     <div class="header-item">Total</div>
                                                 </div>
 
-                                                <div class="body-list">
-                                                    <div class="body-item product-info">
-                                                        <div class="cart-product">
-                                                            <div class="p-image">
-                                                                <img src="~/images/bouquet/MuaXuanTinhYeuVaEm.jpg" alt="Spring Love and You" />
-                                                            </div>
-                                                            <div class="p-info">
-                                                                <a class="p-name" href="" title="Spring Love and You">Spring Love and You</a>
-                                                                <p>SKU: WLVLTD010</p>
-
-                                                                <a class="wishlist" data-toggle="modal" data-keyboard="false" data-backdrop="static" data-target="#loginModal" title="Favourite">
-                                                                    <img width="20" src="~/images/like.png">Favourite
-                                                                </a>
+                                                @foreach (var i in @ViewBag.cart)
+                                                {
+                                                    <div class="body-list" style="border:3px">
+                                                        <div class="body-item product-info">
+                                                            <div class="cart-product">
+                                                                <div class="p-image">
+                                                                    <img src="~/images/bouquets/@i.Bouquet.Photo" alt="@i.Bouquet.Name" />
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <div class="body-item price" data-price="@i.Bouquet.Price">
+                                                            <span>@i.Bouquet.Price.ToString("C", CultureInfo.CurrentCulture)</span>
+                                                        </div>
+                                                        <div class="body-item quantity">
+                                                            <input data-unit="packing_item" type="text" value="@i.Quantity" name="quantity" class="quantity-input">
+                                                            <input class="bouquetid" value="@i.Bouquet.Id" type="hidden">
+                                                        </div>
+                                                        <div class="body-item total">
+                                                            <span class="bouquet-total">@((i.Quantity * i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture))</span>
+                                                            <a class="btn" asp-controller="cart" asp-action="remove" asp-route-id="@i.Bouquet.Id" style="float:right"><img width="20" src="~/images/close.png"></a>
+                                                        </div>
                                                     </div>
-                                                    <div class="body-item price" data-price="850000">
-                                                        <span>850.000đ/package</span>
-                                                    </div>
-                                                    <div class="body-item quantity">
-                                                        <input data-id="14" onChange="update_qty_product(this)" data-unit="packing_item" type="text" value="1" name="quantity" class="quantity-input">
-                                                        <input name="item_qty_current" value="1" type="hidden">
-                                                    </div>
-                                                    <div class="body-item total">
-                                                        <span>850.000đ</span>
-                                                        <button onclick="remove_cart(this)" data-id="14" data-unit="packing_item" type="button"><img width="20" src="~/images/close.png"></button>
-                                                    </div>
-                                                </div>
+                                                    <div class="seperate-line" style="height: 1px;"></div>
+                                                }
                                             </div>
                                         </div>
-
                                         <div class="col-lg-3">
-                                            <div class="border-wrapp">
-                                                <div class="row ship-address">
-                                                    <input type="hidden" name="city_id" id="city_id" value="30">        <div class="col-lg-6"><span class="green">Deliver to</span></div>
-                                                    <div class="col-lg-12 py-3">
-                                                        <span><img width="22" src="~/images/location-pin.svg"></span>
-                                                        <span class="current-address" id="current_address" data-city="Hồ Chí Minh city">Hồ Chí Minh city</span>
-                                                    </div>
-                                                </div>
-                                                <div class="row select-group">
-                                                    <div class="col-lg-12" style="display:none">
-                                                        <select class="form-control selectpicker" id="district-select" onchange="get_ward_shipping(this)">
-                                                            <option value="32">District 1</option>
-                                                            <option value="33">District 2</option>
-                                                            <option value="34">District 3</option>
-                                                            <option value="35">District 4</option>
-                                                            <option value="36">District 5</option>
-                                                            <option value="37">District 6</option>
-                                                            <option value="38">District 7</option>
-                                                            <option value="39">District 8</option>
-                                                            <option value="40">District 9</option>
-                                                            <option value="41">District 10</option>
-                                                            <option value="42">District 11</option>
-                                                            <option value="43">District 12</option>
-                                                            <option value="44">District Phú Nhuận</option>
-                                                            <option value="45">District Bình Thạnh</option>
-                                                            <option value="46">District Tân Bình</option>
-                                                            <option value="47">District Tân Phú</option>
-                                                            <option value="48">District Gò Vấp</option>
-                                                            <option value="49">District Thủ Đức</option>
-                                                            <option value="50">District Bình Tân</option>
-                                                            <option value="51">District Bình Chánh</option>
-                                                            <option value="52">District Củ Chi</option>
-                                                            <option value="53">District Nhà Bè</option>
-                                                            <option value="54">District Cần Giờ</option>
-                                                            <option value="55">District Hóc Môn</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="border-wrapp padding-0">
                                                 <div class="order-cart-header">
                                                     <p>My Cart</p>
-                                                    <p class="total-item">1 Product</p>
+                                                    <p class="total-item">@ViewBag.totalqty Product</p>
                                                 </div>
                                                 <div class="order-cart-content">
                                                     <div class="order-cart-content-item">
                                                         <p>Provisional Sum</p>
-                                                        <p>850.000đ</p>
+                                                        <p class="cart_total">@ViewBag.total.ToString("C", CultureInfo.CurrentCulture)</p>
                                                     </div>
                                                     <div class="order-cart-content-item">
                                                     </div>
@@ -117,39 +75,13 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="popup-note-cart" tabindex="-1" role="dialog" aria-labelledby="comment-modal-Label" class="modal fade">
-                                        <div role="document" class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                                                    <h5 class="modal-title"><i class="arv arv-stationary"></i><span> Note for Product</span></h5>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-xs-4 col-md-3">
-                                                            <img id="image-item-cart" class="img-fluid" src="">
-                                                            <input id="id-item-cart" value="" name="id-item-cart" type="hidden">
-                                                        </div>
-                                                        <div class="col-xs-8 col-md-9">
-                                                            <h6 id="name-item-cart"></h6>
-                                                            <p>Mã SP:<span id="sku-item-cart"></span></p>
-                                                            <div>Note for Product need to buy</div>
-                                                            <textarea class="form-control" id="note-item-cart" rows="1"></textarea>
-                                                            <p class="pv10">
-                                                                <button class="btn btn-primary" onclick="save_item_note();">Lưu</button>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
+</div>
 

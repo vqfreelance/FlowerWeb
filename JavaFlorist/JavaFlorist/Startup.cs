@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace JavaFlorist
 {
@@ -24,9 +26,11 @@ namespace JavaFlorist
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             string connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
+            services.AddSession();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
             {
@@ -34,8 +38,21 @@ namespace JavaFlorist
                 options.LogoutPath = "/account/logout";
                 options.AccessDeniedPath = "/login/accessDenied";
             });
+            services.AddSession();
 
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IBouquetRepository, BouquetRepository>();
+            services.AddScoped<IOccasionRepository, OccasionRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IOccBouquetRepository, OccBouquetRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
         }
 
         
@@ -45,6 +62,7 @@ namespace JavaFlorist
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSession();
 
             app.UseStaticFiles();
 
@@ -56,11 +74,15 @@ namespace JavaFlorist
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
                 endpoints.MapControllerRoute(
                    name: "default",
                    pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
         }
+
+
     }
 }

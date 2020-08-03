@@ -1,8 +1,10 @@
-﻿
+﻿@using System.Globalization
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model JavaFlorist.Models.Bouquet
+
 <div class="container">
     <div class="row top-content-wrapp">
         <div class="col-lg-2 col-xs-12">
@@ -13,94 +15,20 @@
             </div>
             <nav class="jquery-accordion-menu hidden-xs" id="jquery-accordion-menu">
                 <ul>
-                    <li class="">
-                        <a href="c/hoa-cat-canh/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-2.png">
-                            <span>Cut Flowers</span>
-                        </a>
-                        <div class="sub-menu">
-                            <ul>
-                                <li class=" "><a href="">* Green Wicky</a></li>
-                                <li class=" "><a href="">* Cúc Đơn</a></li>
-                                <li class=" "><a href="">* Cúc Nhánh</a></li>
-                                <li class=" "><a href="">* Sống Đời</a></li>
-                                <li class=" "><a href="">* Cẩm Chướng Đơn</a></li>
-                                <li class=" "><a href="">* Lily</a></li>
-                                <li class=" "><a href="">* Cẩm Chướng Nhánh</a></li>
-                                <li class=" "><a href="">* Calimero</a></li>
-                                <li class=" "><a href="">* Rossi</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="">
-                        <a href="c/hoa-chau/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-3.png">
-                            <span>Flower Pots</span>
-                        </a>
-                        <div class="sub-menu">
-                            <ul>
-                                <li class=" "><a href="">* Bâng Khuâng</a></li>
-                                <li class=" "><a href="">* Hồng Môn</a></li>
-                                <li class=" "><a href="">* Thu Hải Đường</a></li>
-                                <li class=" "><a href="">* Calimero</a></li>
-                                <li class=" "><a href="">* Cẩm Chướng</a></li>
-                                <li class=" "><a href="">* Hoa Cúc</a></li>
-                                <li class=" "><a href="">* Anh Thảo</a></li>
-                                <li class=" "><a href="">* Dương Xỉ Nhỏ</a></li>
-                                <li class=" "><a href="">* Đồng Tiền</a></li>
-                                <li class=" "><a href="">* Cây Xanh</a></li>
-                            </ul><ul>
-                                <li class=" "><a href="">* Râm Bụt</a></li>
-                                <li class=" "><a href="">* Cẩm Tú Cầu</a></li>
-                                <li class=" "><a href="">* Sống Đời</a></li>
-                                <li class=" "><a href="">* Calla Lily</a></li>
-                                <li class=" "><a href="">* Lily</a></li>
-                                <li class=" "><a href="">* Cúc Họa Mi</a></li>
-                                <li class=" "><a href="">* Cúc Pico</a></li>
-                                <li class=" "><a href="">* Lan Ý</a></li>
-                                <li class=" "><a href="">* Hoa Hồng</a></li>
-                                <li class=" "><a href="">* Violet Châu Phi</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="">
-                        <a href="c/la-trang-tri/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-5.png">
-                            <span>Decorative Leaves</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="c/lan-ho-diep/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-4.png">
-                            <span>Orchid</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="c/phu-lieu-hoa/index.html">
-                            <img width="20" src="~/assets/_file/2020/2020-05/flower-6.png">
-                            <span>Accessories</span>
-                        </a>
-                        <div class="sub-menu">
-                            <ul>
-                                <li class=" "><a href="">* Đất hữu cơ Potting Soil</a></li>
-                                <li class=" "><a href="">* Accessories khác</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    @foreach (var occasion in ViewBag.Occasions)
+                    {
+                        <li class="">
+                            <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                                <img width="20" src="~/images/occasions/@occasion.Photo">
+                                <span>@occasion.Name</span>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </nav>
         </div>
         <div class="col-lg-8 col-lg-custom-8 col-xs-12">
-            <nav class="nav-extend">
-                <ul>
-                    <li><a href=""><img src="~/assets/_file/2020/2020-06/present-box-3.png"><span>Award Flowers</span></a></li>
-                    <li><a href=""><img src="~/assets/_file/2020/2020-06/Pot-design.png"><span>Design Flower Pots</span></a></li>
-                    <li><a href=""><img src="~/assets/_file/2020/2020-06/pray-day-2.png"><span>Workship day Flowers</span></a></li>
-                    <li class="hidden-xs"><a href=""><img src="~/images/office-2.svg"><span>Decorate</span></a></li>
-                    <li style="display:none"><a href=""><img src="~/images/promotion.svg"><span>Promotion</span></a></li>
-                    <li><a href=""><img src="~/images/bundle-2.svg"><span>Buy a lot</span></a></li>
-                </ul>
-            </nav>
+
             <div class="banner">
                 <div><a href="" target="_blank"><img src="~/assets/2020/2020-06/a41f059deb0a800af8491b1d234f5f71.jpg"></a></div>
                 <div><a href="" target="_blank"><img src="~/assets/2020/2020-06/b496ebd7b74cbf7ba1d2f0d0ea4a660e.jpg"></a></div>
@@ -140,189 +68,61 @@
         </div>
     </div>
 </div>
-<div class="group-product-wrapp" style="margin-top:40px">
-    <h2><a href="">Award Flowers & Service Flowers </a></h2>
-    <div class="products-type hidden-xs" style="margin: 10px 0 40px;">
-        <ul class="type-list">
-            <li>
-                <a href="">
-                    <img src="~/images/type-1.png"><span>Love</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img src="~/images/type-2.png"><span>Birthday</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img src="~/images/type-3.png"><span>Thanks</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img src="~/images/type-4.png"><span>Condolatory</span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <img src="~/images/type-5.png"><span>Congratulation</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <div class="row products service-product">
-        <div class="col-lg-12 col-lg-custom-12">
-            <div class="row">
-
-                <div class="col-lg-3 col-xs-6 blur-box item-580" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a asp-controller="bouquet" asp-action="index">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/ChaCon_DadSon.jpg"
-                                     alt="Dad & Son" />
-                            </a>
+<div class="container">
+    <div class="group-product-wrapp" style="margin-top:40px">
+        <h2><a href="">Award Flowers & Service Flowers </a></h2>
+        <div class="products-type hidden-xs" style="margin: 10px 0 40px;">
+            <ul class="type-list">
+                @foreach (var occasion in ViewBag.NumberOccasions)
+                {
+                    <li>
+                        <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                            <img src="~/images/occasions/@occasion.Photo"><span>@occasion.Name</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="row products service-product">
+            <div class="col-lg-12 col-lg-custom-12">
+                <div class="row">
+                    @foreach (var b in ViewBag.bouquets)
+                    {
+                        <div class="col-lg-3 col-xs-6 blur-box item-580">
+                            <div class="product-item">
+                                <div class="product-img">
+                                    <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                                        <img itemprop="image" src="~/images/bouquets/@b.Photo" alt="@b.Name" />
+                                    </a>
+                                </div>
+                                <div class="product-title">
+                                    <a href="" class="title-products"
+                                       title="@b.Name"><span itemprop="name">@b.Name</span></a>
+                                </div>
+                                <div class="product-price">
+                                    <b>@(((decimal)b.Price).ToString("C", CultureInfo.CurrentCulture))</b>
+                                </div>
+                                @*<div class="product-cart">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-left">
+                                            <img class="btn" src="~/images/shopping-cart.png" href="#" onClick="quickbuyout(@b.Id)" />
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <img class="btn" src="~/images/plus.png" href="#" onClick="quickaddcart(@b.Id)" />
+                                        </div>
+                                    </div>
+                                </div>*@
+                            </div>
                         </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products"
-                               title="Dad & Son"><span itemprop="name">Dad & Son</span></a>
-                        </div>
-                        <div class="product-price"><b>520.000đ/package</b></div>
+                    }
+                    <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
+                        <a class="btn-readmore"
+                           asp-controller="Bouquet" asp-action="Index">
+                            View All
+                        </a>
                     </div>
-                </div>
-                <div class="col-lg-3 col-xs-6 blur-box item-582" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/TinhCha_WarmFather.jpg"
-                                     alt="Warm Father" />
-                            </a>
-                        </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products"
-                               title="Warm Father"><span itemprop="name">Warm Father</span></a>
-                        </div>
-                        <div class="product-price"><b>800.000đ/box</b></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6 blur-box item-583" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/TinhThan_TheDescendants.jpg"
-                                     alt="The Descendants" />
-                            </a>
-                        </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products"
-                               title="The Descendants"><span itemprop="name">The Descendants</span></a>
-                        </div>
-                        <div class="product-price"><b>900.000đ/package</b></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6 blur-box item-610" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/LocPhat.jpg"
-                                     alt="Fortune" />
-                            </a>
-                        </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products"
-                               title="Fortune"><span itemprop="name">Fortune</span></a>
-                        </div>
-                        <div class="product-price"><b>140.000đ/pot</b></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6 blur-box item-588" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/DauChanCha_DadFoodprint.jpg"
-                                     alt="Dads Foodprint" />
-                            </a>
-                        </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products"
-                               title="Dad's Foodprint">
-                                <span itemprop="name">
-                                    Dad's
-                                    Foodprint
-                                </span>
-                            </a>
-                        </div>
-                        <div class="product-price"><b>450.000đ/box</b></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6 blur-box item-576" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/BaoLa_Infinite.jpg"
-                                     alt="Infinite" />
-                            </a>
-                        </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products"
-                               title="Infinite"><span itemprop="name">Infinite</span></a>
-                        </div>
-                        <div class="product-price"><b>900.000đ/bottle</b></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6 blur-box item-581" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/OnCha_ThanksDad.jpg"
-                                     alt="Thanks Dad" />
-                            </a>
-                        </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products"
-                               title="Thanks Dad"><span itemprop="name">Thanks Dad</span></a>
-                        </div>
-                        <div class="product-price"><b>550.000đ/package</b></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-xs-6 blur-box item-613" itemscope itemtype="https://schema.org/Product">
-                    <div class="product-item">
-                        <div class="product-img">
-                            <a href="">
-                                <img itemprop="image"
-                                     src="~/images/bouquet/RucRo.jpg"
-                                     alt="Brilliant" />
-                            </a>
-                        </div>
-                        <meta itemprop="url" content="">
-                        <div class="product-title">
-                            <a href="" class="title-products" title="Brilliant">
-                                <span itemprop="name">Brilliant</span>
-                            </a>
-                        </div>
-                        <div class="product-price"><b>270.000đ/pot</b></div>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
-                    <a class="btn-readmore"
-                       href="">View All</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

@@ -20,15 +20,18 @@ namespace JavaFlorist.Models
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<OccBouquet> OccBouquet { get; set; }
-        public virtual DbSet<Occcasion> Occcasion { get; set; }
+        public virtual DbSet<Occasion> Occasion { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
 
-        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
             {
+                entity.Property(e => e.Address)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(250)
                     .IsUnicode(false);
@@ -108,22 +111,20 @@ namespace JavaFlorist.Models
 
             modelBuilder.Entity<OccBouquet>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Occ_Bouquet");
 
                 entity.HasOne(d => d.Bouquet)
-                    .WithMany()
+                    .WithMany(p => p.OccBouquet)
                     .HasForeignKey(d => d.BouquetId)
                     .HasConstraintName("FK_Occ_Bouquet_Bouquet");
 
                 entity.HasOne(d => d.Occasion)
-                    .WithMany()
+                    .WithMany(p => p.OccBouquet)
                     .HasForeignKey(d => d.OccasionId)
                     .HasConstraintName("FK_Occ_Bouquet_Occcasion");
             });
 
-            modelBuilder.Entity<Occcasion>(entity =>
+            modelBuilder.Entity<Occasion>(entity =>
             {
                 entity.Property(e => e.Description)
                     .HasMaxLength(250)
@@ -144,7 +145,9 @@ namespace JavaFlorist.Models
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
-                entity.Property(e => e.ReceivingTime).HasColumnType("date");
+                entity.Property(e => e.ReceivingTime)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Status)
                     .HasMaxLength(10)

@@ -1,0 +1,78 @@
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model JavaFlorist.Models.Bouquet
+
+<div class="container">
+    <div class="row top-content-wrapp">
+        <div class="col-lg-2 col-xs-12">
+            <div class="dropdown cate-main hidden-xs">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                    <img class="sep2" src="~/images/signs.svg"> Category
+                </button>
+            </div>
+            <nav class="jquery-accordion-menu hidden-xs" id="jquery-accordion-menu">
+                <ul>
+                    @foreach (var occasion in ViewBag.Occasions)
+                    {
+                        <li class="">
+                            <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                                <img width="20" src="~/images/occasions/@occasion.Photo">
+                                <span>@occasion.Name</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-10 col-lg-custom-10 col-xs-12">
+                    <h2><a href="">Award Flowers & Service Flowers </a></h2>
+                    <div class="products-type hidden-xs" style="margin: 10px 0 40px;">
+                        <ul class="type-list">
+                            @foreach (var occasion in ViewBag.NumberOccasions)
+                            {
+                                <li>
+                                    <a asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">
+                                        <img src="~/images/occasions/@occasion.Photo" width=80><span>@occasion.Name</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="row products service-product">
+                        <div class="col-lg-12 col-lg-custom-12">
+                            <div class="row">
+                                @foreach (var b in ViewBag.bouquets)
+                                {
+                                    <div class="col-lg-3 col-xs-6 blur-box item-580">
+                                        <div class="product-item">
+                                            <div class="product-img">
+                                                <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                                                    <img itemprop="image" src="~/images/bouquets/@b.Photo" alt="@b.Name" />
+                                                </a>
+                                            </div>
+                                            <div class="product-title">
+                                                <a href="" class="title-products"
+                                                   title="@b.Name"><span itemprop="name">@b.Name</span></a>
+                                            </div>
+                                            <div class="product-price">
+                                                <b>@(((decimal)b.Price).ToString("C", CultureInfo.CurrentCulture))</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
+                                    <a class="btn-readmore"
+                                       asp-controller="Bouquet" asp-action="Index">
+                                        View All
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+

@@ -1,427 +1,257 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="content">
-        <div class="content-box">
-            <div class="container">
-                <div class="row">
+<div class="content">
+    <div class="content-box">
+        <div class="container">
+            <div class="row">
 
-                    <div class="col-md-12">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                            <li class="breadcrumb-item">
-                                <a href="shop.dalathasfarm.com/shopcart/gio-hang.html">Cart</a>
-                            </li>
-                            <li class="breadcrumb-item active">Order</li>
-                        </ol>
-                        <div class="document-box">
-                            <form name="checkoutform" id="checkoutform" action="shop.dalathasfarm.com/shopcart/order.html" method="POST">
-                                <div class="row" id="main-content">
-                                    <div class="col-lg-9 col-xs-12">
-                                        <input name="action" id="action_form" type="hidden" value="MemberOrder">
-                                        <div class="sender-receiver-box">
-                                            <div class="border-wrapp">
-                                                <div class="customer-info">
-                                                    <p class="title">Customer Infomation</p>
-                                                    <div class="row">
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label>FullName <span class="text-danger">*</span></label>
-                                                                <input class="form-control" name="Name" value="" type="text" placeholder="FullName">
-                                                                <div id="Name_validate"></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>PhoneNumber <span class="text-danger">*</span></label>
-                                                                <input class="form-control" name="Phone" value="" type="text" placeholder="PhoneNumber">
-                                                                <div id="Phone_validate"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="form-group">
-                                                                <label>Email <span class="text-danger">*</span></label>
-                                                                <input class="form-control" value="" name="email" id="checkout-email" type="email" placeholder="Email">
-                                                                <div id="email_validate"></div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>
-                                                                    Other PhoneNumber <small>(not required)</small>
-                                                                </label>
-                                                                <input class="form-control" name="phone2" id="checkout-phone2" value="" type="text" placeholder="Other PhoneNumber">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="kt-checkbox kt-checkbox--success">
-                                                            <input type="checkbox" name="anonymous" value="2">Hide Customer Infomation<span></span>
-                                                        </label>
-                                                    </div>
-                                                </div>
+                <div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                        <li class="breadcrumb-item">Cart</li>
+                        <li class="breadcrumb-item active">Checkout</li>
+                    </ol>
+                    <div class="document-box">
+                    <form action="@ViewBag.paypalConfig.PostUrl" method="post">
+                    
+                    <input type="hidden" name="upload" value="1" />
+                    <input type="hidden" name="business" value="@ViewBag.paypalConfig.Business" />
+                    <input type="hidden" name="cmd" value="_cart" />
+                    <input type="hidden" name="return" value="@ViewBag.paypalConfig.ReturnUrl" />
+
+                    <div class="row" id="main-content">
+                    <div class="col-lg-9 col-xs-12">
+                    <div class="sender-receiver-box">
+
+                        @await Component.InvokeAsync("Sender")
+
+                        <div class="border-wrapp">
+                            <div class="customer-address">
+                                <p class="title">Receive</p>
+                                <div class="kt-radio-list">
+                                    <label class="kt-radio kt-radio--success">
+                                        <input type="radio" onclick="yesnoCheck();" id="noCheck" name="receiver_type" value="store"><img width="20" src="~/images/store.svg">Receive at the store<span></span>
+                                    </label>
+                                    <label class="kt-radio kt-radio--success">
+                                        <input type="radio" onclick="yesnoCheck();" id="yesCheck" name="receiver_type" value="receiver"><img width="20" src="~/images/home-1.svg">Delivery to<span></span>
+                                    </label>
+                                </div>
+
+                                <div class="receiver-delivery" id="blk-receiver" style="display: none">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-xs-12">
+                                            <div class="kt-radio-list">
+                                                <label class="kt-radio kt-radio--success">
+                                                    <input type="radio" value="Mr. " name="gender" checked>Mr.<span></span>
+                                                </label>
+                                                <label class="kt-radio kt-radio--success">
+                                                    <input type="radio" value="Ms. " name="gender">Ms.<span></span>
+                                                </label>
                                             </div>
-
-                                            <div class="border-wrapp">
-                                                <div class="customer-address">
-                                                    <p class="title">Address and time of delivery</p>
-
-                                                    <div class="kt-radio-list">
-                                                        <label class="kt-radio kt-radio--success">
-                                                            <input type="radio" name="receive_type" value="ship" checked><img width="20" src="~/images/home-1.svg">Delivery at home<span></span>
-                                                        </label>
-                                                        <label class="kt-radio kt-radio--success">
-                                                            <input type="radio" name="receive_type" value="store"><img width="20" src="~/images/store.svg">Receive at the store<span></span>
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="home-delivery" id="blk-ship">
-                                                        <div class="row">
-                                                            <input name="customer_address_id" type="hidden" value="0" />
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="kt-radio-list">
-                                                                    <label class="kt-radio kt-radio--success">
-                                                                        <input type="radio" value="3" name="gender" checked>Mr<span></span>
-                                                                    </label>
-                                                                    <label class="kt-radio kt-radio--success">
-                                                                        <input type="radio" value="1" name="gender">Ms<span></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2 col-xs-12 hidden-lg hidden-md hidden-sm">
-                                                                <div class="btn-box pull-right" style="margin-bottom: 0;">
-                                                                    <input type="hidden" value="0" name="address_book_id" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-10 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <input class="form-control" type="text" name="fullname" id="checkout-fullname" value="" placeholder="FullName *">
-                                                                    <div id="fullname_validate"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-2 col-xs-12 hidden-xs">
-                                                                <div class="btn-box pull-right" style="margin-bottom: 0;">
-                                                                    <input type="hidden" value="0" name="address_book_id" />
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control selectpicker" name="address_type_id">
-                                                                                <option value="">Type of Adress</option>
-                                                                                <option value="1">Home</option>
-                                                                                <option value="2">Apartment</option>
-                                                                                <option value="3">Office</option>
-                                                                            </select>
-                                                                            <div id="address_type_id_validate"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <input type="hidden" name="city_id" id="city_id" value="30">
-                                                                            <select class="form-control selectpicker" name="store_city">
-                                                                                <option value="">Hồ Chí Minh city</option>
-                                                                            </select>
-                                                                            <div id="store_city_validate"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control selectpicker" name="ship_district" id="district-select" onchange="get_ward_shipping(this)">
-                                                                                <option value="">District</option>
-                                                                                <option value="32">District 1</option>
-                                                                                <option value="33">District 2</option>
-                                                                                <option value="34">District 3</option>
-                                                                                <option value="35">District 4</option>
-                                                                                <option value="36">District 5</option>
-                                                                                <option value="37">District 6</option>
-                                                                                <option value="38">District 7</option>
-                                                                                <option value="39">District 8</option>
-                                                                                <option value="40">District 9</option>
-                                                                                <option value="41">District 10</option>
-                                                                                <option value="42">District 11</option>
-                                                                                <option value="43">District 12</option>
-                                                                                <option value="44">District Phú Nhuận</option>
-                                                                                <option value="45">District Bình Thạnh</option>
-                                                                                <option value="46">District Tân Bình</option>
-                                                                                <option value="47">District Tân Phú</option>
-                                                                                <option value="48">District Gò Vấp</option>
-                                                                                <option value="49">District Thủ Đức</option>
-                                                                                <option value="50">District Bình Tân</option>
-                                                                                <option value="51">District Bình Chánh</option>
-                                                                                <option value="52">District Củ Chi</option>
-                                                                                <option value="53">District Nhà Bè</option>
-                                                                                <option value="54">District Cần Giờ</option>
-                                                                                <option value="55">District Hóc Môn</option>
-                                                                            </select>
-                                                                            <div id="ship_district_validate"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control selectpicker" name="ship_ward" id="ward-select" onchange="get_delivery(this)">
-                                                                                <option value="">Ward</option>
-                                                                                <option value="210">Ward 14</option>
-                                                                                <option value="211">Ward 13</option>
-                                                                                <option value="212">Ward 09</option>
-                                                                                <option value="213">Ward 06</option>
-                                                                                <option value="214">Ward 12</option>
-                                                                                <option value="215">Ward 05</option>
-                                                                                <option value="216">Ward 11</option>
-                                                                                <option value="217">Ward 02</option>
-                                                                                <option value="218">Ward 01</option>
-                                                                                <option value="219">Ward 04</option>
-                                                                                <option value="220">Ward 08</option>
-                                                                                <option value="221">Ward 03</option>
-                                                                                <option value="222">Ward 07</option>
-                                                                                <option value="223">Ward 10</option>
-                                                                            </select>
-                                                                            <div id="ship_ward_validate"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <input class="form-control" type="text" name="ship_address" id="checkout-address" value="" placeholder="Adress for shipper *">
-                                                                    <div id="ship_address_validate"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <input class="form-control" type="text" name="customer_phone" id="checkout-phone" value="" placeholder="Receiver 's PhoneNumber *">
-                                                                            <div id="customer_phone_validate"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-xs-12">
-                                                                        <div class="form-group">
-                                                                            <input class="form-control" type="text" name="customer_phone_2" placeholder="Other PhoneNumber (Not required)">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <label class="kt-checkbox kt-checkbox--success">
-                                                                        <input type="checkbox" name="address_book_action" value="1" checked>Save this delivery address<span></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="home-delivery" id="blk-store" style="display:none">
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <select class="form-control selectpicker" name="store_district" id="store_district">
-                                                                        <option value="">Hậu Giang street District 6</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-12 col-xs-12">
-                                                                <div class="form-group">
-                                                                    <input name="store_id" value="3" data-name="Hậu Giang Q6<br><small>99 Hậu Giang street, Ward 5, District 6, Hồ Chí Minh<br>+84 28 3960 1969<br>Time: 7:00 - 20:00 Saturday and Sunday, holiday</small>" class="form-check-input" type="hidden">
-
-                                                                    <p>Địa chỉ: <b>99 Đường Hậu Giang, Ward 5, District 6, Hồ Chí Minh</b></p>
-                                                                    <p class="mt-3">Open hour: <b>7:00 - 20:00 Saturday and Sunday, holiday</b></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="clearfix">
-                                                    </div>
-                                                    <div class="row">
-
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <label>VPlease choose the time </label>
-                                                                <div class="kt-radio-list">
-                                                                    <label class="kt-radio kt-radio--success">
-                                                                        <input type="radio" name="delivery_type" value="save" checked>Wednesday, 15/07 <strong>before 14h</strong><span></span>
-                                                                    </label>
-                                                                    <label class="kt-radio kt-radio--success">
-                                                                        <input type="radio" name="delivery_type" value="other">Choose a different time<span></span>
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="time-delivery" id="time-save" style="display:none"></div>
-                                                            <div class="time-delivery" id="time-other" style="display:none">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <div class="form-group">
-                                                                            <input class="form-control" id="kt_datepicker_1" name="order_delivery_date" type="text" placeholder="Day">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-6">
-                                                                        <div class="form-group">
-                                                                            <select class="form-control selectpicker" name="order_delivery_time">
-                                                                                <option value="">Choose Time</option>
-                                                                                <option value="08:00 - 10:00" selected>08:00 - 10:00</option>
-                                                                                <option value="10:00 - 12:00">10:00 - 12:00</option>
-                                                                                <option value="12:00 - 14:00">12:00 - 14:00</option>
-                                                                                <option value="14:00 - 16:00">14:00 - 16:00</option>
-                                                                                <option value="16:00 - 18:00">16:00 - 18:00</option>
-                                                                                <option value="18:00 - 20:00">18:00 - 20:00</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-lg-12">
-                                                            <div class="form-group">
-                                                                <textarea name="note" id="checkout-note" placeholder="Note delivery. Ex: Please deliver to me at 3rd stage, Hoàng Gia apartment" rows="3" class="form-control"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="border-wrapp">
-                                            <div class="customer-address">
-                                                <p class="title" style="margin-bottom: 10px;">
-                                                    Message for the recipient
-                                                </p>
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <select name="object" class="form-control selectpicker">
-                                                                <option value="" selected>Person</option>
-                                                                <option value="1">Father / Mother</option>
-                                                                <option value="2">Wife / Husband</option>
-                                                                <option value="3">Family</option>
-                                                                <option value="4">Love</option>
-                                                                <option value="5">Colleague / Friend</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="form-group">
-                                                            <select name="occasion" class="form-control selectpicker">
-                                                                <option value="" selected>Offer occasion</option>
-                                                                <option value="1">Birthday</option>
-                                                                <option value="2">Congratulation</option>
-                                                                <option value="3">Condolatory</option>
-                                                                <option value="4">Opening</option>
-                                                                <option value="5">Special day</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                            <form id="get-receiver-info">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input class="form-control" type="text" name="receiver_name" id="receiver_name" placeholder="Receiver Name">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Message on the card</label>
-                                                    <input class="form-control" name="message" type="text" placeholder="Message">
+                                                    <label>Phone Number</label>
+                                                    <input class="form-control" type="text" name="receiver_phone" id="receiver_phone" placeholder="Receiver Phone Number">
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="kt-checkbox kt-checkbox--success">
-                                                <input type="checkbox" name="vat_check" value="1" onclick="check_vat('vat')">Billing infomation<span></span>
-                                            </label>
-                                        </div>
-                                        <div class="bill-invoice" id="vat" style="display:none">
-
-                                            <div class="form-group">
-                                                <input class="form-control" name="vat_company" type="text" placeholder="Company name">
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control" name="vat_address" type="text" placeholder="Company address">
-                                            </div>
-                                            <div class="form-group">
-                                                <input class="form-control" name="vat_number" type="text" placeholder="Tax Code">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="kt-checkbox kt-checkbox--success">
-                                                <input type="checkbox" value="1" name="call_me" onclick="check_vat('vat')">I want telesale recall to confirm order<span></span>
-                                            </label>
-                                        </div>
-                                        <div class="border-wrapp">
-                                            <div class="payment">
-                                                <p class="title">Payment</p>
-                                                <div class="payment-list">
-                                                    <div class="item-payment">
-                                                        <label class="kt-radio kt-radio--success">
-                                                            <input type="radio" name="payment" value="cod" checked>
-                                                            <span>
-                                                                <img height="40" src="~/images/cod.svg">
-                                                                <span>Payment on delivery</span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="item-payment">
-                                                        <label class="kt-radio kt-radio--success">
-                                                            <input type="radio" name="payment" value="onepay_visa"><span>
-                                                                <img height="40"
-                                                                     src="~/images/visa.svg"><span>Visa / Mastercard</span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="item-payment">
-                                                        <label class="kt-radio kt-radio--success">
-                                                            <input type="radio" name="payment" value="onepay_atm"><span>
-                                                                <img height="40"
-                                                                     src="~/images/atm.svg"><span>ATM Card</span>
-                                                            </span>
-                                                        </label>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input class="form-control" type="email" name="receiver_email" id="receiver_email" placeholder="Receiver Email">
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="border-wrapp hidden-xs">
-                                            <p>
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                                By ordering, you have agreed to <a href="" title="term">term and condition</a> of Dalathasfarm.
-                                            </p>
-
-                                            <div class="btn-box" style="width:400px; margin:20px auto 10px">
-                                                <button type="submit" name="cod" value="1" class="btn btn-buy btn-confirm"> Payment <span>On Delivery</span> </button>
-                                                <button type="submit" name="paymentvisa" value="1" title="Payment Online" class="btn btn-buy btn-confirm hidden">Payment ONLINE <span>(Visa / Mastercard)</span></button>
-                                                <button type="submit" name="paymentatm" value="1" title="Payment Online" class="btn btn-buy btn-confirm hidden">Payment ONLINE <span>(ATM)</span></button>
-                                            </div>
+                                                <div class="form-group">
+                                                    <label>Address</label>
+                                                    <input class="form-control" type="text" name="receiver_address" id="receiver_address" placeholder="Receiver Address">
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-xs-12" id="sidebar">
-                                        <div class="sidebar__inner" id="cart-summary">
-                                            <div class="border-wrapp padding-0">
-                                                <div class="order-cart-header hover-cursor" onclick="if($(this).find('.fa').hasClass('fa-angle-down')){$(this).find('.fa').removeClass('fa-angle-down').addClass('fa-angle-up');}else{$(this).find('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');}; $(this).next().toggle('fast');">
-                                                    <p>Product</p>
-                                                    <p class="total-item">1 Product <i class="fa fa-angle-down"></i></p>
-                                                </div>
-                                                <div class="order-cart-content ">
-                                                    <div class="order-cart-content-item">
-                                                        <p style="width: 25%; flex: 0 0 25%">
-                                                            <img src="~/images/bouquet/MuaXuanTinhYeuVaEm.jpg" class="img-responsive" style="width:60px" alt="Spring Love and You" />
-                                                        </p>
-                                                        <p>
-                                                            <a class="p-name" style="color: #333" href="" title="Spring Love and You">Spring Love and You</a><br>
-                                                            <span>x1</span>
-                                                        </p>
-                                                        <p>850.000đ</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="border-wrapp padding-0">
-                                                <div class="order-cart-header"><p>Order summary</p></div><div class="order-cart-content"><div class="order-cart-content-item"><p>Provisonal Sum</p><p>850.000</p></div><div class="order-cart-content-item shipping_price"><p>Ship</p><p>0</p></div><hr><div class="order-cart-content-item cart-all-total"><p>Total</p><p><span class="have_ship">850.000đ</span><span class="hidden no_ship">850.000đ</span></p></div></div>
+                                </div>
+
+                                <div class="receiver-delivery" id="blk-store">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-xs-12">
+                                            <div class="form-group">
+                                                <p>Địa chỉ: <b>99 Đường Hậu Giang, Ward 5, District 6, Hồ Chí Minh</b></p>
+                                                <p class="mt-3">Open hour: <b>9:00 - 21:00 Saturday and Sunday, holiday</b></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="clearfix">
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="border-wrapp">
+                        <div class="customer-address">
+                            <p class="title">Time of delivery</p>
+                            <div class="kt-radio-list">
+                                <label class="kt-radio kt-radio--success">
+                                    <input type="radio" name="time_type" value="ctime" checked><img width="20" src="~/images/choose-time.png">Choose time receiver<span></span>
+                                </label>
+                                <label class="kt-radio kt-radio--success">
+                                    <input type="radio" name="time_type" value="5hours"><img width="20" src="~/images/5hours.png">Delivery in 5 hours<span></span>
+                                </label>
+                            </div>
+
+                            <div class="time-delivery" id="blk-ctime">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <input class="form-control" id="kt_datepicker_1" name="order_delivery_date" type="text" placeholder="Day">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <select class="form-control selectpicker" name="order_delivery_time">
+                                                        <option value="">Choose Time</option>
+                                                        <option value="09:00 - 12:00">09:00 - 12:00</option>
+                                                        <option value="12:00 - 15:00">12:00 - 15:00</option>
+                                                        <option value="15:00 - 18:00">15:00 - 18:00</option>
+                                                        <option value="18:00 - 21:00">18:00 - 21:00</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="time-delivery" id="blk-5hours" style="display: none">
+                                <p>The bouquet will be delivered before: <span name="order_delivery_5hours">@ViewBag.time</span></p>
+                                <p>*Your bouquet will be deliveried to the next day if the delivery time is overtime</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-wrapp">
+                        <div class="customer-address">
+                            <p class="title" style="margin-bottom: 10px;">
+                                Message for the recipient
+                            </p>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select name="object" class="form-control selectpicker">
+                                            <option value="" selected>Person</option>
+                                            <option value="1">Father / Mother</option>
+                                            <option value="2">Wife / Husband</option>
+                                            <option value="3">Family</option>
+                                            <option value="4">Love</option>
+                                            <option value="5">Colleague / Friend</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <select name="occasion" class="form-control selectpicker">
+                                            <option value="" selected>Occasion</option>
+                                            @foreach (var o in @ViewBag.occ)
+                                            {
+                                                <option id="@o.Id" value="@o.Name">@o.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select name="message" class="form-control selectpicker">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Message on the card</label>
+                                <textarea onkeyup="textAreaAdjust(this)" class="form-control" name="messagetype" type="text" placeholder="Message" style="overflow: hidden"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="kt-checkbox kt-checkbox--success">
+                            <input type="checkbox" name="vat_check" value="1" onclick="check_vat('vat')">Billing infomation<span></span>
+                        </label>
+                    </div>
+                    <div class="bill-invoice" id="vat" style="display: none">
+
+                        <div class="form-group">
+                            <input class="form-control" name="vat_company" type="text" placeholder="Company name">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="vat_address" type="text" placeholder="Company address">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" name="vat_number" type="text" placeholder="Tax Code">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="kt-checkbox kt-checkbox--success">
+                            <input type="checkbox" value="1" name="call_me" onclick="check_vat('vat')">I want telesale recall to confirm order<span></span>
+                        </label>
+                    </div>
+
+
+
+                    @*<input class="btn btn-warning" type="submit" value="Pay" id="pay"/>
+                    <input class="btn btn-warning" type="submit" value="Pay with Paypal" id="pay"/>*@
+                    <div class="border-wrapp">
+                        <div class="payment">
+                            <p class="title">Payment</p>
+                            <div class="payment-list">
+                                <div class="item-payment">
+                                    <label class="kt-radio kt-radio--success">
+                                        <input type="radio" name="payment" value="cod" checked>
+                                        <span>
+                                            <img height="40" src="~/images/cod.svg">
+                                            <span>Payment on delivery</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                @*<div class="item-payment">
+                                    <label class="kt-radio kt-radio--success">
+                                        <input type="radio" name="payment" value="onepay_visa">
+                                        <span>
+                                            <img height="40"
+                                                 src="~/images/visa.svg"><span>Visa / Mastercard</span>
+                                        </span>
+                                    </label>
+                                </div>*@
+                                <div class="item-payment">
+                                    <label class="kt-radio kt-radio--success">
+                                        <input type="radio" name="payment" value="onepay_atm">
+                                        <span>
+                                            <img height="40"
+                                                 src="~/images/paypal.svg"><span>Paypal</span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-wrapp hidden-xs">
+                        <p>
+                            <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            By ordering, you have agreed to <a href="" title="term">term and condition</a> of Dalathasfarm.
+                        </p>
+
+                        <div class="btn-box" style="width: 400px; margin: 20px auto 10px">
+                            <button type="submit" name="cod" value="1" class="btn btn-buy btn-confirm" asp-controller="Cart" asp-action="Success1"> Payment <span>On Delivery</span> </button>
+                            @*<button type="submit" name="paymentvisa" value="1" title="Payment Online" class="btn btn-buy btn-confirm hidden">Payment ONLINE <span>(Visa / Mastercard)</span></button>*@
+                            <button type="submit" name="paymentatm" value="1" title="Payment Online" class="btn btn-buy btn-confirm hidden">Payment ONLINE <span>(Paypal)</span></button>
+                        </div>
+                    </div>
+                    </div>
+                    @await Component.InvokeAsync("BouquetList")
+                    </div>
+                    </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

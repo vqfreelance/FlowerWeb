@@ -137,8 +137,10 @@ jQuery(document).ready(function () {
     }
     // End product detail slider
     $(".product-info input[name='quantity']").TouchSpin({
-        initval: 40
+        min: 1,
+        initval: 1
     });
+
     if ($('.selectpicker').length) {
         $('.selectpicker').selectpicker();
     }
@@ -289,13 +291,33 @@ jQuery(document).ready(function () {
                 required: true
             },
             Username: {
-                required: true
+                required: true,
+                //check username exist
+                remote: {
+                    data: {
+                        username: '#Username'
+                    },
+                    url: '/account/checkusername',
+                    type: "post"
+                }
+            },
+            Oldpass: {
+                required: true,
+                //check user password
+                remote: {
+                    data: {
+                        id: $('#Id').val(),
+                        oldpass: '#Oldpass'
+                    },
+                    url: '/account/checkuserpass',
+                    type: "post"
+                }
             },
             Phone: {
                 required: true,
                 number: true,
-                minlength: 10,
-                maxlength: 15
+                //minlength: 10,
+                //maxlength: 15
             },
             Password: {
                 required: true
@@ -306,6 +328,9 @@ jQuery(document).ready(function () {
             },
             Email: {
                 required: true
+            },
+            Address: {
+                required: true
             }
         },
         messages: {
@@ -313,7 +338,8 @@ jQuery(document).ready(function () {
                 required: "Please enter your full name!"
             },
             Username: {
-                required: "Please enter your username!"
+                required: "Please enter your username!",
+                remote: "Username already in use!"
             },
             Phone: {
                 required: "Please enter your phone number!",
@@ -328,8 +354,16 @@ jQuery(document).ready(function () {
                 required: "Please enter the password confirmation!",
                 equalTo: "Confirm password was wrong!"
             },
+            Oldpass: {
+                required: "Please enter your old password!",
+                //check user password
+                remote: "Your old incorrect!"
+            },
             Email: {
                 required: "Please enter your email!"
+            },
+            Address: {
+                required: "Please enter your address!"
             }
         }
     });
@@ -652,7 +686,7 @@ function setUpToolTipHelpers() {
     });
 }
 $(document).ready(function () {
-    get_total_num_cart();
+    //get_total_num_cart();
 });
 
 function validate_member_form() {
@@ -1337,3 +1371,376 @@ function clearAllFilter() {
         }
     });
 }
+
+//anhvu .js--------------------
+$(document).ready(function () {
+    //buy now
+    $('#buynow').click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/cart/buynow',
+            data: {
+                bouquetid: $('#bouquetid').val(),
+                quantity: $('#quantity').val()
+            },
+            success: function (data) {
+                window.location.href = data;
+                count_item()
+            }
+        });
+    });
+
+    // add to cart
+    $('#addcart').click(function () {
+        $.ajax({
+            type: "POST",
+            url: '/cart/addcart',
+            data: {
+                bouquetid: $('#bouquetid').val(),
+                quantity: $('#quantity').val()
+            },
+            success: function (data) {
+                $('#cart-num').html(data.cart_num);
+            }
+        });
+    });
+
+    $("[name=send_type]").click(function () {
+        $('.sender-info').hide('slow');
+        $("#blk-" + $(this).val()).show('slow');
+
+        if ($(this).val() == 'sender') {
+            //$('p .have_ship').addClass('hidden');
+            //$('p .no_ship').removeClass('hidden');
+            //$('#get-sender-info').validator.reset();
+            validate_sender();
+        } else {
+            //$('p .have_ship').removeClass('hidden');
+            //$('p .no_ship').addClass('hidden');
+            $('#get-sender-info').validate().resetForm();
+            //validate_sender();
+        }
+    });
+
+    $("[name=receiver_type]").click(function () {
+        $('.receiver-delivery').hide('slow');
+        $("#blk-" + $(this).val()).show('slow');
+
+        if ($(this).val() == 'receiver') {
+            $('.shipping_price').show('slow');
+            $('p .have_ship').removeClass('hidden');
+            $('p .no_ship').addClass('hidden');
+            //$('#get-sender-info').validator.reset();
+            validate_receiver();
+        } else {
+            $('.shipping_price').hide('slow');
+            $('p .have_ship').addClass('hidden');
+            $('p .no_ship').removeClass('hidden');
+            $('#get-receiver-info').validate().resetForm();
+            //validate_sender();
+        }
+    });
+
+    $("[name=time_type]").click(function () {
+        $('.time-delivery').hide('slow');
+        $("#blk-" + $(this).val()).show('slow');
+
+        if ($(this).val() == '5hours') {
+
+        } else {
+
+        }
+    });
+
+    //$('[name=occasion]').on('change', function () {
+    //    var id = $(this).find(':selected')[0].id;
+    //    //alert(id); 
+    //    $.ajax({
+    //        type: 'GET',
+    //        url: '/cart/getallmess',
+    //        data: {
+    //            id: id
+    //        },
+    //        success: function (data) {
+    //            // the next thing you want to do 
+    //            var $mess = $('[name=message]');
+    //            $mess.empty();
+    //            for (var i = 0; i < data.length; i++) {
+    //                $mess.append('<option value=' + data[i].MeContent + '>' + data[i].MeContent + '</option>');
+    //            }
+    //        }
+    //    });
+    //});
+
+    $('[class*="bootstrap-touchspin-"]').click(function (event) {
+        var $this = $(this);
+        var a = $(this).find('input[name="quantity"]').val();
+        var $bouquettotal = $this.parent().parent().parent().next('div');
+        //alert(a);
+
+        if ($this.hasClass('bootstrap-touchspin-down')) {
+
+                $.ajax({
+                    type: "POST",
+                    url: '/cart/touchspincart',
+                    data: {
+                        bouquetid: $this.parent().parent().siblings('.bouquetid').val(),
+                        quantity: -1
+                    },
+                    success: function (data) {
+                        $bouquettotal.find('.bouquet-total').html(data.bouquet_total);
+                        $('#cart-num').html(data.cart_num);
+                        $('.total-item').html(data.cart_num+' Product');
+                        $('.cart_total').html(data.cart_total);
+                    }
+                });
+
+        } else if ($this.hasClass('bootstrap-touchspin-up')) {
+            $.ajax({
+                type: "POST",
+                url: '/cart/touchspincart',
+                data: {
+                    bouquetid: $this.parent().parent().siblings('.bouquetid').val(),
+                    quantity: 1
+                },
+                success: function (data) {
+                    $bouquettotal.find('.bouquet-total').html(data.bouquet_total);
+                    $('#cart-num').html(data.cart_num);
+                    $('.total-item').html(data.cart_num + ' Product');
+                    $('.cart_total').html(data.cart_total);
+                }
+            });
+        }
+    });
+
+    $('[name=occasion]').on('change', function () {
+        var id = $(this).find(':selected')[0].id;
+        //alert(id); 
+        $.ajax({
+            type: 'GET',
+            url: '/cart/getallmess',
+            data: {
+                id: id
+            },
+            success: function (data) {
+                // the next thing you want to do 
+                //var $mess = $('select[#message]');
+                $("select[name='message']").html('');
+                //$mess.empty();
+                //console.log(data);
+                $("select[name='message']").append('<option value="" selected>Message</option>');
+                for (var i = 0; i < data.length; i++) {
+                    $("select[name='message']").append('<option id=' + data[i].id + 'value=' + data[i].meContent + '>' + data[i].meContent + '</option>');
+                }
+                $('.selectpicker').selectpicker("refresh");
+            }
+        });
+    });
+
+    $('[name=message]').on('change', function () {
+
+        $('[name=messagetype]').html('Dear ' + $("select[name='object']").children("option:selected").text() +', '
+            + $("select[name='message']").children("option:selected").text() +' Sincerely');
+    });
+
+    $('#pay').click(function () {
+        var $sender = $('input[name="send_type"]:checked').val();
+        var $receiver = $('input[name="receiver_type"]:checked').val();
+        if ($sender != 'sender'){
+            $("[name='sender_name']").val('');
+            $("[name='sender_email']").val('');
+            $("[name='sender_phone']").val('');
+            $("[name='sender_address']").val('');
+        };
+        if ($receiver != 'receiver'){
+            $("[name='receiver_name']").val('');
+            $("[name='receiver_email']").val('');
+            $("[name='receiver_phone']").val('');
+            $("[name='receiver_address']").val('');
+        };
+        if ($("#get-sender-info").valid() && $("#get-receiver-info").valid()) {
+            $.ajax({
+                type: 'POST',
+                url: '/cart/pay',
+                data: {
+                    sender_name: $("[name='sender_name']").val(),
+                    sender_email: $("[name='sender_email']").val(),
+                    sender_phone: $("[name='sender_phone']").val(),
+                    sender_address: $("[name='sender_address']").val(),
+                    receiver_name: $("[name='receiver_name']").val(),
+                    receiver_email: $("[name='receiver_email']").val(),
+                    receiver_phone: $("[name='receiver_phone']").val(),
+                    receiver_address: $("[name='receiver_address']").val(),
+                    message: $("[name='messagetype']").text(),
+                    time_type: $('input[name="time_type"]:checked').val(),
+                    receivingtime: $("input[name='order_delivery_date']").val() + ' at ' + $("select[name='order_delivery_time']").children("option:selected").text(),
+                    receiving5hours: $("span[name='order_delivery_5hours']").text(),
+                },
+                success: function (data) {  
+                    window.location.href = data;
+                }
+            });
+        };
+    })
+    count_item();
+})
+
+//count all quantity products in cart
+function count_item() {
+    $.ajax({
+        url: '/cart/countcart',
+        success: function (data) {
+            //alert(data);
+            $('#cart-num').html(data)
+        }
+    })
+}
+
+function quickaddcart(id) {
+    $.ajax({
+        type: "POST",
+        url: '/cart/addcart',
+        data: {
+            bouquetid: id,
+            quantity: 1
+        },
+        success: function (data) {
+            count_item()
+        }
+    });
+}
+
+function quickbuyout(id) {
+    $.ajax({
+        type: "POST",
+        url: '/cart/buynow',
+        data: {
+            bouquetid: id,
+            quantity: 1
+        },
+        success: function (data) {
+            window.location.href = data;
+            count_item()
+        }
+    });
+}
+
+//list product in check out page
+function showlistbouquet() {
+    if ($(this).find('.fa').hasClass('fa-angle-down')) {
+        $(this).find('.fa').removeClass('fa-angle-down').addClass('fa-angle-up');
+    }
+    else
+    {
+        $(this).find('.fa').removeClass('fa-angle-up').addClass('fa-angle-down');
+    };
+    $(this).next().toggle('fast');
+}
+
+//validate sender in checkout
+function validate_sender() {
+    $("#get-sender-info").validate({
+        //ignore: null,
+        rules: {
+            sender_name: {
+                required: true
+            },
+            sender_address: {
+                required: true
+            },
+            sender_phone: {
+                required: true,
+                number: true
+            },
+            sender_email: {
+                required: true
+            }
+        },
+        messages: {
+            sender_name: {
+                required: "Please enter sender's full name!"
+            },
+            sender_address: {
+                required: "Please enter sender's address!"
+            },
+            sender_phone: {
+                required: "Please enter sender's phone number!",
+                number: "The phone number is not correct!",
+            },
+            sender_email: {
+                required: "Please enter sender's email!"
+            }
+        }
+    });
+}
+
+//validate receiver in checkout
+function validate_receiver() {
+    $("#get-receiver-info").validate({
+        //ignore: null,
+        rules: {
+            receiver_name: {
+                required: true
+            },
+            receiver_address: {
+                required: true
+            },
+            receiver_phone: {
+                required: true,
+                number: true
+            },
+            receiver_email: {
+                required: true
+            }
+        },
+        messages: {
+            receiver_name: {
+                required: "Please enter receiver's full name!"
+            },
+            receiver_address: {
+                required: "Please enter receiver's address!"
+            },
+            receiver_phone: {
+                required: "Please enter receiver's phone number!",
+                number: "The phone number is not correct!",
+            },
+            receiver_email: {
+                required: "Please enter receiver's email!"
+            }
+        }
+    });
+}
+
+//auto height with content
+function textAreaAdjust(element) {
+    element.style.height = "1px";
+    element.style.height = (25 + element.scrollHeight) + "px";
+}
+
+
+//function pad(num) { return ("0" + num).slice(-2) }
+//function getHHMMSS(ms) {
+//    var seconds = parseInt(ms / 1000) % 60;
+//    var minutes = parseInt(ms / (1000 * 60)) % 60;
+//    var hours = parseInt(ms / (1000 * 60 * 60)) % 24;
+//    console.log(parseInt(ms / 1000) % 60)
+//    var str = pad(hours) + " hour" + (hours == 1 ? "" : "s") + " " +
+//        pad(minutes) + " minute" + (minutes == 1 ? "" : "s") + " " +
+//        pad(seconds) + " second" + (seconds == 1 ? "" : "s");
+//    return str;
+//}
+
+//setInterval(function () {
+//    var now = new Date(); // server time
+//    var end = new Date(now.getTime());
+//    var hour = now.getHours() + now.getMinutes() / 60;
+//    if (hour > 17) end.setDate(end.getDate() + 1); // too late today
+//    var day = end.getDay();
+//    end.setHours(17, 0, 0, 0);
+//    if (!(day >= 1 && day <= 5)) { // weekend
+//        end.setDate(end.getDate() + (day == 0 ? 1 : 2)); // add one on sunday 2 on saturday
+//    }
+//    var diff = end.getTime() - now.getTime();
+//    document.getElementById("open").innerHTML = "Order now and we ship your order in: " +
+//        getHHMMSS(diff) + "<br/>(" + new Date(now.getTime() + diff) + ")";
+//}, 500);
