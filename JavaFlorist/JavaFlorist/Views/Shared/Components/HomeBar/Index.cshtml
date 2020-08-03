@@ -19,7 +19,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach (var occasion in ViewBag.Occasions)
                         {
-                            <a class="dropdown-item" asp-controller="home" asp-action="OccBouquet" asp-route-id="@occasion.Id">@occasion.Name</a>
+                            <a class="dropdown-item" asp-controller="occasion" asp-action="detail" asp-route-id="@occasion.Id">@occasion.Name</a>
                         }
                     </div>
                 </div>

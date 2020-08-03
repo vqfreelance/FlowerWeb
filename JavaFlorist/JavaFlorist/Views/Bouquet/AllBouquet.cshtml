@@ -4,53 +4,44 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@*@await Component.InvokeAsync("OccBar")*@
-<div class="group-product-wrapp">
-    <div class="row products service-product">
-        <div class="col-lg-12 col-lg-custom-12">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                <li class="breadcrumb-item active">Bouquets</li>
-            </ol>
-            <div class="row">
-                @foreach (var b in ViewBag.bouquets)
-                {
-                    <div class="col-lg-3 col-xs-6 blur-box item-580" itemscope itemtype="https://schema.org/Product">
-                        <div class="product-item">
-                            <div class="product-img">
-                                <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
-                                    <img itemprop="image"
-                                         src="~/images/bouquets/@b.Photo"
-                                         alt="@b.Name" />
-                                </a>
-                            </div>
-                            <meta itemprop="url" content="">
-                            <div class="product-title">
-                                <a href="" class="title-products"
-                                   title="Dad & Son">
-                                    <span itemprop="name">@b.Name</span>
-                                </a>
-                            </div>
-                            <div class="product-price">
-                                <b>@(b.Price.ToString("C", CultureInfo.CurrentCulture))</b>
-                            </div>
-                            @*<div class="product-cart">
-                                <div class="row">
-                                    <div class="col-sm-6 text-left">
-                                        <img class="btn" src="~/images/shopping-cart.png" href="#" onClick="quickbuyout(@b.Id)" />
-                                    </div>
-                                    <div class="col-sm-6 text-right">
-                                        <img class="btn" src="~/images/plus.png" href="#" onClick="quickaddcart(@b.Id)" />
-                                    </div>
-                                </div>
-                            </div>*@
-                        </div>
-                    </div>
-                }
-                <div class="col-lg-12 col-xs-12 text-center mr-bottom-30">
+        <ol class="breadcrumb" style="margin-left:65px">
+            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+        </ol>
+        <div class="middle-header">
+            <form class="form-inline my-2 my-lg-0" asp-controller="bouquet" asp-action="search">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword" style="width:60%">
+                <button class="btn my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="occasion-group">
+            <div class="occasion-group-body">
+                <div class="occasion-group-header"><span>Occasion</span></div>
+                <div class="row occasion-group-button">
+                    @foreach (var occasion in ViewBag.occs)
+                    {
+                        <a asp-controller="occasion" asp-action="detail" asp-route-id="@occasion.Id">@occasion.Name</a>
+                    }
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
+        <div class="group-product-wrapp" style="margin-top:20px">
+            <div class="row bouquets">
+
+                <div class="row bouquet-list">
+                    @foreach (var b in ViewBag.bouquets)
+                    {
+                        <div class="card" style="width: 14rem;">
+                            <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                                <img class="card-img-top" src="~/images/bouquets/@b.Photo" alt="@b.Name">
+                            </a>
+
+                            <div class="card-body">
+                                <h5 class="card-title">@b.Name</h5>
+                                <p class="card-text">@(b.Price.ToString("C", CultureInfo.CurrentCulture))</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>

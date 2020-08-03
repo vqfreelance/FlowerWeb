@@ -8609,19 +8609,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\avMacWin\\.nuget\\packages\\": {}
+    "C:\\Users\\anhvu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "projectUniqueName": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
       "projectName": "JavaFlorist",
-      "projectPath": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
-      "packagesPath": "C:\\Users\\avMacWin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\obj\\",
+      "projectPath": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "packagesPath": "C:\\Users\\anhvu\\.nuget\\packages\\",
+      "outputPath": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\avMacWin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\anhvu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8700,7 +8700,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

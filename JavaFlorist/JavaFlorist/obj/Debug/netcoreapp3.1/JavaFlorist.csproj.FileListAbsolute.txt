@@ -346,3 +346,4 @@ C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcorea
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csproj.CopyComplete
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.dll
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.pdb
+C:\Aptech\WindowsForms\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Occasion\Index.cshtml.g.cs

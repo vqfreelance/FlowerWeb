@@ -26,11 +26,21 @@ namespace JavaFlorist.Controllers
         [Route("index")]
         [Route("")]
         [Route("~/")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.bouquets = bouquetRepository.GetBouquetByStatus();
-            ViewBag.numberOccasions = occasionRepository.GetNumberOcc(5);
-            ViewBag.occasions = occasionRepository.GetAll().ToList();
+            var today = DateTime.Now;
+            var allocc = occasionRepository.GetAll().ToList();
+            var occs = new List<Occasion>();
+            foreach (var o in allocc)
+            {
+                if (o.StartMonth - 1 < today.Month && o.EndMonth >= today.Month)
+                {
+                    occs.Add(o);
+                }
+            }
+            var bouquets = bouquetRepository.GetRandomBouquets(12);
+            ViewBag.bouquets = bouquets;
+            ViewBag.occs = occs;
             return View();
         }
 

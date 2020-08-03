@@ -1475,7 +1475,7 @@ $(document).ready(function () {
     $('[class*="bootstrap-touchspin-"]').click(function (event) {
         var $this = $(this);
         var a = $(this).find('input[name="quantity"]').val();
-        var $bouquettotal = $this.parent().parent().parent().next('div');
+        var $bouquettotal = $this.parent().parent().parent().parent().next('div');
         //alert(a);
 
         if ($this.hasClass('bootstrap-touchspin-down')) {
@@ -1583,6 +1583,8 @@ $(document).ready(function () {
         };
     })
     count_item();
+
+
 })
 
 //count all quantity products in cart

@@ -2,17 +2,40 @@ body {
     padding-top: 55px
 }
 
+hr{
+    margin:0;
+}
+
+.hidden {
+    display: none;
+}
+
+nav .fa-shopping-cart {
+    font-size: 18pt;
+}
+
 .services-guarante {
     text-align: center;
     width: 100%;
 }
 
     .services-guarante li {
-        font-size: larger;
+        color: #8B835C;
+        font-size: 20px;
         margin-right: 25px;
         list-style-type: none;
         display: inline;
     }
+
+.services-guarante-bouquet ul {
+    padding: 0;
+}
+
+.services-guarante-bouquet li {
+    color: #8B835C;
+    font-size: 16px;
+    list-style-type: none;
+}
 
 .navbar-custom {
     margin-bottom: 10px;
@@ -127,30 +150,279 @@ body {
             background: #FF95A1;
         }
 
-    .occasion-group div {
-        margin: auto;
-        justify-content: center;
+.occasion-group {
+    margin: auto;
+    justify-content: center;
+    width: 89%;
+}
+
+.occasion-group-body {
+    border: 0.5px solid #FF95A1;
+    border-radius: 5px;
+}
+
+.occasion-group .occasion-group-header {
+    margin: 0;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    background: #FF95A1;
+}
+
+.occasion-group div {
+    margin: auto;
+}
+
+.occasion-group a {
+    margin: auto;
+    color: #FF95A1;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+    .occasion-group a:hover {
+        color: #FF4C60;
     }
 
-    .occasion-group button {
+.bouquet-list {
+    margin: auto;
+    justify-content: center;
+}
+
+    .bouquet-list .card {
+        margin: 15px;
+        border: 0.5px solid #FF95A1;
+        color: #FF95A1;
+    }
+
+        .bouquet-list .card p {
+            color: #8B835C;
+        }
+
+        .bouquet-list .card:hover {
+            outline: 2px solid #FF4C60;
+            outline-style: auto;
+            color: #FF4C60;
+        }
+
+
+/*Login*/
+.breadcrumb {
+    background: none;
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.login-page, .signup-page {
+    margin: auto;
+    width: 80%;
+}
+
+    .login-page .error, .signup-page .error {
+        color: red;
+    }
+
+.login-box {
+    justify-content: center;
+}
+
+    .login-box .btn-login, .signup-box .btn-signup {
         color: white;
-        margin-right: 15px;
         background: #FF95A1;
-        border-radius: 5px;
-        width: 85px;
     }
 
-        .occasion-group button:hover {
+        .login-box .btn-login:hover, .signup-box .btn-signup:hover {
+            background: #FF4C60;
+        }
+
+/*bouquet detail*/
+.bouquet-detail img {
+    width: 100%;
+}
+
+.bouquet-detail .title {
+    color: #FF4C60;
+}
+
+.bouquet-detail .price {
+    color: #FF4C60;
+    font-weight: bold;
+    font-size: 23pt;
+}
+
+.bouquet-detail p {
+    margin-bottom: 5px;
+}
+
+.quantity .bootstrap-touchspin-up,
+.quantity .bootstrap-touchspin-down {
+    background: #FF95A1;
+    border: 1px solid #FF95A1;
+}
+
+.quantity {
+    width: 120px;
+}
+
+    .quantity .bootstrap-touchspin-up:hover,
+    .quantity .bootstrap-touchspin-down:hover {
+        background: #FF4C60;
+    }
+
+.seperate-line {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 2px;
+    background: #FF4C60;
+}
+
+/*Check out*/
+.cart-list {
+}
+
+    .cart-list .header-list {
+        background: #FF95A1;
+    }
+
+.header-list .header-item {
+    color: white;
+    width: 22%;
+    margin: auto;
+    display: inline-block;
+}
+
+.body-list{
+
+}
+
+.body-list .body-item {
+    width: 22%;
+    margin: auto;
+    display: inline-block;
+}
+
+.body-list .body-quantity {
+    width: 80%;
+}
+
+.body-list img {
+    width: 65px;
+}
+
+.body-list .fa-times {
+    color: red;
+}
+
+.order-cart-content {
+    border: 1px solid #FF95A1;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.order-cart-header {
+    color: white;
+    background: #FF95A1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.order-cart-header p {
+    margin:0 5px 0 5px;
+    display: inline-flex;
+}
+
+.btn-box-confirm {
+
+}
+
+    .btn-box-confirm a {
+        color: white;
+        font-weight: bolder;
+        margin: 10px 0 10px 0;
+        width: 100%;
+        background: #FF95A1;
+        text-align: center;
+        border-radius: 5px;
+    }
+
+        .btn-box-confirm a:hover {
             color: white;
             background: #FF4C60;
         }
 
-@media only screen and (max-width: 767px) {
-    .services-guarante {
-        text-align: left;
+.order-cart-content-item p {
+    margin: 0 5px 0 5px;
+    font-weight: bolder;
+    display: inline;
+}
+
+.customer-address{
+    margin-bottom:15px;
+}
+
+    .customer-address .title {
+       color:white;
+       background: #FF95A1;
     }
 
-        .services-guarante li {
-            display: block;
+    .customer-address label {
+        color: #FF95A1;
+        margin-right: 15px;
+    }
+
+        .customer-address label:hover {
+            color: #FF4C60;
         }
+
+.form-group option:hover {
+    background: #FF95A1;
 }
+
+/*Occasion detail*/
+.occasion-title {
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    background: #FF95A1;
+    border-radius: 5px;
+}
+
+.occasion-description {
+    color: #8B835C;
+    font-weight: bolder;
+    margin: auto;
+}
+
+.occasion-img {
+    height: 25%;
+    margin: auto;
+    border-radius: 15px;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .services-guarante {
+                text-align: left;
+            }
+
+                .services-guarante li {
+                    display: block;
+                }
+
+            .carousel {
+                margin: auto;
+                width: 100%;
+                overflow: hidden;
+            }
+
+                .carousel .carousel-inner {
+                    height: 160px;
+                    border-radius: 15px;
+                }
+        }
+
+
+

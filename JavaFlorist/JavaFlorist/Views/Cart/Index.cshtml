@@ -5,83 +5,74 @@
 }
 @model JavaFlorist.Models.Item
 
-<div class="content">
-    <div class="content-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                        <li class="breadcrumb-item active">Cart</li>
-                    </ol>
-                    @if (@ViewBag.cart != null)
-                    {
-                        <div class="document-box">
-                            <div class="no-gutters checkout-box">
-                                <div class="cart-box" id="cart-page">
-                                    <div class="row">
-                                        <div class="col-lg-9">
-                                            <div class="cart-list">
-                                                <div class="header-list">
-                                                    <div class="header-item">Product</div>
-                                                    <div class="header-item">Price</div>
-                                                    <div class="header-item">Quantity</div>
-                                                    <div class="header-item">Total</div>
-                                                </div>
 
-                                                @foreach (var i in @ViewBag.cart)
-                                                {
-                                                    <div class="body-list" style="border:3px">
-                                                        <div class="body-item product-info">
-                                                            <div class="cart-product">
-                                                                <div class="p-image">
-                                                                    <img src="~/images/bouquets/@i.Bouquet.Photo" alt="@i.Bouquet.Name" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="body-item price" data-price="@i.Bouquet.Price">
-                                                            <span>$@i.Bouquet.Price</span>
-                                                        </div>
-                                                        <div class="body-item quantity">
-                                                            <input data-unit="packing_item" type="text" value="@i.Quantity" name="quantity" class="quantity-input">
-                                                            <input class="bouquetid" value="@i.Bouquet.Id" type="hidden">
-                                                        </div>
-                                                        <div class="body-item total">
-                                                            <span class="bouquet-total">@((i.Quantity * i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture))</span>
-                                                            <a class="btn" asp-controller="cart" asp-action="remove" asp-route-id="@i.Bouquet.Id" style="float:right"><img width="20" src="~/images/close.png"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="seperate-line" style="height: 1px;"></div>
-                                                }
+<div class="col-md-12" style="min-height: 450px">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+        <li class="breadcrumb-item active">Cart</li>
+    </ol>
+    @if (@ViewBag.cart != null)
+    {
+        <div class="document-box">
+            <div class="no-gutters checkout-box">
+                <div class="cart-box" id="cart-page">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="cart-list">
+
+                                <div class="header-list">
+                                    <div class="header-item">Product</div>
+                                    <div class="header-item">Price</div>
+                                    <div class="header-item">Quantity</div>
+                                    <div class="header-item">Total</div>
+                                </div>
+
+                                @foreach (var i in @ViewBag.cart)
+                                {
+                                    <div class="body-list">
+                                        <div class="body-item product-info">
+                                            <img src="~/images/bouquets/@i.Bouquet.Photo" alt="@i.Bouquet.Name" />
+                                        </div>
+                                        <div class="body-item price">
+                                            <span>@i.Bouquet.Price.ToString("C", CultureInfo.CurrentCulture)</span>
+                                        </div>
+                                        <div class="body-item quantity">
+                                            <div class="body-quantity">
+                                                <input type="text" value="@i.Quantity" name="quantity">
+                                                <input class="bouquetid" value="@i.Bouquet.Id" type="hidden">
                                             </div>
                                         </div>
-                                        <div class="col-lg-3">
-                                            <div class="border-wrapp padding-0">
-                                                <div class="order-cart-header">
-                                                    <p>My Cart</p>
-                                                    <p class="total-item">@ViewBag.totalqty Product</p>
-                                                </div>
-                                                <div class="order-cart-content">
-                                                    <div class="order-cart-content-item">
-                                                        <p>Provisional Sum</p>
-                                                        <p class="cart_total">@ViewBag.total.ToString("C", CultureInfo.CurrentCulture)</p>
-                                                    </div>
-                                                    <div class="order-cart-content-item">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="btn-box">
-                                                <a class="btn btn-buy btn-confirm" asp-controller="cart" asp-action="checkout" title="CONFIRM CART">Continue</a>
-                                            </div>
+                                        <div class="body-item total">
+                                            <span class="bouquet-total">@((i.Quantity * i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture))</span>
+                                            <a asp-controller="cart" asp-action="remove" asp-route-id="@i.Bouquet.Id" style="float:right"><i class="fa fa-times" aria-hidden="true"></i></a>
                                         </div>
+                                        <div class="seperate-line" style="height: 1px;"></div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="order-cart">
+                                <div class="order-cart-header">
+                                    <p>My Cart</p>
+                                    <p class="total-item" style="float:right">@ViewBag.totalqty Product</p>
+                                </div>
+                                <div class="order-cart-content">
+                                    <div class="order-cart-content-item">
+                                        <p>Provisional Sum</p>
+                                        <p class="cart_total" style="float:right">@ViewBag.total.ToString("C", CultureInfo.CurrentCulture)</p>
                                     </div>
                                 </div>
                             </div>
+                            <div class="btn-box-confirm">
+                                <a class="btn" asp-controller="cart" asp-action="checkout" title="CONFIRM CART">Continue</a>
+                            </div>
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
+
 

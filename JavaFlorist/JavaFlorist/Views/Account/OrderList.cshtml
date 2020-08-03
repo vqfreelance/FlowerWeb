@@ -3,60 +3,51 @@
     ViewData["Title"] = "OrderList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="content">
-    <div class="content-box">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                        <li class="breadcrumb-item active">OrderList</li>
-                    </ol>
-                    @if (@ViewBag.listorder != null)
-                    {
-                        <div class="document-box">
-                            <div class="no-gutters checkout-box">
-                                <div class="cart-box" id="cart-page">
-                                    <div class="row">
-                                        <div class="col-lg-9">
-                                            <div class="cart-list">
-                                                <div class="header-list">
-                                                    <div class="header-item">DateTime Create</div>
-                                                    <div class="header-item">Status</div>
-                                                    <div class="header-item">Time Receive</div>
-                                                    <div class="header-item">Total</div>
-                                                    <div class="header-item">Action</div>
-                                                </div>
-                                                @foreach (var o in @ViewBag.listorder)
-                                                {
-                                                    <div class="body-list" style="border:3px">
-                                                        <div class="body-item datetime">
-                                                            <span>@o.Order.CreateDate</span>
-                                                        </div>
-                                                        <div class="body-item status">
-                                                            <span>@o.Order.Status</span>
-                                                        </div>
-                                                        <div class="body-item time-delivery">
-                                                            <span>@o.Order.ReceivingTime</span>
-                                                        </div>
-                                                        <div class="body-item tprice">
-                                                            <span class="bouquet-total">@o.Total.ToString("C", CultureInfo.CurrentCulture)</span>
-                                                        </div>
-                                                        <div class="body-item action">
-                                                            <a class="btn" asp-controller="account" asp-action="vieworderdetail" asp-route-id="@o.Order.Id" ><img width="20" src="~/images/docs.png"></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="seperate-line" style="height: 1px;"></div>
-                                                }
-                                            </div>
-                                        </div>
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+    <li class="breadcrumb-item active">OrderList</li>
+</ol>
+@if (@ViewBag.listorder != null)
+{
+    <div class="document-box" style="min-height:300px">
+        <div class="no-gutters checkout-box">
+            <div class="cart-box" id="cart-page">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="cart-list">
+                            <div class="header-list">
+                                <div class="header-item">DateTime Create</div>
+                                <div class="header-item">Status</div>
+                                <div class="header-item">Time Receive</div>
+                                <div class="header-item">Total</div>
+                            </div>
+                            @foreach (var o in @ViewBag.listorder)
+                            {
+                                <div class="body-list" style="border:3px">
+                                    <div class="body-item datetime">
+                                        <span>@o.Order.CreateDate</span>
+                                    </div>
+                                    <div class="body-item status">
+                                        <span>@o.Order.Status</span>
+                                    </div>
+                                    <div class="body-item time-delivery">
+                                        <span>@o.Order.ReceivingTime</span>
+                                    </div>
+                                    <div class="body-item tprice">
+                                        <span class="bouquet-total">@o.Total.ToString("C", CultureInfo.CurrentCulture)</span>
+                                        <a class="btn" asp-controller="account" asp-action="vieworderdetail" asp-route-id="@o.Order.Id" style="float:right; padding:0;">
+                                            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
+                                <div class="seperate-line" style="height: 1px;"></div>
+                            }
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
+
