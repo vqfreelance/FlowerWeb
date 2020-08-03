@@ -1,0 +1,45 @@
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+    <li class="breadcrumb-item active">Occasion</li>
+</ol>
+<div class="col-lg-10 col-md-12 col-xs-10 occasion-title">
+    <h3>@ViewBag.occ.Name</h3>
+</div>
+
+<div class="col-lg-10 col-md-12 col-xs-10 occasion-img">
+    <img src="~/images/banner/@ViewBag.occ.Photo" style="width:100%"/>
+</div>
+<div class="col-lg-10 col-md-12 col-xs-10 occasion-description">
+    <p>Description: @ViewBag.occ.Description</p>
+</div>
+<hr />
+
+@if(ViewBag.listb != null)
+{
+<div class="row bouquet-list">
+    @foreach (var b in ViewBag.listb)
+    {
+        <div class="card" style="width: 14rem;">
+            <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                <img class="card-img-top" src="~/images/bouquets/@b.Photo" alt="@b.Name">
+            </a>
+
+            <div class="card-body">
+                <h5 class="card-title">@b.Name</h5>
+                <p class="card-text">@(b.Price.ToString("C", CultureInfo.CurrentCulture))</p>
+            </div>
+        </div>
+    }
+</div>
+}
+
+
+
+
+

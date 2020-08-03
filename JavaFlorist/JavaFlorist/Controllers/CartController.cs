@@ -11,9 +11,8 @@ using JavaFlorist.PayPal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using JavaFlorist.PaypalAPI;
+
 
 namespace JavaFlorist.Controllers
 {
@@ -28,7 +27,6 @@ namespace JavaFlorist.Controllers
         private IOrderRepository orderRepository;
         private IOrderDetailRepository orderdetailRepository;
         private ICustomerRepository customerRepository;
-        public IConfiguration configuration { get; }
 
         public CartController(DatabaseContext _db,
             IBouquetRepository _bouquetRepository,
@@ -37,8 +35,7 @@ namespace JavaFlorist.Controllers
             IMessageRepository _messageRepository,
             IOrderRepository _orderRepository,
             IOrderDetailRepository _orderdetailRepository,
-            ICustomerRepository _customerRepository,
-            IConfiguration _configuration
+            ICustomerRepository _customerRepository
             )
         {
             db = _db;
@@ -49,7 +46,6 @@ namespace JavaFlorist.Controllers
             orderRepository = _orderRepository;
             orderdetailRepository = _orderdetailRepository;
             customerRepository = _customerRepository;
-            configuration = _configuration;
 
         }
 
@@ -202,8 +198,8 @@ namespace JavaFlorist.Controllers
                 var result = new
                 {
                     cart_num = cart.Sum(i => i.Quantity),
-                    cart_total = cart.Sum(i => i.Quantity * i.Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture),
-                    bouquet_total = (cart[index].Quantity * cart[index].Bouquet.Price).Value.ToString("C", CultureInfo.CurrentCulture)
+                    cart_total = cart.Sum(i => i.Quantity * i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture),
+                    bouquet_total = (cart[index].Quantity * cart[index].Bouquet.Price).ToString("C", CultureInfo.CurrentCulture)
 
                 };
                 return new JsonResult(result);
@@ -274,10 +270,8 @@ namespace JavaFlorist.Controllers
             ViewBag.occ = occasionRepository.GetAll().ToList();
             ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
             ViewBag.cart = cart;
-            ViewBag.sumCart = int.Parse(cart.Count.ToString()) ;
             ViewBag.time = time.ToString("MM/dd/yyyy, HH:mm");
             ViewBag.paypalConfig = PayPalService.getPayPalConfig();
-
             return View("Checkout");
         }
 
@@ -364,9 +358,7 @@ namespace JavaFlorist.Controllers
             var cart = HttpContext.Session.GetString("cart");
             if (cart != null)
             {
-
                 return new JsonResult(JsonConvert.DeserializeObject<List<Item>>(cart).Sum(i => i.Quantity));
-
             }
             else
             {
@@ -380,41 +372,6 @@ namespace JavaFlorist.Controllers
             return View("OrderError");
         }
 
-        [HttpPost]
-        [Route("payment")]
-        public IActionResult Payment(double total)
-        {
-            var paypalApi = new PaypalAPI.PayPalAPI();
-            string url =  PaypalAPI.PayPalAPI.getRedirectURLToPayPal(total, "USD").Result;
-            return Redirect(url);
-        }
-
-        //[HttpPost]
-        //[Route("success")]
-        //public IActionResult Success([FromQuery(Name = "paymentId")] string paymentId, [FromQuery(Name = "PayerID")] string PayerID)
-        //{
-        //    var paypalApi = new PaypalAPI.PayPalAPI();
-        //    PayPalPaymentExecutedResponse result = PaypalAPI.PayPalAPI.executedPayment(paymentId, PayerID).Result;
-        //    ViewBag.result = result;
-        //    Debug.WriteLine("Transaction Details");
-        //    Debug.WriteLine("cart: " + result.cart);
-        //    Debug.WriteLine("create_time: " + result.create_time.ToLongDateString());
-        //    Debug.WriteLine("id: " + result.id);
-        //    Debug.WriteLine("intent: " + result.intent);
-        //    Debug.WriteLine("links 0 -href: " + result.links[0].href);
-        //    Debug.WriteLine("links 0 -method: " + result.links[0].method);
-        //    Debug.WriteLine("links 0 -rel: " + result.links[0].rel);
-        //    Debug.WriteLine("payer info - firtname: " + result.payer.payer_info.first_name);
-        //    Debug.WriteLine("payer info - lastname: " + result.payer.payer_info.last_name);
-        //    Debug.WriteLine("payer info - email: " + result.payer.payer_info.email);
-        //    Debug.WriteLine("payer info - billing adress: " + result.payer.payer_info.billing_address);
-        //    Debug.WriteLine("payer info - country code: " + result.payer.payer_info.country_code);
-        //    Debug.WriteLine("payer info - shipping address: " + result.payer.payer_info.shipping_address);
-        //    Debug.WriteLine("payer info - payer id: " + result.payer.payer_info.payer_id);
-        //    Debug.WriteLine("payer info - state: " + result.state);
-        //    return View("Success");
-        //}
-
         [HttpGet]
         [Route("success")]
         public IActionResult Success([FromQuery(Name = "tx")] string tx)
@@ -427,7 +384,7 @@ namespace JavaFlorist.Controllers
             Debug.WriteLine("cart: " + result.PaymentStatus);
             Debug.WriteLine("create_time: " + result.PayerFirstName);
 
-            return RedirectToAction("Index", "Home");
+            return View("Success");
 
         }
 
@@ -437,5 +394,4 @@ namespace JavaFlorist.Controllers
             return View("Success");
         }
     }
-
 }

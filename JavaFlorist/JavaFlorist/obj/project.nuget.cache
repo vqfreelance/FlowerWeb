@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5kQYF5NTuBhDeWPmCb44xnLDIad6M8qaIL/AQzZgpEpUP6GJ5MYu+kfZ+thIS2789z9SX0Vg4LjcAS8D+HFXkw==",
+  "dgSpecHash": "P/F61sBlBrVGAE9GQjvbGhaq2mv0bh5CFQl2vWMmHaj21AP3yMw7Z5tkxNhmY2CDagiwSkbYmf8tAlinBSGMGg==",
   "success": true,
-  "projectFilePath": "E:\\BasicCode\\test\\java\\java\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+  "projectFilePath": "E:\\BasicCode\\Vu\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vietq\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\vietq\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",

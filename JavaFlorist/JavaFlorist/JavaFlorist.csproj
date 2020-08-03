@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,8 +7,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Occasion\" />
     <Folder Include="Middlewares\" />
-    <Folder Include="PaypalAPI\" />
-    <Folder Include="Paypal\" />
     <Folder Include="wwwroot\images\bouquets\" />
   </ItemGroup>
 

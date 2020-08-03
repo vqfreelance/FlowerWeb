@@ -8614,11 +8614,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\BasicCode\\test\\java\\java\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "projectUniqueName": "E:\\BasicCode\\Vu\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
       "projectName": "JavaFlorist",
-      "projectPath": "E:\\BasicCode\\test\\java\\java\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "projectPath": "E:\\BasicCode\\Vu\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
       "packagesPath": "C:\\Users\\vietq\\.nuget\\packages\\",
-      "outputPath": "E:\\BasicCode\\test\\java\\java\\JavaFlorist\\JavaFlorist\\obj\\",
+      "outputPath": "E:\\BasicCode\\Vu\\JavaFlorist\\JavaFlorist\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\vietq\\AppData\\Roaming\\NuGet\\NuGet.Config",

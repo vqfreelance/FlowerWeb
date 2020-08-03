@@ -2,21 +2,16 @@
     ViewData["Title"] = "Order History";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <div class="content">
-        <div class="content-box">
-            <div class="container">
-                <div class="row">
+
                     <div class="col-md-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                            <li class="breadcrumb-item">
-                                <a href="shop.dalathasfarm.com/shopcart/gio-hang.html">Cart</a>
-                            </li>
+                            <li class="breadcrumb-item"><a asp-controller="account" asp-action="vieworderlist">OrderList</a></li>
                             <li class="breadcrumb-item active">Order</li>
                         </ol>
                         <div class="document-box">
                             <div class="row" id="main-content">
-                                <div class="customer-address col-lg-6">
+                                <div class="customer-address col-lg-6" style="border:3px">
                                     <p class="title">Order Info</p>
                                     <table>
                                         <tr>
@@ -99,7 +94,3 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>

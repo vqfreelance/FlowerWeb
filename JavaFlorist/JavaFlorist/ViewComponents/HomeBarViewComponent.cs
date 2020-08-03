@@ -15,21 +15,25 @@ namespace JavaFlorist.ViewComponents
     {
         private DatabaseContext db;
         private IAccountRepository accountRepository;
-        public HomeBarViewComponent(DatabaseContext _db, IAccountRepository _accountRepository)
+        private IOccasionRepository occasionRepository;
+        public HomeBarViewComponent(DatabaseContext _db, IAccountRepository _accountRepository, IOccasionRepository _occasionRepository)
         {
             db = _db;
             accountRepository = _accountRepository;
+            occasionRepository = _occasionRepository;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             if (HttpContext.User.FindFirst(ClaimTypes.Name) != null) 
             {
                 var username = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+                ViewBag.occasions = occasionRepository.GetAll().ToList();
                 ViewBag.acc = accountRepository.GetByUsername(username.Value);
                 return View("Index2");
             } 
             else
             {
+                ViewBag.occasions = occasionRepository.GetAll().ToList();
                 return View("Index");
             }
             

@@ -13,10 +13,13 @@ namespace JavaFlorist.Controllers
     {
         private DatabaseContext db;
         private IBouquetRepository bouquetRepository;
-        public BouquetController(DatabaseContext _db, IBouquetRepository _bouquetRepository)
+        private IOccasionRepository occasionRepository;
+
+        public BouquetController(DatabaseContext _db, IBouquetRepository _bouquetRepository, IOccasionRepository _occasionRepository)
         {
             db = _db;
             bouquetRepository = _bouquetRepository;
+            occasionRepository = _occasionRepository;
         }
 
         [HttpGet]
@@ -39,6 +42,18 @@ namespace JavaFlorist.Controllers
         [Route("index")]
         public IActionResult Index()
         {
+            var today = DateTime.Now;
+            var allocc = occasionRepository.GetAll().ToList();
+            var occs = new List<Occasion>();
+            foreach (var o in allocc)
+            {
+                if (o.StartMonth - 1 < today.Month && o.EndMonth >= today.Month)
+                {
+                    occs.Add(o);
+                }
+            }
+            ViewBag.occs = occs;
+
             ViewBag.bouquets = bouquetRepository.GetAll().ToList();
             return View("AllBouquet");
         }
@@ -46,6 +61,18 @@ namespace JavaFlorist.Controllers
         [Route("search")]
         public IActionResult Search(string keyword)
         {
+            var today = DateTime.Now;
+            var allocc = occasionRepository.GetAll().ToList();
+            var occs = new List<Occasion>();
+            foreach (var o in allocc)
+            {
+                if (o.StartMonth - 1 < today.Month && o.EndMonth >= today.Month)
+                {
+                    occs.Add(o);
+                }
+            }
+            ViewBag.occs = occs;
+
             ViewBag.bouquets = bouquetRepository.SearchByKeyword(keyword);
             return View("AllBouquet");
         }

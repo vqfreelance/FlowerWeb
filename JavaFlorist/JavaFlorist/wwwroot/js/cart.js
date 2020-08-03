@@ -555,5 +555,3 @@ function yesnoCheck() {
         document.getElementById('ifYes').value = 0;
     }
 }
-
-

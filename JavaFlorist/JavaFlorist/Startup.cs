@@ -26,7 +26,6 @@ namespace JavaFlorist
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             string connectionString = configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
             //services.AddControllersWithViews();

@@ -4,12 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="login-box">
-        <div class="col-lg-10">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-                <li class="breadcrumb-item active">Login</li>
-            </ol>
+
+    <div class="login-page">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+            <li class="breadcrumb-item active">Login</li>
+        </ol>
+        <div class="login-box">
             <h3>Login account</h3> <br />
             <form name="box-signin" id="login_form" method="POST" asp-controller="account" asp-action="login">
                 <input name="action" type="hidden" value="Login">
@@ -25,22 +26,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label class="kt-checkbox kt-checkbox--success">
-                                <input type="checkbox" value="option1">Remember password<span></span>
+                                <input type="checkbox" value="option1"> Remember password<span></span>
                             </label>
                         </div>
                         <div class="col-md-6 text-right">
-                            <a class="color-or" href="#" data-toggle="modal"
-                               data-target="#fogotPasswordModal" data-dismiss="modal">Fogot Password?</a>
+                            <a href="">Fogot Password?</a>
                         </div>
                     </div>
                 </div>
                 <a style="color:red">@ViewBag.error</a>
                 <div class="form-group text-center"><button class="btn btn-login" type="submit">Login</button></div>
-                <input name="return" class="return_popup_login" type="hidden" data-return="" value="">
-                <div class="form-group text-center rgt">
-                    Do not have an account?
-                    <a class="color-or" data-toggle="modal" data-keyboard="false" data-backdrop="static" asp-controller="account" asp-action="signup">Signup now!</a>
-                </div>
+                <div class="text-center">Do not have an account? <a asp-controller="account" asp-action="signup">SignUp Now!</a></div>
             </form>
         </div>
     </div>

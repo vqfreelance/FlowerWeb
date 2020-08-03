@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using JavaFlorist.Models;
 using JavaFlorist.Models.Repositories;
-using JavaFlorist.PayPal;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JavaFlorist.ViewComponents
@@ -22,7 +21,6 @@ namespace JavaFlorist.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewBag.paypalConfig = PayPalService.getPayPalConfig();
             return View("Index");
         }
     }
