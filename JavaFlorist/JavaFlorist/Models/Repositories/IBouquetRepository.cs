@@ -14,5 +14,12 @@ namespace JavaFlorist.Models.Repositories
         List<Bouquet> GetBouquetByStatus();
         List<Bouquet> GetRandomBouquets(int number);
         List<Bouquet> SearchByKeyword(string keyword);
+
+        //load pagination
+        IEnumerable<Bouquet> getProductAll();
+        int totalProduct();
+        int numberPage(int totalProduct, int limit);
+        IEnumerable<Bouquet> paginationProduct(int start, int limit);
+
     }
 }

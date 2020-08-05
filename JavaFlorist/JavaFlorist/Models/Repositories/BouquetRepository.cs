@@ -8,8 +8,11 @@ namespace JavaFlorist.Models.Repositories
 {
     public class BouquetRepository : GenericRepository<Bouquet>, IBouquetRepository
     {
+        private List<Bouquet> bouquets = new List<Bouquet>();
+
         public BouquetRepository(DatabaseContext dbContext) : base(dbContext)
         {
+            bouquets = GetAll().ToList();
         }
         public List<Bouquet> Search(string keyword)
         {
@@ -40,5 +43,27 @@ namespace JavaFlorist.Models.Repositories
         {
             return GetAll().Where(b => b.Name.Contains(keyword)).ToList();
         }
+
+        //load pagination
+        public IEnumerable<Bouquet> getProductAll()
+        {
+            return bouquets;
+        }
+        public int totalProduct()
+        {
+            return bouquets.Count;
+        }
+        public int numberPage(int totalProduct, int limit)
+        {
+            float numberpage = totalProduct / limit;
+            return (int)Math.Ceiling(numberpage);
+        }
+        public IEnumerable<Bouquet> paginationProduct(int start, int limit)
+        {
+            var data = (from s in bouquets select s);
+            var dataProduct = data.OrderByDescending(x => x.Id).Skip(start).Take(limit);
+            return dataProduct.ToList();
+        }
+
     }
 }

@@ -14,7 +14,7 @@
             <li class="breadcrumb-item active">Checkout</li>
         </ol>
         <div class="document-box">
-            <form action="@ViewBag.paypalConfig.PostUrl" method="post">
+            <form id="get-customer-info" action="@ViewBag.paypalConfig.PostUrl" method="post">
 
                 <input type="hidden" name="upload" value="1" />
                 <input type="hidden" name="business" value="@ViewBag.paypalConfig.Business" />
@@ -76,7 +76,6 @@
                                         <div class="row">
                                             <div class="col-lg-12 col-xs-12">
                                                 <div class="form-group">
-                                                    @*<p>Địa chỉ: <b>99 Đường Hậu Giang, Ward 5, District 6, Hồ Chí Minh</b></p>*@
                                                     <p>Open hour: <b>9:00 - 21:00 Saturday and Sunday, holiday</b></p>
                                                 </div>
                                             </div>
@@ -234,7 +233,7 @@
                             </p>
 
                             <div class="btn btn-warning" style="width: 400px; margin: 20px auto 10px">
-                                <button type="submit" name="cod" value="1" class="btn btn-buy btn-confirm" asp-controller="Cart" asp-action="Success1"> Payment <span>On Delivery</span> </button>
+                                <button type="submit" name="cod" value="1" class="btn btn-buy btn-confirm"> Payment <span>On Delivery</span></button>
                                 @*<button type="submit" name="paymentvisa" value="1" title="Payment Online" class="btn btn-buy btn-confirm hidden">Payment ONLINE <span>(Visa / Mastercard)</span></button>*@
                                 <button type="submit" name="paymentatm" value="1" title="Payment Online" class="btn btn-buy btn-confirm hidden">Payment ONLINE <span>(Paypal)</span></button>
                             </div>

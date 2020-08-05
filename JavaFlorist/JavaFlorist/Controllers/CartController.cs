@@ -366,11 +366,7 @@ namespace JavaFlorist.Controllers
             }
         }
 
-        [Route("carterror")]
-        public IActionResult CartError()
-        {
-            return View("OrderError");
-        }
+
 
         [HttpGet]
         [Route("success")]
@@ -386,6 +382,12 @@ namespace JavaFlorist.Controllers
 
             return View("Success");
 
+        }
+
+        [Route("carterror")]
+        public IActionResult CartError()
+        {
+            return View("OrderError");
         }
 
         [Route("success1")]

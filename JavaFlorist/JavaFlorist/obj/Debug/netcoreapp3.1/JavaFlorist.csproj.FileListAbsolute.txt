@@ -702,3 +702,5 @@ C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\ob
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.dll
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.pdb
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.genruntimeconfig.cache
+C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Success.cshtml.g.cs
+C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Occasion\Index.cshtml.g.cs

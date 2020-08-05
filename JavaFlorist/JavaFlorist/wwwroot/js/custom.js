@@ -1547,7 +1547,7 @@ $(document).ready(function () {
             + $("select[name='message']").children("option:selected").text() +' Sincerely');
     });
 
-    $('#pay').click(function () {
+    $('#cod').click(function () {
         var $sender = $('input[name="send_type"]:checked').val();
         var $receiver = $('input[name="receiver_type"]:checked').val();
         if ($sender != 'sender'){
@@ -1588,31 +1588,6 @@ $(document).ready(function () {
     })
     count_item();
 
-/*loading*/
-    var pageindex = 2;
-    var NoMoredata = false;
-    var inProgress = false;
-
-    $(window).on("scroll", function () {
-        var docHeight = $(document).height();
-        var winScrolled = $(window).height() + $(window).scrollTop();
-        if ((docHeight - winScrolled) < 1) {
-            console.log("module scrolled to bottom");
-            inProgress = true;
-            $("#loadingdiv").show();
-
-            $.post("@Url.Action('InfiniteScroll', 'bouquet')", { "pageindex": pageindex },
-                function (data) {
-                    pageindex = pageindex + 1;
-                    NoMoredata = data.NoMoredata;
-                    $("#trow").append(data.HTMLString);
-                    $("#loadingdiv").hide();
-                    inProgress = false;
-                }
-            );
-        }
-    });
-/*end loading*/
 })
 
 //count all quantity products in cart

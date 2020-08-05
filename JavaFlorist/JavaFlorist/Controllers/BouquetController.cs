@@ -40,7 +40,7 @@ namespace JavaFlorist.Controllers
         }
 
         [Route("index")]
-        public IActionResult Index()
+        public IActionResult Index(int? page = 0)
         {
             var today = DateTime.Now;
             var allocc = occasionRepository.GetAll().ToList();
@@ -54,6 +54,30 @@ namespace JavaFlorist.Controllers
             }
             ViewBag.occs = occs;
 
+            //load pagination
+            int limit = 2;
+            int start;
+            if (page > 0)
+            {
+                page = page;
+            }
+            else
+            {
+                page = 1;
+            }
+            start = (int)(page - 1) * limit;
+
+            ViewBag.pageCurrent = page;
+
+            int totalProduct = bouquetRepository.totalProduct();
+
+            ViewBag.totalProduct = totalProduct;
+
+            ViewBag.numberPage = bouquetRepository.numberPage(totalProduct, limit);
+
+            var data = bouquetRepository.paginationProduct(start, limit);
+
+            ViewBag.data = data;
             ViewBag.bouquets = bouquetRepository.GetAll().ToList();
             return View("AllBouquet");
         }
