@@ -1444,13 +1444,17 @@ $(document).ready(function () {
     $("[name=time_type]").click(function () {
         $('.time-delivery').hide('slow');
         $("#blk-" + $(this).val()).show('slow');
-
-        if ($(this).val() == '5hours') {
-
-        } else {
-
-        }
     });
+
+    $(".occasion-dropdown").hover(
+        function () {
+            $(".occasion-dropdown-menu").stop(true, true).slideDown('medium');
+        },
+        function () {
+            $(".occasion-dropdown-menu").stop(true, true).slideUp('medium');
+        }
+    );
+
 
     //$('[name=occasion]').on('change', function () {
     //    var id = $(this).find(':selected')[0].id;
@@ -1584,7 +1588,31 @@ $(document).ready(function () {
     })
     count_item();
 
+/*loading*/
+    var pageindex = 2;
+    var NoMoredata = false;
+    var inProgress = false;
 
+    $(window).on("scroll", function () {
+        var docHeight = $(document).height();
+        var winScrolled = $(window).height() + $(window).scrollTop();
+        if ((docHeight - winScrolled) < 1) {
+            console.log("module scrolled to bottom");
+            inProgress = true;
+            $("#loadingdiv").show();
+
+            $.post("@Url.Action('InfiniteScroll', 'bouquet')", { "pageindex": pageindex },
+                function (data) {
+                    pageindex = pageindex + 1;
+                    NoMoredata = data.NoMoredata;
+                    $("#trow").append(data.HTMLString);
+                    $("#loadingdiv").hide();
+                    inProgress = false;
+                }
+            );
+        }
+    });
+/*end loading*/
 })
 
 //count all quantity products in cart

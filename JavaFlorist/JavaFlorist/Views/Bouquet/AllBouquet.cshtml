@@ -7,12 +7,6 @@
         <ol class="breadcrumb" style="margin-left:65px">
             <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
         </ol>
-        <div class="middle-header">
-            <form class="form-inline my-2 my-lg-0" asp-controller="bouquet" asp-action="search">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword" style="width:60%">
-                <button class="btn my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
         <div class="occasion-group">
             <div class="occasion-group-body">
                 <div class="occasion-group-header"><span>Occasion</span></div>
@@ -42,6 +36,10 @@
                             </div>
                         </div>
                     }
+                </div>
+
+                <div id="loadingdiv" style="text-align:center;display:none;margin-bottom:20px;">
+                    <img src="~/images/loading/loading.gif" />
                 </div>
             </div>
         </div>

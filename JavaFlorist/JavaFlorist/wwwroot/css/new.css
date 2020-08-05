@@ -1,5 +1,5 @@
 body {
-    padding-top: 55px
+    padding-top: 65px
 }
 
 hr{
@@ -49,20 +49,26 @@ nav .fa-shopping-cart {
     }
     /* change the link color */
     .navbar-custom .navbar-nav .nav-link {
+        text-align: center;
         color: white;
     }
     /* change the color of active or hovered links */
     .navbar-custom .nav-item.active .nav-link,
-    .navbar-custom .nav-item:hover .nav-link {
+    .navbar-custom .nav-item:hover .nav-link,
+    .navbar-custom .navbar-brand:hover {
         color: #FF4C60;
     }
 
+    .navbar-custom .dropdown-menu a {
+        color: #FF95A1;
+    }
     .navbar-custom .dropdown-menu a:hover {
+        color:white;
         background: #FF95A1;
     }
 
 
-#back-top {
+    #back-top {
     bottom: 115px;
     display: none;
     height: 55px;
@@ -97,6 +103,7 @@ nav .fa-shopping-cart {
 
 .carousel {
     margin: auto;
+    margin-bottom:15px;
     width: 80%;
     overflow: hidden;
 }
@@ -110,28 +117,22 @@ nav .fa-shopping-cart {
         width: 100%
     }
 
-.middle-header {
-    padding: 10px;
-}
-
-    .middle-header form {
+    .search form {
+        display:block;
+        height: 40px;
         justify-content: center;
     }
-
-        .middle-header form input {
-            border: 2px solid #FF95A1;
-            border-radius: 5px;
-            height: 45px;
-        }
-
-    .middle-header button {
-        color: #FF95A1;
-        border: 2px solid #FF95A1;
+    .search input {
+        border: 1px solid white;
         border-radius: 5px;
-        height: 45px;
+    }
+    .search button {
+        border: 1px solid white;
+        border-radius: 5px;
+        color: white;
     }
 
-        .middle-header button:hover {
+        .search button:hover {
             color: white;
             background: #FF95A1;
         }
@@ -192,7 +193,17 @@ nav .fa-shopping-cart {
             outline-style: auto;
             color: #FF4C60;
         }
-
+.footer-menu li {
+    color: #FF95A1;
+    list-style-type: none;
+}
+    .footer-menu li a {
+        text-decoration: none;
+        color: #FF95A1;
+    }
+    .footer-menu li a:hover {
+        color: #FF4C60;
+    }
 .footer-logo a {
     font-family: albasuper;
     font-size: 55pt;

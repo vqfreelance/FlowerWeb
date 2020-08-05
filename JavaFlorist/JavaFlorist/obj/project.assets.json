@@ -8614,11 +8614,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "projectUniqueName": "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
       "projectName": "JavaFlorist",
-      "projectPath": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+      "projectPath": "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
       "packagesPath": "C:\\Users\\anhvu\\.nuget\\packages\\",
-      "outputPath": "C:\\Aptech\\WindowsForms\\JavaFlorist\\JavaFlorist\\JavaFlorist\\obj\\",
+      "outputPath": "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\anhvu\\AppData\\Roaming\\NuGet\\NuGet.Config",

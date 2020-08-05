@@ -7,27 +7,9 @@
 @*<div class="container">*@
 
 <div class="middle-header">
-    <form class="form-inline my-2 my-lg-0" asp-controller="bouquet" asp-action="search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword" style="width:60%">
-        <button class="btn my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
 </div>
 <div class="row top-content-wrapp">
-
-
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="~/images/banner/banner1.jpg">
-            </div>
-            @foreach (var occasion in ViewBag.occs)
-            {
-                <div class="carousel-item">
-                    <img src="~/images/banner/@occasion.Photo" alt="@occasion.Name">
-                </div>
-            }
-        </div>
-    </div>
 
     <div class="services-guarante">
         <ul>
@@ -45,6 +27,22 @@
             </li>
         </ul>
     </div>
+
+    <div class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/banner/banner1.jpg">
+            </div>
+            @foreach (var occasion in ViewBag.occs)
+            {
+                <div class="carousel-item">
+                    <img src="~/images/banner/@occasion.Photo" alt="@occasion.Name">
+                </div>
+            }
+        </div>
+    </div>
+
+
 </div>
 @*</div>*@
 @*<div class="container">*@
