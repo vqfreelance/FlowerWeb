@@ -7,10 +7,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using JavaFlorist.Models;
 using JavaFlorist.Models.Repositories;
+using JavaFlorist.PayPal;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+
 
 namespace JavaFlorist.Controllers
 {
@@ -60,6 +62,7 @@ namespace JavaFlorist.Controllers
                     ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
                     ViewBag.cart = cart;
                 }
+                ViewBag.paypalConfig = PayPalService.getPayPalConfig();
             }
             return View();
         }
@@ -268,7 +271,7 @@ namespace JavaFlorist.Controllers
             ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
             ViewBag.cart = cart;
             ViewBag.time = time.ToString("MM/dd/yyyy, HH:mm");
-
+            ViewBag.paypalConfig = PayPalService.getPayPalConfig();
             return View("Checkout");
         }
 
@@ -367,6 +370,28 @@ namespace JavaFlorist.Controllers
         public IActionResult CartError()
         {
             return View("OrderError");
+        }
+
+        [HttpGet]
+        [Route("success")]
+        public IActionResult Success([FromQuery(Name = "tx")] string tx)
+        {
+            //hung lai ket qua tu class PDTHolder
+            var result = PDTHolder.Success(tx);
+            ViewBag.result = result;
+
+            Debug.WriteLine("Transaction Details");
+            Debug.WriteLine("cart: " + result.PaymentStatus);
+            Debug.WriteLine("create_time: " + result.PayerFirstName);
+
+            return View("Success");
+
+        }
+
+        [Route("success1")]
+        public IActionResult Success1()
+        {
+            return View("Success");
         }
     }
 }

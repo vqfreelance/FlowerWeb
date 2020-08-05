@@ -548,3 +548,10 @@ function check_vat(id) {
     }
 }
 
+function yesnoCheck() {
+    if (document.getElementById('yesCheck').checked) {
+        document.getElementById('ifYes').value = 5;
+    } else {
+        document.getElementById('ifYes').value = 0;
+    }
+}

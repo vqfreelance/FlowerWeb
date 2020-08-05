@@ -95,20 +95,6 @@ nav .fa-shopping-cart {
         width: 100%
     }
 
-/*#cart-num {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 25px;
-    height: 25px;
-    background: #f58831;
-    color: #FFFFFF;
-    text-align: center;
-    line-height: 25px;
-    border-radius: 50%;
-    font-style: normal;
-}*/
-
 .carousel {
     margin: auto;
     width: 80%;
@@ -207,9 +193,27 @@ nav .fa-shopping-cart {
             color: #FF4C60;
         }
 
+.footer-logo a {
+    font-family: albasuper;
+    font-size: 55pt;
+    color: #FF95A1;
+}
 
-/*Login*/
-.breadcrumb {
+.navbar-brand {
+    font-family: albasuper;
+    font-size: 16pt;
+    margin:0;
+}
+@font-face {
+    font-family: 'albasuper';
+    src: url('../fonts/albas__.ttf') format('truetype');
+}
+
+.footer-logo a:hover{
+    color: #FF95A1;
+}
+    /*Login*/
+    .breadcrumb {
     background: none;
     padding: 0;
     margin-top: 15px;
