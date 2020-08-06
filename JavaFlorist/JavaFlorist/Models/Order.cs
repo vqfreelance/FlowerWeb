@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace JavaFlorist.Models
 {
-    public partial class Order: IEntity
+    public partial class Order:IEntity
     {
         public Order()
         {
@@ -19,6 +19,8 @@ namespace JavaFlorist.Models
         public string Message { get; set; }
         public string ReceivingTime { get; set; }
         public DateTime CreateDate { get; set; }
+        public string Payment { get; set; }
+        public string PaymentConfirm { get; set; }
 
         public virtual Account Account { get; set; }
         public virtual ICollection<OrderDetail> OrderDetail { get; set; }

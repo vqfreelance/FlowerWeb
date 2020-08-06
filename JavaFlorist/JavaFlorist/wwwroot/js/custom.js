@@ -188,27 +188,6 @@ jQuery(document).ready(function () {
     });
 
 
-
-    $("input[name=payment]").click(function () {
-        console.log($(this).val());
-        if ($(this).val() == 'cod') {
-            $('button[name=cod]').removeClass('hidden');
-            $('button[name=paymentvisa]').addClass('hidden');
-            $('button[name=paymentatm]').addClass('hidden');
-        }
-        if ($(this).val() == 'onepay_visa') {
-            console.log('asd');
-            $('button[name=cod]').addClass('hidden');
-            $('button[name=paymentvisa]').removeClass('hidden');
-            $('button[name=paymentatm]').addClass('hidden');
-        }
-        if ($(this).val() == 'onepay_atm') {
-            $('button[name=cod]').addClass('hidden');
-            $('button[name=paymentvisa]').addClass('hidden');
-            $('button[name=paymentatm]').removeClass('hidden');
-        }
-    });
-
     $('#kt_datepicker_1').datepicker({
         todayHighlight: true,
         orientation: "bottom left",
@@ -1547,9 +1526,13 @@ $(document).ready(function () {
             + $("select[name='message']").children("option:selected").text() +' Sincerely');
     });
 
-    $('#cod').click(function () {
+    $('#pay').click(function () {
+        validate_message();
+        validate_sender();
+        validate_receiver();
         var $sender = $('input[name="send_type"]:checked').val();
         var $receiver = $('input[name="receiver_type"]:checked').val();
+        var $payment = $('input[name="payment_type"]:checked').val();
         if ($sender != 'sender'){
             $("[name='sender_name']").val('');
             $("[name='sender_email']").val('');
@@ -1562,7 +1545,7 @@ $(document).ready(function () {
             $("[name='receiver_phone']").val('');
             $("[name='receiver_address']").val('');
         };
-        if ($("#get-sender-info").valid() && $("#get-receiver-info").valid()) {
+        if ($("#get-sender-info").valid() && $("#get-receiver-info").valid() && $("#get-message-order").valid()) {
             $.ajax({
                 type: 'POST',
                 url: '/cart/pay',
@@ -1575,10 +1558,11 @@ $(document).ready(function () {
                     receiver_email: $("[name='receiver_email']").val(),
                     receiver_phone: $("[name='receiver_phone']").val(),
                     receiver_address: $("[name='receiver_address']").val(),
-                    message: $("[name='messagetype']").text(),
+                    message: $("[name='messagetype']").val(),
                     time_type: $('input[name="time_type"]:checked').val(),
                     receivingtime: $("input[name='order_delivery_date']").val() + ' at ' + $("select[name='order_delivery_time']").children("option:selected").text(),
                     receiving5hours: $("span[name='order_delivery_5hours']").text(),
+                    payment: $payment
                 },
                 success: function (data) {  
                     window.location.href = data;
@@ -1711,6 +1695,23 @@ function validate_receiver() {
             },
             receiver_email: {
                 required: "Please enter receiver's email!"
+            }
+        }
+    });
+}
+
+function validate_message() {
+    $("#get-message-order").validate({
+        //ignore: null,
+        rules: {
+            messagetype: {
+                required: true,
+                minlength: 2
+            }
+        },
+        messages: {
+            messagetype: {
+                required: "Please type your message for the bouquet!"
             }
         }
     });

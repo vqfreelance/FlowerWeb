@@ -648,7 +648,6 @@ C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\bi
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfoInputs.cache
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfo.cs
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csproj.CoreCompileInputs.cache
@@ -704,3 +703,5 @@ C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\ob
 C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.genruntimeconfig.cache
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Success.cshtml.g.cs
 C:\Users\avMacWin\Documents\FlowerWeb\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Occasion\Index.cshtml.g.cs
+C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
+C:\Aptech\WindowsForms\ASPNetCoreEproject\JavaFlorist\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Views\Account\PaypalConfirm.cshtml.g.cs

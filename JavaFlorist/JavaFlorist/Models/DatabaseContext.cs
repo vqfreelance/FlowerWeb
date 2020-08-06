@@ -24,6 +24,7 @@ namespace JavaFlorist.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
@@ -145,6 +146,14 @@ namespace JavaFlorist.Models
 
                 entity.Property(e => e.Message)
                     .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PaymentConfirm)
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Payment)
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.ReceivingTime)

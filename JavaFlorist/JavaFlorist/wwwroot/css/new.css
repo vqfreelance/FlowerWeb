@@ -2,6 +2,8 @@ body {
     padding-top: 65px
 }
 
+
+
 hr{
     margin:0;
 }
@@ -383,12 +385,21 @@ nav .fa-shopping-cart {
     }
 
     .customer-address label {
-        color: #FF95A1;
+        color: #8B835C;
         margin-right: 15px;
     }
 
         .customer-address label:hover {
-            color: #FF4C60;
+            color: #8B835C;
+        }
+
+    .customer-address .error {
+        color: red;
+        margin-right: 15px;
+    }
+
+        .customer-address .error:hover {
+            color: red;
         }
 
 .form-group option:hover {

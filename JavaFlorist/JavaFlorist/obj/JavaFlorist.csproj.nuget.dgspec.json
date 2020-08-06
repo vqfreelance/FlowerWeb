@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {}
+    "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {}
   },
   "projects": {
-    "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {
+    "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+        "projectUniqueName": "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
         "projectName": "JavaFlorist",
-        "projectPath": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
-        "packagesPath": "C:\\Users\\avMacWin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\avMacWin\\Documents\\FlowerWeb\\JavaFlorist\\JavaFlorist\\obj\\",
+        "projectPath": "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\JavaFlorist.csproj",
+        "packagesPath": "C:\\Users\\anhvu\\.nuget\\packages\\",
+        "outputPath": "C:\\Aptech\\WindowsForms\\ASPNetCoreEproject\\JavaFlorist\\JavaFlorist\\JavaFlorist\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\avMacWin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\anhvu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -72,7 +72,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.3, )"
+              "version": "[3.1.4, )"
             }
           },
           "imports": [
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

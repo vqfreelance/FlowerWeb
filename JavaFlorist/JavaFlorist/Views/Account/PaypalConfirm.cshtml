@@ -1,0 +1,168 @@
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "PaypalConfirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="document-box">
+    <form action="@ViewBag.paypalConfig.PostUrl" method="post">
+
+        <div class="col-md-12">
+            <div class="document-box">
+                <div class="row" id="main-content">
+                    <div class="customer-address col-lg-6" style="border:3px">
+                        <p class="title">Order Info</p>
+                        <table>
+                            <tr>
+                                <td width=100px height=30px>Oderer: </td>
+                                <td><b>@ViewBag.acc.Name</b></td>
+                            </tr>
+                        </table>
+
+                        @if (ViewBag.sender.Name != null)
+                        {
+                            <p class="title">Sender Info</p>
+                            <table>
+                                <tr>
+                                    <td width=100px height=30px>Sender: </td>
+                                    <td><b>@ViewBag.sender.Name</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px>Sender Address: </td>
+                                    <td><b>@ViewBag.sender.Address</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px>Phone: </td>
+                                    <td><b>@ViewBag.sender.Phone</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px>Email: </td>
+                                    <td><b>@ViewBag.sender.Email</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px></td>
+                                </tr>
+                            </table>
+                        }
+
+                        <p class="title">Reciver Info</p>
+                        <table>
+                            @if (ViewBag.receiver.Name != null)
+                            {
+                                <tr>
+                                    <td width=100px height=30px>Receiver: </td>
+                                    <td><b>@ViewBag.receiver.Name</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px>Sender Address: </td>
+                                    <td><b>@ViewBag.receiver.Address</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px>Phone: </td>
+                                    <td><b>@ViewBag.receiver.Phone</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px>Email: </td>
+                                    <td><b>@ViewBag.receiver.Email</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px></td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td width=100px height=30px>Receive: </td>
+                                    <td><b>Receive goods at the store</b></td>
+                                </tr>
+                                <tr>
+                                    <td width=100px height=30px></td>
+                                </tr>
+                            }
+                        </table>
+                        <p class="title">Order Status</p>
+                        <table>
+                            <tr>
+                                <td width=100px height=30px>Time Delivery: </td>
+                                <td><b>@ViewBag.order.ReceivingTime</b></td>
+                            </tr>
+                            <tr>
+                                <td width=100px height=30px>Message: </td>
+                                <td><b>@ViewBag.order.Message</b></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-4 col-xs-12">
+                        <div class="sidebar__inner" id="cart-summary">
+                            <div class="border-wrapp padding-0">
+                                <div class="order-cart-header hover-cursor" onClick="if ($(this).find('.fa').hasClass('fa-angle-down')) { $(this).find('.fa').removeClass('fa-angle-down').addClass('fa-angle-up'); } else { $(this).find('.fa').removeClass('fa-angle-up').addClass('fa-angle-down'); };$(this).next().toggle('fast');">
+                                    <p>Product</p>
+                                    <p class="total-item" style="float: right">1 Product <i class="fa fa-angle-down"></i></p>
+                                </div>
+                                <div class="order-cart-content">
+
+                                    @{
+                                        var index = 1;
+                                    }
+
+                                    @foreach (var i in ViewBag.cart)
+                                    {
+                                        <div class="order-cart-content-item">
+                                            <p>
+                                                <a title="@i.Bouquet.Name">@i.Bouquet.Name</a>
+                                                <span> x @i.Quantity</span>
+                                            </p>
+                                            <p style="float: right">
+                                                @((i.Quantity * i.Bouquet.Price).ToString("C", CultureInfo.CurrentCulture))
+
+                                                <input type="hidden" name="item_number_@index" value="@i.Bouquet.Id" />
+                                                <input type="hidden" name="item_name_@index" value="@i.Bouquet.Name" />
+                                                <input type="hidden" name="amount_@index" value="@i.Bouquet.Price" />
+                                                <input type="hidden" name="quantity_@index" value="@i.Quantity" />
+                                            </p>
+                                        </div>
+                                        index++;
+                                    }
+                                    <input type="hidden" name="handling_cart" value="@ViewBag.ship">
+
+                                </div>
+                            </div>
+                            <div class="border-wrapp padding-0">
+                                <div class="order-cart-header">
+                                    <p>Order summary</p>
+                                </div>
+                                <div class="order-cart-content">
+                                    <div class="order-cart-content-item">
+                                        <p>Provisonal Sum</p>
+                                        <p style="float:right">@ViewBag.sum.ToString("C", CultureInfo.CurrentCulture)</p>
+                                    </div>
+                                    <div class="order-cart-content-item shipping_price">
+                                        <p>Ship</p>
+                                        <p style="float:right">@ViewBag.ship.ToString("C", CultureInfo.CurrentCulture)</p>
+                                    </div>
+                                    <hr>
+                                    <div class="order-cart-content-item cart-all-total">
+                                        <p>Total</p>
+                                        <p style="float:right">
+                                            <span class="no_ship">@ViewBag.total.ToString("C", CultureInfo.CurrentCulture)</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-box">
+                    <input class="btn btn-primary" type="submit" value="Pay with PayPal" />
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="upload" value="1" />
+        <input type="hidden" name="business" value="@ViewBag.paypalConfig.Business" />
+        <input type="hidden" name="cmd" value="_cart" />
+        <input type="hidden" name="return" value="@ViewBag.paypalConfig.ReturnUrl/@ViewBag.order.Id" />
+    </form>
+</div>
+

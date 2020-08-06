@@ -271,7 +271,6 @@ namespace JavaFlorist.Controllers
             ViewBag.total = cart.Sum(i => i.Quantity * i.Bouquet.Price);
             ViewBag.cart = cart;
             ViewBag.time = time.ToString("MM/dd/yyyy, HH:mm");
-            ViewBag.paypalConfig = PayPalService.getPayPalConfig();
             return View("Checkout");
         }
 
@@ -289,7 +288,8 @@ namespace JavaFlorist.Controllers
             string message,
             string time_type,
             string receivingtime,
-            string receiving5hours)
+            string receiving5hours,
+            string payment)
         {
             var sender = new Customer { Name = sender_name, Phone = sender_phone, Email = sender_email, Address = sender_address };
             var receiver = new Customer { Name = receiver_name, Phone = receiver_phone, Email = receiver_email, Address = receiver_address };
@@ -308,7 +308,9 @@ namespace JavaFlorist.Controllers
                     ReceiverId = receiver != null ? receiver.Id : 0,
                     Status = "pending",
                     Message = message,
-                    ReceivingTime = time_type == "ctime" ? receivingtime : receiving5hours
+                    CreateDate = DateTime.Now,
+                    ReceivingTime = time_type == "ctime" ? receivingtime : receiving5hours,
+                    Payment = payment
                 };
                 await orderRepository.Create(order);
                 foreach (var c in cart)
@@ -364,24 +366,6 @@ namespace JavaFlorist.Controllers
             {
                 return null;
             }
-        }
-
-
-
-        [HttpGet]
-        [Route("success")]
-        public IActionResult Success([FromQuery(Name = "tx")] string tx)
-        {
-            //hung lai ket qua tu class PDTHolder
-            var result = PDTHolder.Success(tx);
-            ViewBag.result = result;
-
-            Debug.WriteLine("Transaction Details");
-            Debug.WriteLine("cart: " + result.PaymentStatus);
-            Debug.WriteLine("create_time: " + result.PayerFirstName);
-
-            return View("Success");
-
         }
 
         [Route("carterror")]

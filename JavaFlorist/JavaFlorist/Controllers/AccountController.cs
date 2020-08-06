@@ -11,6 +11,7 @@ using JavaFlorist.Models.Repositories;
 using System.Security.Claims;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using JavaFlorist.PayPal;
 
 namespace JavaFlorist.Controllers
 {
@@ -244,15 +245,24 @@ namespace JavaFlorist.Controllers
                             cart.Add(item);
                         }
                     }
-
                     ViewBag.acc = acc;
                     ViewBag.sender = sender;
                     ViewBag.receiver = receiver;
                     ViewBag.cart = cart;
                     ViewBag.order = order;
-                    ViewBag.total = receiver.Name == null ? (cart.Sum(i => i.Quantity * i.Bouquet.Price)) : (cart.Sum(i => i.Quantity * i.Bouquet.Price))+ 5;
+                    ViewBag.sum = (cart.Sum(i => i.Quantity * i.Bouquet.Price));
+                    ViewBag.ship = receiver.Name == null ? 0 : 5;
+                    ViewBag.total = receiver.Name == null ? (cart.Sum(i => i.Quantity * i.Bouquet.Price)) : (cart.Sum(i => i.Quantity * i.Bouquet.Price)) + 5;
 
-                    return View("OrderHistory");
+                    if (order.Payment == "paypal" && order.PaymentConfirm == null)
+                    {
+                        ViewBag.paypalConfig = PayPalService.getPayPalConfig();
+                        return View("PaypalConfirm");
+                    } 
+                    else
+                    {
+                        return View("OrderHistory");
+                    }
                 }
                 else
                 {
@@ -263,6 +273,53 @@ namespace JavaFlorist.Controllers
             {
                 return RedirectToAction("carterror", "cart");
             }
+        }
+
+        [HttpGet]
+        [Route("paypalreturn/{id}")]
+        public async Task<IActionResult> Success(int id,[FromQuery(Name = "tx")] string tx)
+        {
+            var time = DateTime.Now;
+            var startday = time.Date + new TimeSpan(09, 00, 00);
+            var endday = time.Date + new TimeSpan(21, 00, 00);
+
+            if (time.AddHours(5) < startday)
+            {
+                time = time.Date + new TimeSpan(14, 00, 00);
+            }
+            else if (time.AddHours(5) > endday)
+            {
+                time = time.AddDays(1).Date + new TimeSpan(14, 00, 00);
+            }
+            else
+            {
+                time = time.AddHours(5);
+            }
+
+            //hung lai ket qua tu class PDTHolder
+            var order = await orderRepository.GetById(id);
+            try
+            {
+                order.PaymentConfirm = tx;
+                order.ReceivingTime = time.ToString();
+                order.Status = "paid";
+                await orderRepository.Update(id,order);
+
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+
+            }
+            //var result = PDTHolder.Success(tx);
+            //ViewBag.result = result;
+
+            //Debug.WriteLine("Transaction Details");
+            //Debug.WriteLine("cart: " + result.PaymentStatus);
+            //Debug.WriteLine("create_time: " + result.PayerFirstName);
+
+            return RedirectToAction("vieworderdetail","account",new { id = id });
+
         }
 
         [Authorize(Roles = "user")]
