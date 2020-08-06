@@ -11,6 +11,9 @@ using JavaFlorist.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using PagedList;
 
 namespace JavaFlorist.Areas.Admin.Controllers
 {
@@ -39,11 +42,59 @@ namespace JavaFlorist.Areas.Admin.Controllers
 
         [Route("")]
         [Route("index")]
-        public IActionResult Index()
+        public IActionResult Index(int? page, int? pageSize)
         {
             try
             {
-                ViewBag.bouquets = bouquetRepository.GetAllIncludeRelationship().ToList();
+                int pageIndex = 1;
+                pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+                ViewBag.pageIndex = pageIndex;
+                //Default size is 5 otherwise take pageSize value
+                int defaultSize = (pageSize ?? 5);
+                ViewBag.psize = defaultSize;
+                var selected5 = false;
+                var selected10 = false;
+                var selected20 = false;
+                var selected50 = false;
+                if (defaultSize == 5) selected5 = true;
+                if (defaultSize == 10) selected10 = true;
+                if (defaultSize == 20) selected20 = true;
+                if (defaultSize == 50) selected50 = true;
+
+                //Dropdownlist code for PageSize selection
+                //In View Attach this
+                ViewBag.PageSize = new List<SelectListItem>()
+                {
+                    new SelectListItem() { Value = "5", Text = "5 records", Selected = selected5},
+                    new SelectListItem() { Value = "10", Text = "10 records", Selected = selected10},
+                    new SelectListItem() { Value = "20", Text = "20 records", Selected = selected20},
+                    new SelectListItem() { Value = "50", Text = "50 records", Selected = selected50}
+                };
+
+                //Check if there is search or not, then take appropriate entity
+                var bouquets = new List<Bouquet>();
+                if (HttpContext.Session.GetString("searchBouquets") == null)
+                {
+                    bouquets = bouquetRepository.GetAllIncludeRelationship().ToList();
+                }
+                else
+                {
+                    var a = JsonConvert.DeserializeObject<SearchBouquets>(HttpContext.Session.GetString("searchBouquets"));
+                    bouquets = a.bouquets;
+                    ViewBag.keyword = a.keyword;
+                    if(a.min != 0) ViewBag.min = a.min;
+                    if (a.max != 0) ViewBag.max = a.max;
+                }
+                
+                //Show bouquet index
+                ViewBag.bouquets = bouquets.ToPagedList(pageIndex, defaultSize);
+                ViewBag.bouquetcount = bouquets.Count();
+                var numofpage = bouquets.Count / defaultSize + 1;
+                var lastpage = bouquets.Count % defaultSize;
+                ViewBag.numofpage = numofpage;
+                ViewBag.frombouquet = defaultSize * (pageIndex - 1) + 1;
+                ViewBag.toboquet = pageIndex == numofpage ? defaultSize * (pageIndex - 1) + lastpage : defaultSize * pageIndex;
+                //Upload annoucement
                 ViewBag.noimageerror = TempData["NoImage"];
                 ViewBag.uploaded = TempData["Uploaded"];
                 return View();
@@ -59,55 +110,63 @@ namespace JavaFlorist.Areas.Admin.Controllers
         [Route("searchByKeyword")]
         public IActionResult Search(string keyword)
         {
+            HttpContext.Session.Remove("searchBouquets");
             try
             {
                 if(keyword != null)
                 {
-                    ViewBag.bouquets = bouquetRepository.Search(keyword).ToList();
-                    ViewBag.keyword = keyword;
+                    var bouquets = bouquetRepository.Search(keyword).ToList();                   
+                    var searchBouquets = new SearchBouquets { bouquets = bouquets, keyword = keyword };
+                    HttpContext.Session.SetString("searchBouquets", JsonConvert.SerializeObject(searchBouquets, new JsonSerializerSettings()
+                    {
+                        PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                        Formatting = Formatting.Indented
+                    }));
                 }
-                else
-                {
-                    ViewBag.bouquets = bouquetRepository.GetAllIncludeRelationship().ToList();
-                }
-                return View("Index");
+                return RedirectToAction("index", "bouquet");
             }
             catch (Exception)
             {
                 return RedirectToAction("error500", "error", new { area = "admin" });
-            }
-          
+            } 
         }
+
+        
 
         //Search bouquet by price
         [HttpPost]
         [Route("searchByPrice")]
         public IActionResult Search(decimal min, decimal max)
         {
+            HttpContext.Session.Remove("searchBouquets");
             try
             {
-                if(min != 0 && max != 0)
+               
+                var bouquets = new List<Bouquet>();
+                
+                if (min != 0 && max != 0)
                 {
-                    ViewBag.bouquets = bouquetRepository.Search(min, max).ToList();
-                    ViewBag.min = min;
-                    ViewBag.max = max;
+                    bouquets = bouquetRepository.Search(min, max).ToList();                 
                 }
                 else if (min != 0 && max == 0)
                 {
-                    ViewBag.bouquets = bouquetRepository.Search1(min).ToList();
-                    ViewBag.min = min;
+                    bouquets = bouquetRepository.Search1(min).ToList();                  
                 }
                 else if (min == 0 && max != 0)
                 {
-                    ViewBag.bouquets = bouquetRepository.Search2(max).ToList();
-                    ViewBag.max = max;
+                    bouquets = bouquetRepository.Search2(max).ToList();
                 }
                 else
                 {
-                    ViewBag.bouquets = bouquetRepository.GetAllIncludeRelationship().ToList();
+                    bouquets = bouquetRepository.GetAllIncludeRelationship().ToList();
                 }
-
-                return View("Index");
+                var searchBouquets = new SearchBouquets { bouquets = bouquets, min = min, max = max };
+                HttpContext.Session.SetString("searchBouquets", JsonConvert.SerializeObject(searchBouquets, new JsonSerializerSettings()
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    Formatting = Formatting.Indented
+                }));
+                return RedirectToAction("index", "bouquet");
             }
             catch (Exception)
             {

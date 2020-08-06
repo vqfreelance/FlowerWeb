@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using JavaFlorist.Models;
 using JavaFlorist.Models.Repositories;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JavaFlorist.Areas.Admin.Controllers
@@ -37,10 +38,16 @@ namespace JavaFlorist.Areas.Admin.Controllers
         {
             try
             {
+                // Dashboard index
                 ViewBag.numoforder = orderRepository.GetAll().Count();
                 ViewBag.numofbouquet = bouquetRepository.GetAll().Count();
                 ViewBag.numofuser = accountRepository.GetAll().Count();
                 ViewBag.numofoccasion = occasionRepository.GetAll().Count();
+
+                // Admin Photo
+                var username = HttpContext.Session.GetString("username");
+                var account = accountRepository.GetByUsername(username);
+                ViewBag.account = account;
                 return View();
             }
             catch (Exception)

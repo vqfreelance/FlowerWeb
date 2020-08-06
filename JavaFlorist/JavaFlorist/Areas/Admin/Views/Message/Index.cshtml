@@ -40,8 +40,17 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12" align="right">
+                    <div class="row" style="margin-bottom: 0.5em;">
+                        <div class="col-sm-6 col-md-6">
+                            <div class="col-sm-3 col-md-3">Show</div>
+                            <select name="pageSize" id="pageSize" onchange="changeSelect()" class="custom-select custom-select-sm form-control form-control-sm" style="width: 100px;">
+                                @foreach (var ps in ViewBag.PageSize)
+                                {
+                                    <option value="@ps.Value" selected="@ps.Selected">@ps.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-6 col-md-6" align="right">
                             <a class="btn btn-labeled btn-success" asp-area="admin" asp-controller="message" asp-action="create">
                                 <span class="btn-label"><i class="fa fa-plus"></i></span>                                
                                 Add New
@@ -88,7 +97,11 @@
                     <!-- /.details of photo -->
                     <div class="row">
                         <div class="col-sm-12 col-md-5">
-                            <div class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                            <div class="dataTables_info" role="status" aria-live="polite">
+                                Showing <b>@ViewBag.frommessage</b>
+                                to <b>@ViewBag.toomessage</b>
+                                of <b>@ViewBag.messagecount</b> messages
+                            </div>
                         </div>
                         <div class="col-sm-12 col-md-7" align="right">
                             <div class="" id="">
@@ -96,24 +109,12 @@
                                     <li class="paginate_button page-item previous disabled" id="example2_previous">
                                         <a href="#" aria-controls="example2" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
                                     </li>
-                                    <li class="paginate_button page-item active">
-                                        <a href="#" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                                    </li>
-                                    <li class="paginate_button page-item ">
-                                        <a href="#" aria-controls="example2" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                                    </li>
-                                    <li class="paginate_button page-item ">
-                                        <a href="#" aria-controls="example2" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                                    </li>
-                                    <li class="paginate_button page-item ">
-                                        <a href="#" aria-controls="example2" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                                    </li>
-                                    <li class="paginate_button page-item ">
-                                        <a href="#" aria-controls="example2" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                                    </li>
-                                    <li class="paginate_button page-item ">
-                                        <a href="#" aria-controls="example2" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                                    </li>
+                                    @for (var i = 0; i < ViewBag.numofpage; i++)
+                                    {
+                                        <li class="paginate_button page-item">
+                                            <a onclick="changePage(@(i + 1))" data-dt-idx="@(i+1)" tabindex="0" class="page-link" name="page">@(i+1)</a>
+                                        </li>
+                                    }
                                     <li class="paginate_button page-item next" id="example2_next">
                                         <a href="#" aria-controls="example2" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
                                     </li>
@@ -132,3 +133,17 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+
+<script type="text/javascript">
+
+    function changePage(num) {
+        let pageSize = $("#pageSize").val();
+        window.location.href = "/admin/message/index?page=" + num + "&pageSize=" + pageSize;
+    }
+
+    function changeSelect() {
+        let pageSize = $("#pageSize").val();
+        window.location.href = "/admin/message/index?page=1&pageSize=" + pageSize;
+    }
+
+</script>

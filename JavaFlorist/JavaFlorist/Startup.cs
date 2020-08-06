@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JavaFlorist.Middlewares;
 using JavaFlorist.Models;
 using JavaFlorist.Models.Repositories;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -64,6 +65,10 @@ namespace JavaFlorist
             app.UseSession();
 
             app.UseStaticFiles();
+
+            app.UseMiddleware<DateLogMiddleware>();
+            app.UseMiddleware<RequestLogMiddleware>();
+            app.UseMiddleware<AdminMiddleware>();
 
             app.UseRouting();
 

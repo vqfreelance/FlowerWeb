@@ -291,8 +291,6 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfoInputs.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.AssemblyInfo.cs
-D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csproj.CoreCompileInputs.cache
-D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.MvcApplicationPartsAssemblyInfo.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.RazorAssemblyInfo.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.RazorAssemblyInfo.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.TagHelpers.input.cache
@@ -340,5 +338,9 @@ D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netco
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Message\Edit.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Message\Create.cshtml.g.cs
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Dashboard\User.cshtml.g.cs
-D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache
 D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Account\Profile.cshtml.g.cs
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\PagedList.dll
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\bin\Debug\netcoreapp3.1\PagedList.Mvc.dll
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csproj.CoreCompileInputs.cache
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.MvcApplicationPartsAssemblyInfo.cache
+D:\Aptech ADSE\eProject - S3\Source Tree\JavaFlorist\JavaFlorist\obj\Debug\netcoreapp3.1\JavaFlorist.csprojAssemblyReference.cache

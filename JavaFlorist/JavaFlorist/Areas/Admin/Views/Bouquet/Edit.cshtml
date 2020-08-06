@@ -40,7 +40,7 @@
                     <form role="form" method="post" asp-area="admin" asp-controller="bouquet" asp-action="edit">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="inputName">Message ID</label>
+                                <label for="inputName">Bouquet ID</label>
                                 <input type="text" class="form-control" asp-for="Bouquet.Id" readonly>
                             </div>
                             <div class="form-group">
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" asp-for="Bouquet.Description"></textarea>
+                                <textarea class="form-control" asp-for="Bouquet.Description" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Price</label>
@@ -58,13 +58,17 @@
                             <div class="form-group">
                                 <label for="inputStatus">Occasion</label>
                                 <div class="panel panel-default">
-                                    @for (var i = 0; i < Model.TempOccasions.Count; i++)
-                                    {
-                                        <input type="hidden" asp-for="TempOccasions[i].Id" />
-                                        <input type="hidden" asp-for="TempOccasions[i].Name" />
-                                        <input type="checkbox" asp-for="TempOccasions[i].IsChecked" />
-                                        <label asp-for="TempOccasions[i].Id">@Model.TempOccasions[i].Name</label>
-                                    }
+                                    <div class="row">
+                                        @for (var i = 0; i < Model.TempOccasions.Count; i++)
+                                        {
+                                            <div class="col-sm-6 col-md-6">
+                                                <input type="hidden" asp-for="TempOccasions[i].Id" />
+                                                <input type="hidden" asp-for="TempOccasions[i].Name" />
+                                                <input type="checkbox" asp-for="TempOccasions[i].IsChecked" />
+                                                <label asp-for="TempOccasions[i].Id">@Model.TempOccasions[i].Name</label>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">

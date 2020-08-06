@@ -56,9 +56,9 @@
                 </li>
             </ul>
 
-           
+
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">           
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
@@ -79,22 +79,22 @@
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
-                <div class="user-panel mt-3 pb-5 mb-3 d-flex">
+                <div class="user-panel mt-3 pb-5 mb-3 d-flex" style="height: 8em;">
                     <div class="image" style="padding: 0; margin-top: 8px;">
-                        <img src="~/admin/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="Admin Image">
+                        <img src="~/images/user/@Context.Session.GetString("photo")" class="img-circle elevation-2" alt="Admin Photo">
                     </div>
                     <div class="info">
-                        <a href="#" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Context.Session.GetString("username")</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a href="#" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@Context.Session.GetString("name")</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="z-index: 999">
                             <a asp-area="admin" asp-controller="account" asp-action="profile" class="dropdown-item">Profile</a>
                             <a asp-area="admin" asp-controller="account" asp-action="logout" class="dropdown-item">Log out</a>
                         </div>
                     </div>
                     <br /><br />
                 </div>
-               
+
                 <!-- Sidebar Menu -->
-                <nav class="mt-3">
+                <nav id="menu" class="mt-3" style="background-color: #3a424a;">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
@@ -108,7 +108,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a asp-area="admin" asp-controller="dashboard" asp-action="index" class="nav-link active">
+                                    <a asp-area="admin" asp-controller="dashboard" asp-action="index" class="nav-link" >
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dashboard</p>
                                     </a>
@@ -138,7 +138,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> 
+                        </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -172,6 +172,17 @@
     <script src="~/admin/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="~/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <!-- JS -->
+    <script type="text/javascript">
+         function active() {
+            if ($(this).find('a.nav-link').hasClass('active')) {
+                $(this).find('a.nav-link').removeClass('active');
+            } else
+            {
+                $(this).find('a.nav-link').addClass('active');
+            }
+        }
+    </script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
