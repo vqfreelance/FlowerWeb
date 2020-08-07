@@ -42,6 +42,52 @@ namespace JavaFlorist.Controllers
         [Route("index")]
         public IActionResult Index(int? page = 0)
         {
+           var bouquets = bouquetRepository.GetAll().ToList();
+
+            var today = DateTime.Now;
+            var allocc = occasionRepository.GetAll().ToList();
+            var occs = new List<Occasion>();
+            foreach (var o in allocc)
+            {
+                if (o.StartMonth - 1 < today.Month && o.EndMonth >= today.Month)
+                {
+                    occs.Add(o);
+                }
+            }
+            ViewBag.occs = occs;
+
+            //load pagination
+            int limit = 8;
+            int start;
+            if (page > 0)
+            {
+                page = page;
+            }
+            else
+            {
+                page = 1;
+            }
+            start = (int)(page - 1) * limit;
+
+            ViewBag.pageCurrent = page;
+
+            int totalProduct = bouquetRepository.totalProduct(bouquets);
+
+            ViewBag.totalProduct = totalProduct;
+
+            ViewBag.numberPage = bouquetRepository.numberPage(totalProduct, limit);
+
+            var data = bouquetRepository.paginationProduct(start, limit, bouquets);
+
+            ViewBag.data = data;
+            return View("AllBouquet");
+        }
+
+        [Route("search")]
+        public IActionResult Search(string keyword, int? page = 0)
+        {
+            var bouquets = bouquetRepository.SearchByKeyword(keyword);
+
             var today = DateTime.Now;
             var allocc = occasionRepository.GetAll().ToList();
             var occs = new List<Occasion>();
@@ -69,35 +115,18 @@ namespace JavaFlorist.Controllers
 
             ViewBag.pageCurrent = page;
 
-            int totalProduct = bouquetRepository.totalProduct();
+            int totalProduct = bouquetRepository.totalProduct(bouquets);
 
             ViewBag.totalProduct = totalProduct;
 
             ViewBag.numberPage = bouquetRepository.numberPage(totalProduct, limit);
 
-            var data = bouquetRepository.paginationProduct(start, limit);
+            var data = bouquetRepository.paginationProduct(start, limit, bouquets);
 
             ViewBag.data = data;
-            ViewBag.bouquets = bouquetRepository.GetAll().ToList();
-            return View("AllBouquet");
-        }
 
-        [Route("search")]
-        public IActionResult Search(string keyword)
-        {
-            var today = DateTime.Now;
-            var allocc = occasionRepository.GetAll().ToList();
-            var occs = new List<Occasion>();
-            foreach (var o in allocc)
-            {
-                if (o.StartMonth - 1 < today.Month && o.EndMonth >= today.Month)
-                {
-                    occs.Add(o);
-                }
-            }
-            ViewBag.occs = occs;
 
-            ViewBag.bouquets = bouquetRepository.SearchByKeyword(keyword);
+
             return View("AllBouquet");
         }
     }

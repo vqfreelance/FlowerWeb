@@ -4,106 +4,103 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-        <ol class="breadcrumb" style="margin-left:65px">
-            <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-        </ol>
-        <div class="occasion-group">
-            <div class="occasion-group-body">
-                <div class="occasion-group-header"><span>Occasion</span></div>
-                <div class="row occasion-group-button">
-                    @foreach (var occasion in ViewBag.occs)
-                    {
-                        <a asp-controller="occasion" asp-action="detail" asp-route-id="@occasion.Id">@occasion.Name</a>
-                    }
-                </div>
-            </div>
+<div class="occasion-group">
+    <div class="occasion-group-body">
+        <div class="occasion-group-header">
+            <span>Occasion</span>
         </div>
-
-        <div class="group-product-wrapp" style="margin-top:20px">
-            <div class="row bouquets">
-
-                <div class="row bouquet-list">
-                    @foreach (var b in ViewBag.data)
-                    {
-                        <div class="card" style="width: 14rem;">
-                            <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
-                                <img class="card-img-top" src="~/images/bouquets/@b.Photo" alt="@b.Name">
-                            </a>
-
-                            <div class="card-body">
-                                <h5 class="card-title">@b.Name</h5>
-                                <p class="card-text">@(b.Price.ToString("C", CultureInfo.CurrentCulture))</p>
-                            </div>
-                        </div>
-                    }
-                </div>
-                <div>
-                    <ul class="pagination">
-                        @{
-                            int numberPage = ViewBag.numberPage;
-                            int pageCurrent = ViewBag.pageCurrent;
-                            int offset = 2;//number display page
-
-
-                            //config FirstLink
-                            if (pageCurrent > 1)
-                            {
-                                int prevPage = pageCurrent - 1;
-                                var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
-                                <li><a asp-controller="bouquet" asp-action="index" asp-all-route-data="PrevLink">Prev Link</a></li>
-                            }
-
-                            int from = pageCurrent - offset;
-                            int to = pageCurrent + offset;
-                            if (from <= 0)
-                            {
-                                from = 1;
-                                to = offset * 2;
-                            }
-
-
-                            if (to > numberPage)
-                            {
-                                to = numberPage;
-                            }
-
-                            int i;
-                            for (i = from; i <= to; i++)
-                            {
-                                var parms = new Dictionary<string, string>
-                                                {
-                        { "page",i.ToString()}
-                    };
-                                if (pageCurrent == i)
-                                {
-                                    <li class="active"><a asp-controller="bouquet" asp-action="index" asp-all-route-data="parms">@i</a></li>
-                                }
-                                else
-                                {
-                                    <li><a asp-controller="bouquet" asp-action="index" asp-all-route-data="parms">@i</a></li>
-                                }
-
-                            }
-
-                            if (pageCurrent < numberPage - (to / 2))
-                            {
-                                <li><a>...</a></li>
-                                var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
-                                <li><a asp-controller="bouquet" asp-action="index" asp-all-route-data="LastLink">Last Link</a></li>
-                            }
-
-                            if (pageCurrent < numberPage)
-                            {
-                                int nextPage = pageCurrent + 1;
-                                var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
-                                <li><a asp-controller="bouquet" asp-action="index" asp-all-route-data="NextLink">Next Link</a></li>
-                            }
-                        }
-                    </ul>
-                </div>
-
-                @*<div id="loadingdiv" style="text-align:center;display:none;margin-bottom:20px;">
-            <img src="~/images/loading/loading.gif" />
-        </div>*@
-            </div>
+        <div class="row occasion-group-button">
+            @foreach (var occasion in ViewBag.occs)
+            {
+                <a asp-controller="occasion" asp-action="detail" asp-route-id="@occasion.Id">@occasion.Name</a>
+            }
         </div>
+    </div>
+</div>
+
+<div class="group-product-wrapp" style="margin-top: 20px;">
+    <div class="row bouquets">
+
+        <div class="row bouquet-list">
+            @foreach (var b in ViewBag.data)
+            {
+                <div class="card" style="width: 14rem;">
+                    <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                        <img class="card-img-top" src="~/images/bouquets/@b.Photo" alt="@b.Name">
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">@b.Name</h5>
+                        <p class="card-text">@(b.Price.ToString("C", CultureInfo.CurrentCulture))</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="pagination">
+    @{
+        int numberPage = ViewBag.numberPage;
+        int pageCurrent = ViewBag.pageCurrent;
+        var offset = 2; //number display page
+
+
+        //config FirstLink
+        if (pageCurrent > 2)
+        {
+            var prevPage = pageCurrent - 1;
+            var PrevLink = new Dictionary<string, string> { { "page", 1.ToString() } };
+        <a asp-controller="bouquet" asp-action="index" asp-all-route-data="PrevLink">&laquo;&laquo;</a>
+        }
+
+        if (pageCurrent > 1)
+        {
+            var prevPage = pageCurrent - 1;
+            var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+            <a asp-controller="bouquet" asp-action="index" asp-all-route-data="PrevLink">&laquo;</a>
+        }
+
+        var from = pageCurrent - offset;
+        var to = pageCurrent + offset;
+        if (from <= 0)
+        {
+            from = 1;
+            to = offset * 2;
+        }
+
+
+        if (to > numberPage)
+        {
+            to = numberPage;
+        }
+
+        int i;
+        for (i = from; i <= to; i++)
+        {
+            var parms = new Dictionary<string, string> { {"page", i.ToString()} };
+            if (pageCurrent == i)
+            {
+                <a class="active" asp-controller="bouquet" asp-action="index" asp-all-route-data="parms">@i</a>
+            }
+            else
+            {
+                <a asp-controller="bouquet" asp-action="index" asp-all-route-data="parms">@i</a>
+            }
+        }
+
+
+
+        if (pageCurrent < numberPage)
+        {
+            var nextPage = pageCurrent + 1;
+            var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+            <a asp-controller="bouquet" asp-action="index" asp-all-route-data="NextLink">&raquo;</a>
+        }
+
+        if (pageCurrent < numberPage - to / 2)
+        {
+            var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+            <a asp-controller="bouquet" asp-action="index" asp-all-route-data="LastLink">&raquo;&raquo;</a>
+        }
+    }
+</div>

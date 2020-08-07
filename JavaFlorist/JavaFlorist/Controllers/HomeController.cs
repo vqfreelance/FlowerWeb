@@ -26,7 +26,7 @@ namespace JavaFlorist.Controllers
         [Route("index")]
         [Route("")]
         [Route("~/")]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var today = DateTime.Now;
             var allocc = occasionRepository.GetAll().ToList();

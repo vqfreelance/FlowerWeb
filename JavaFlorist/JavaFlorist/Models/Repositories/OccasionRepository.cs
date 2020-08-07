@@ -27,5 +27,9 @@ namespace JavaFlorist.Models.Repositories
                 .SelectMany(o => o.OccBouquet)
                 .Select(ob => ob.Bouquet).ToList();
         }
+        public List<Occasion> Search(string keyword)
+        {
+            return GetAllIncludeRelationship().Where(b => b.Name.Contains(keyword)).ToList();
+        }
     }
 }

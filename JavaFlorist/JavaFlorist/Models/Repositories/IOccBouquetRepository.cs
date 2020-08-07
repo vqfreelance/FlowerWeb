@@ -8,7 +8,6 @@ namespace JavaFlorist.Models.Repositories
 {
     public interface IOccBouquetRepository : IGenericRepository<OccBouquet>
     {
-        public Task<OccBouquet> GetById(int id);
     }
 
 

@@ -15,6 +15,9 @@ namespace JavaFlorist.Models.Repositories
         {
             return GetAll().Where(m => m.OccasionId == id).ToList();
         }
-       
+        public List<Message> Search(string keyword)
+        {
+            return GetAllIncludeRelationship().Where(m => m.MeContent.Contains(keyword)).ToList();
+        }
     }
 }

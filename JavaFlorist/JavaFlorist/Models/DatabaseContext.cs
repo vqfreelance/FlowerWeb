@@ -24,7 +24,6 @@ namespace JavaFlorist.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderDetail> OrderDetail { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
@@ -69,10 +68,12 @@ namespace JavaFlorist.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Photo)
+                    .IsRequired()
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
@@ -117,11 +118,13 @@ namespace JavaFlorist.Models
                 entity.HasOne(d => d.Bouquet)
                     .WithMany(p => p.OccBouquet)
                     .HasForeignKey(d => d.BouquetId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Occ_Bouquet_Bouquet");
 
                 entity.HasOne(d => d.Occasion)
                     .WithMany(p => p.OccBouquet)
                     .HasForeignKey(d => d.OccasionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Occ_Bouquet_Occcasion");
             });
 
@@ -145,28 +148,33 @@ namespace JavaFlorist.Models
                 entity.Property(e => e.CreateDate).HasColumnType("date");
 
                 entity.Property(e => e.Message)
+                    .IsRequired()
                     .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Payment)
+                    .IsRequired()
+                    .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.Property(e => e.PaymentConfirm)
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Payment)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.ReceivingTime)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Status)
+                    .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Account)
                     .WithMany(p => p.Order)
                     .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Account");
             });
 
@@ -177,11 +185,13 @@ namespace JavaFlorist.Models
                 entity.HasOne(d => d.Bouquet)
                     .WithMany(p => p.OrderDetail)
                     .HasForeignKey(d => d.BouquetId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Detail_Bouquet");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetail)
                     .HasForeignKey(d => d.OrderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_Detail_Order");
             });
 

@@ -11,10 +11,8 @@ namespace JavaFlorist.ViewComponents
     [ViewComponent(Name = "Sender")]
     public class SenderViewComponent : ViewComponent
     {
-        private DatabaseContext db;
         public SenderViewComponent(DatabaseContext _db)
         {
-            db = _db;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()

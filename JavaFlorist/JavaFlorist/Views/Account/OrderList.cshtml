@@ -4,10 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-    <li class="breadcrumb-item active">OrderList</li>
-</ol>
 @if (@ViewBag.listorder != null)
 {
     <div class="document-box" style="min-height:300px">

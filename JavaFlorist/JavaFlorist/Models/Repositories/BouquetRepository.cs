@@ -8,20 +8,30 @@ namespace JavaFlorist.Models.Repositories
 {
     public class BouquetRepository : GenericRepository<Bouquet>, IBouquetRepository
     {
-        private List<Bouquet> bouquets = new List<Bouquet>();
+        //private List<Bouquet> bouquets = new List<Bouquet>();
 
         public BouquetRepository(DatabaseContext dbContext) : base(dbContext)
         {
-            bouquets = GetAll().ToList();
+            //bouquets = GetAll().ToList();
         }
         public List<Bouquet> Search(string keyword)
         {
-            return GetAll().Where(b => b.Name.Contains(keyword)).ToList();
+            return GetAllIncludeRelationship().Where(b => b.Name.Contains(keyword)).ToList();
         }
 
         public List<Bouquet> Search(decimal min, decimal max)
         {
-            return GetAll().Where(b => b.Price >= min && b.Price <= max).ToList();
+            return GetAllIncludeRelationship().Where(b => b.Price >= min && b.Price <= max).ToList();
+        }
+
+        public List<Bouquet> Search1(decimal min)
+        {
+            return GetAllIncludeRelationship().Where(b => b.Price >= min).ToList();
+        }
+
+        public List<Bouquet> Search2(decimal max)
+        {
+            return GetAllIncludeRelationship().Where(b => b.Price <= max).ToList();
         }
 
         // show bouquet by id
@@ -45,11 +55,11 @@ namespace JavaFlorist.Models.Repositories
         }
 
         //load pagination
-        public IEnumerable<Bouquet> getProductAll()
-        {
-            return bouquets;
-        }
-        public int totalProduct()
+        //public IEnumerable<Bouquet> getProductAll()
+        //{
+        //    return bouquets;
+        //}
+        public int totalProduct(List<Bouquet> bouquets)
         {
             return bouquets.Count;
         }
@@ -58,7 +68,7 @@ namespace JavaFlorist.Models.Repositories
             float numberpage = totalProduct / limit;
             return (int)Math.Ceiling(numberpage);
         }
-        public IEnumerable<Bouquet> paginationProduct(int start, int limit)
+        public IEnumerable<Bouquet> paginationProduct(int start, int limit, List<Bouquet> bouquets)
         {
             var data = (from s in bouquets select s);
             var dataProduct = data.OrderByDescending(x => x.Id).Skip(start).Take(limit);

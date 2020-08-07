@@ -4,42 +4,104 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<ol class="breadcrumb">
-    <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
-    <li class="breadcrumb-item active">Occasion</li>
-</ol>
 <div class="col-lg-10 col-md-12 col-xs-10 occasion-title">
     <h3>@ViewBag.occ.Name</h3>
 </div>
 
 <div class="col-lg-10 col-md-12 col-xs-10 occasion-img">
-    <img src="~/images/banner/@ViewBag.occ.Photo" style="width:100%"/>
+    <img src="~/images/occasions/@ViewBag.occ.Photo" style="width:100%"/>
 </div>
 <div class="col-lg-10 col-md-12 col-xs-10 occasion-description">
-    <p>Description: @ViewBag.occ.Description</p>
+    <p>@ViewBag.occ.Description</p>
 </div>
 <hr />
 
-@if(ViewBag.listb != null)
-{
-<div class="row bouquet-list">
-    @foreach (var b in ViewBag.listb)
-    {
-        <div class="card" style="width: 14rem;">
-            <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
-                <img class="card-img-top" src="~/images/bouquets/@b.Photo" alt="@b.Name">
-            </a>
+<div class="group-product-wrapp" style="margin-top:20px">
+    <div class="row bouquets">
 
-            <div class="card-body">
-                <h5 class="card-title">@b.Name</h5>
-                <p class="card-text">@(b.Price.ToString("C", CultureInfo.CurrentCulture))</p>
-            </div>
+        <div class="row bouquet-list">
+            @foreach (var b in ViewBag.data)
+            {
+                <div class="card" style="width: 14rem;">
+                    <a asp-controller="bouquet" asp-action="detail" asp-route-id="@b.Id">
+                        <img class="card-img-top" src="~/images/bouquets/@b.Photo" alt="@b.Name">
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">@b.Name</h5>
+                        <p class="card-text">@b.Price.ToString("C", CultureInfo.CurrentCulture)</p>
+                    </div>
+                </div>
+            }
         </div>
+    </div>
+</div>
+<div class="pagination">
+    @{
+        int numberPage = ViewBag.numberPage;
+        int pageCurrent = ViewBag.pageCurrent;
+        var offset = 2; //number display page
+
+
+        //config FirstLink
+        if (pageCurrent > 2)
+        {
+            var prevPage = pageCurrent - 1;
+            var PrevLink = new Dictionary<string, string> { { "page", 1.ToString() } };
+            <a asp-controller="occasion" asp-action="detail" asp-all-route-data="PrevLink">&laquo;&laquo;</a>
+        }
+
+        if (pageCurrent > 1)
+        {
+            var prevPage = pageCurrent - 1;
+            var PrevLink = new Dictionary<string, string> { { "page", prevPage.ToString() } };
+            <a asp-controller="occasion" asp-action="detail" asp-all-route-data="PrevLink">&laquo;</a>
+        }
+
+        var from = pageCurrent - offset;
+        var to = pageCurrent + offset;
+        if (from <= 0)
+        {
+            from = 1;
+            to = offset * 2;
+        }
+
+
+        if (to > numberPage)
+        {
+            to = numberPage;
+        }
+
+        int i;
+        for (i = from; i <= to; i++)
+        {
+            var parms = new Dictionary<string, string> { { "page", i.ToString() } };
+            if (pageCurrent == i)
+            {
+                <a class="active" asp-controller="occasion" asp-action="detail" asp-all-route-data="parms">@i</a>
+            }
+            else
+            {
+                <a asp-controller="occasion" asp-action="detail" asp-all-route-data="parms">@i</a>
+            }
+        }
+
+
+
+        if (pageCurrent < numberPage)
+        {
+            var nextPage = pageCurrent + 1;
+            var NextLink = new Dictionary<string, string> { { "page", nextPage.ToString() } };
+            <a asp-controller="occasion" asp-action="detail" asp-all-route-data="NextLink">&raquo;</a>
+        }
+
+        if (pageCurrent < numberPage - to / 2)
+        {
+            var LastLink = new Dictionary<string, string> { { "page", numberPage.ToString() } };
+            <a asp-controller="bouquet" asp-action="index" asp-all-route-data="LastLink">&raquo;&raquo;</a>
+        }
     }
 </div>
-}
-
-
 
 
 

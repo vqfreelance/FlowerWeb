@@ -10,6 +10,8 @@ namespace JavaFlorist.Models.Repositories
     {
         List<Occasion> GetNumberOcc(int number);
         List<Bouquet> GetBouquetsByOcc(int id);
+
+        List<Occasion> Search(string keyword);
     }
 
 

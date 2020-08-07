@@ -2,10 +2,8 @@ body {
     padding-top: 65px
 }
 
-
-
-hr{
-    margin:0;
+hr {
+    margin: 0;
 }
 
 .hidden {
@@ -64,13 +62,14 @@ nav .fa-shopping-cart {
     .navbar-custom .dropdown-menu a {
         color: #FF95A1;
     }
-    .navbar-custom .dropdown-menu a:hover {
-        color:white;
-        background: #FF95A1;
-    }
+
+        .navbar-custom .dropdown-menu a:hover {
+            color: white;
+            background: #FF95A1;
+        }
 
 
-    #back-top {
+#back-top {
     bottom: 115px;
     display: none;
     height: 55px;
@@ -105,7 +104,7 @@ nav .fa-shopping-cart {
 
 .carousel {
     margin: auto;
-    margin-bottom:15px;
+    margin-bottom: 15px;
     width: 80%;
     overflow: hidden;
 }
@@ -119,26 +118,30 @@ nav .fa-shopping-cart {
         width: 100%
     }
 
-    .search form {
-        display:block;
-        height: 40px;
-        justify-content: center;
-    }
-    .search input {
-        border: 1px solid white;
-        border-radius: 5px;
-    }
-    .search button {
-        border: 1px solid white;
-        border-radius: 5px;
+    /*search bar*/
+.search form {
+    display: block;
+    height: 40px;
+    justify-content: center;
+}
+
+.search input {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.search button {
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white;
+}
+
+    .search button:hover {
         color: white;
+        background: #FF95A1;
     }
 
-        .search button:hover {
-            color: white;
-            background: #FF95A1;
-        }
-
+    /*occcasion today*/
 .occasion-group {
     margin: auto;
     justify-content: center;
@@ -175,8 +178,14 @@ nav .fa-shopping-cart {
         color: #FF4C60;
     }
 
+.bouquet {
+    display: grid;
+    grid-template-columns: repeat(4, 200px);
+    grid-gap: 1.5rem;
+}
+
 .bouquet-list {
-    margin: auto;
+    display: flex;
     justify-content: center;
 }
 
@@ -195,17 +204,35 @@ nav .fa-shopping-cart {
             outline-style: auto;
             color: #FF4C60;
         }
+/*read more button*/
+.readmore {
+    margin: 10px 10px 10px 10px;
+    padding: 10px;
+    color: #FF95A1;
+    border: 2px solid #FF95A1;
+    border-radius: 5px;
+}
+
+    .readmore:hover {
+        color: white;
+        background: #FF95A1;
+        text-decoration: none;
+    }
+
 .footer-menu li {
     color: #FF95A1;
     list-style-type: none;
 }
+
     .footer-menu li a {
         text-decoration: none;
         color: #FF95A1;
     }
-    .footer-menu li a:hover {
-        color: #FF4C60;
-    }
+
+        .footer-menu li a:hover {
+            color: #FF4C60;
+        }
+
 .footer-logo a {
     font-family: albasuper;
     font-size: 55pt;
@@ -215,28 +242,28 @@ nav .fa-shopping-cart {
 .navbar-brand {
     font-family: albasuper;
     font-size: 16pt;
-    margin:0;
+    margin: 0;
 }
+
 @font-face {
     font-family: 'albasuper';
     src: url('../fonts/albas__.ttf') format('truetype');
 }
 
-.footer-logo a:hover{
+.footer-logo a:hover {
     color: #FF95A1;
 }
-    /*Login*/
-    .breadcrumb {
-    background: none;
-    padding: 0;
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
+/*Login*/
 
 .login-page, .signup-page {
     margin: auto;
     width: 80%;
 }
+
+    .login-page input:focus, .signup-page input:focus {
+        border: 1px solid #FF95A1;
+        box-shadow: 0 0 5px #FF95A1;
+    }
 
     .login-page .error, .signup-page .error {
         color: red;
@@ -311,27 +338,26 @@ nav .fa-shopping-cart {
     display: inline-block;
 }
 
-.body-list{
-
+.body-list {
 }
 
-.body-list .body-item {
-    width: 22%;
-    margin: auto;
-    display: inline-block;
-}
+    .body-list .body-item {
+        width: 22%;
+        margin: auto;
+        display: inline-block;
+    }
 
-.body-list .body-quantity {
-    width: 80%;
-}
+    .body-list .body-quantity {
+        width: 80%;
+    }
 
-.body-list img {
-    width: 65px;
-}
+    .body-list img {
+        width: 65px;
+    }
 
-.body-list .fa-times {
-    color: red;
-}
+    .body-list .fa-times {
+        color: red;
+    }
 
 .order-cart-content {
     border: 1px solid #FF95A1;
@@ -345,13 +371,13 @@ nav .fa-shopping-cart {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.order-cart-header p {
-    margin:0 5px 0 5px;
-    display: inline-flex;
-}
+
+    .order-cart-header p {
+        margin: 0 5px 0 5px;
+        display: inline-flex;
+    }
 
 .btn-box-confirm {
-
 }
 
     .btn-box-confirm a {
@@ -375,13 +401,13 @@ nav .fa-shopping-cart {
     display: inline;
 }
 
-.customer-address{
-    margin-bottom:15px;
+.customer-address {
+    margin-bottom: 15px;
 }
 
     .customer-address .title {
-       color:white;
-       background: #FF95A1;
+        color: white;
+        background: #FF95A1;
     }
 
     .customer-address label {
@@ -427,28 +453,85 @@ nav .fa-shopping-cart {
     margin: auto;
     border-radius: 15px;
 }
+/*pagination*/
+.pagination {
+    /*    display: inline-block;*/
+    justify-content: center;
+}
 
+    .pagination a {
+        margin: 0 1px 0 1px;
+        color: #FF95A1;
+        float: left;
+        padding: 8px 16px;
+        border: 1px solid #FF95A1;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+
+        .pagination a.active {
+            margin: 0 1px 0 1px;
+            background-color: #FF95A1;
+            color: white;
+            border-radius: 5px;
+        }
+
+            .pagination a.active:hover {
+                background-color: #FF4C60;
+            }
+
+        .pagination a:hover:not(.active) {
+            color: white;
+            background-color: #FF4C60;
+            border-radius: 5px;
+        }
+/*pagination*/
 
 @media only screen and (max-width: 767px) {
     .services-guarante {
-                text-align: left;
-            }
+        text-align: left;
+    }
 
-                .services-guarante li {
-                    display: block;
-                }
-
-            .carousel {
-                margin: auto;
-                width: 100%;
-                overflow: hidden;
-            }
-
-                .carousel .carousel-inner {
-                    height: 160px;
-                    border-radius: 15px;
-                }
+        .services-guarante li {
+            display: block;
         }
 
+    .carousel {
+        width: 100%;
+    }
 
+        .carousel .carousel-inner {
+            height: 160px;
+        }
+    .occasion-group {
+        width: 100%;
+    }
+}
 
+@media only screen and (max-width: 1200px) {
+
+    .carousel .carousel-inner {
+        height: 280px;
+    }
+
+    .occasion-group {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+
+    .carousel .carousel-inner {
+        height: 180px;
+    }
+
+    .carousel {
+        width: 80%;
+    }
+
+    .services-guarante li {
+        font-size: 14px;
+    }
+
+}

@@ -1,0 +1,66 @@
+﻿@model JavaFlorist.Models.Message
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Occasion Edit</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a asp-area="admin" asp-controller="dashboard" asp-action="index">Home</a></li>
+                    <li class="breadcrumb-item active">Message Edit</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Occasion Info</h3>
+                </div>
+                <form id="mess-form" role="form" method="post" asp-area="admin" asp-controller="message" asp-action="edit">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputName">Message ID</label>
+                            <input type="text" class="form-control" asp-for="Id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Message Content</label>
+                            <textarea class="form-control" asp-for="MeContent" name="MeContent"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName">Occasion Name</label>
+                            <select class="form-control" asp-for="Occasion.Id" name="OccasionId">
+                                <option value="@ViewBag.message.Occasion.Id" selected>@ViewBag.message.Occasion.Name</option>
+                                @foreach (var occasion in ViewBag.occasions)
+                                {   
+                                    <option value="@occasion.Id">@occasion.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                    
+                </form>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        
+    </div>
+</section>
+<!-- /.content -->

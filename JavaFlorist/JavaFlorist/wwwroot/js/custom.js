@@ -213,16 +213,16 @@ jQuery(document).ready(function () {
         $("#slider_per").text(slideEvt.value);
     });
 
-    $('.readmore').on('click', function () {
-        if ($(this).parent('.sidebar-item').hasClass('show')) {
-            $(this).parent('.sidebar-item').removeClass('show').slideDown();
-            $(this).text('Xem thêm');
-        } else {
-            $('.sidebar-item').removeClass('show');
-            $(this).parent('.sidebar-item').addClass('show').slideDown();
-            $(this).text('Đóng');
-        }
-    });
+    //$('.readmore').on('click', function () {
+    //    if ($(this).parent('.sidebar-item').hasClass('show')) {
+    //        $(this).parent('.sidebar-item').removeClass('show').slideDown();
+    //        $(this).text('Xem thêm');
+    //    } else {
+    //        $('.sidebar-item').removeClass('show');
+    //        $(this).parent('.sidebar-item').addClass('show').slideDown();
+    //        $(this).text('Đóng');
+    //    }
+    //});
 
     $('.loyalty-register').on('click', function () {
         $('#kt_datepicker_1').datepicker({
@@ -1511,12 +1511,21 @@ $(document).ready(function () {
                 $("select[name='message']").html('');
                 //$mess.empty();
                 //console.log(data);
+
+                //$("select[name='message']").append('<option value="" selected>Message</option>');
+                //for (var i = 0; i < data.length; i++) {
+                //    console.log(data[i].id + data[i].meContent);
+                //    $("select[name='message']").append('<option id=' + data[i].id + 'value=' + data[i].meContent + '>' + data[i].meContent + '</option>');
+                //}
+
                 $("select[name='message']").append('<option value="" selected>Message</option>');
                 for (var i = 0; i < data.length; i++) {
-                    $("select[name='message']").append('<option id=' + data[i].id + 'value=' + data[i].meContent + '>' + data[i].meContent + '</option>');
+                    //console.log(data[i].id + data[i].meContent);
+                    $("select[name='message']").append('<option>' + data[i]+ '</option>');
                 }
-                $('.selectpicker').selectpicker("refresh");
-            }
+
+                //$('.selectpicker').selectpicker("refresh");
+            },
         });
     });
 
@@ -1717,7 +1726,7 @@ function validate_message() {
     });
 }
 
-//auto height with content
+//textarea auto height with content
 function textAreaAdjust(element) {
     element.style.height = "1px";
     element.style.height = (25 + element.scrollHeight) + "px";

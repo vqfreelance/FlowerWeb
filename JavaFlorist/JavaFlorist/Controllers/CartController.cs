@@ -208,7 +208,6 @@ namespace JavaFlorist.Controllers
             {
                 return null;
             }
-
         }
 
         [Route("remove/{id}")]
@@ -337,9 +336,23 @@ namespace JavaFlorist.Controllers
         [Route("getallmess")]
         public IActionResult GetAllMess(int id)
         {
+            if (id != null)
+            {
+            var mess = occasionRepository.GetByIdIncludeRelationship(id).Result.Message.ToList();
+            var getmess = new List<string>();
+            foreach(var m in mess)
+            {
+                getmess.Add(m.MeContent);
+            }
+            return new JsonResult(getmess);
+            }
+            else
+            {
+                return null;
+            }
             //Occasion occ = await occasionRepository.GetById(id);
             //var mess = db.Message.Where(m => m.OccasionId == id).ToList();
-            return new JsonResult(db.Message.Where(m => m.OccasionId == id).ToList());
+
         }
 
         private int exists(int id, List<Item> cart)

@@ -1,0 +1,10 @@
+.errorTxt {
+    margin-bottom:5px;
+    height:24px;
+}
+    .errorTxt label, .error {
+        color: red;
+        font-weight: 400 !important;
+        font-size: small;
+        margin: 0;
+    }

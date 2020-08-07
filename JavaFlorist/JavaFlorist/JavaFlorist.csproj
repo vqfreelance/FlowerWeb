@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Occasion\" />
     <Folder Include="Middlewares\" />
-    <Folder Include="wwwroot\images\bouquets\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +24,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="PagedList" Version="1.17.0" />
   </ItemGroup>
 
 </Project>

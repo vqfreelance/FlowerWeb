@@ -8,7 +8,8 @@ namespace JavaFlorist.Models.Repositories
 {
     public interface IMessageRepository : IGenericRepository<Message>
     {
-        public List<Message> GetAllMessbyOccId(int id);
+        List<Message> GetAllMessbyOccId(int id);
+        List<Message> Search(string keyword);
     }
 
 

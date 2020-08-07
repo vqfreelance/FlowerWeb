@@ -46,10 +46,10 @@ namespace JavaFlorist.Controllers
         [Route("login")]
         public IActionResult Login(string customer_username, string customer_password)
         {
-            var countAccount = db.Account.Count(a => a.Username.Equals(customer_username) && a.Password.Equals(customer_password));
-            if (countAccount == 1)
+            //var countAccount = db.Account.Count(a => a.Username.Equals(customer_username) && a.Password.Equals(customer_password));
+            if (Check(customer_username, customer_password) !=null)
             {
-                var a = db.Account.SingleOrDefault(a => a.Username.Equals(customer_username));
+                var a = Check(customer_username, customer_password);
                 securityManager.SignIn(HttpContext, a);
                 if (HttpContext.Session.GetString("cart") != null)
                 {
@@ -91,13 +91,13 @@ namespace JavaFlorist.Controllers
         [Route("signup")]
         public async Task<IActionResult> Signup(Account acc)
         {
-            //acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
+            acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
             acc.Role = "user";
             try
             {
                 await accountRepository.Create(acc);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ViewBag.name = acc.Name;
                 ViewBag.username = acc.Username;
@@ -174,7 +174,7 @@ namespace JavaFlorist.Controllers
             {
                 await accountRepository.Update(id,oldInfo);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -197,12 +197,12 @@ namespace JavaFlorist.Controllers
         {
             //acc.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
             var oldInfo = accountRepository.GetAccById(id);
-            oldInfo.Password = acc.Password;
+            oldInfo.Password = BCrypt.Net.BCrypt.HashPassword(acc.Password);
             try
             {
                 await accountRepository.Update(id, oldInfo);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -349,7 +349,7 @@ namespace JavaFlorist.Controllers
             return View("OrderList");
         }
 
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "user,admin")]
         [Route("logout")]
         public IActionResult Logout()
         {
